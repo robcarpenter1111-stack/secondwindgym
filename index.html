@@ -19,6 +19,9 @@ a{color:#f3efe7}a:hover{color:#ffffff}
 .lk{color:#1e1c1a}.lk:hover{color:#5f4535}
 input,select{font:inherit}
 input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #a2723f;outline-offset:2px}
+input:focus,select:focus{border-color:#5f4535 !important;outline:none}
+#join button[type=submit]:hover{background:#4e3627 !important}
+#join input::placeholder{color:#a39b8c}
 details summary{list-style:none;cursor:pointer}
 details summary::-webkit-details-marker{display:none}
 details[open] .plus{transform:rotate(45deg)}
@@ -47,7 +50,7 @@ details[open] .plus{transform:rotate(45deg)}
       <a href="#build" style="text-decoration: none;">The build</a>
       <a href="#faq" style="text-decoration: none;">FAQ</a>
     </div>
-    <a href="#join" style="font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(243,239,231,.6); padding: 13px 20px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center;">Founding list</a>
+    <a href="#join" style="font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(243,239,231,.6); padding: 13px 20px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; border-radius: 8px;">Founding list</a>
   </nav>
 
   <div id="top" style="position: relative; flex-grow: 1; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 48px; padding: 40px clamp(20px, 5vw, 72px) 72px;">
@@ -58,7 +61,7 @@ details[open] .plus{transform:rotate(45deg)}
     </div>
 
     <!-- waitlist card -->
-    <div id="join" style="flex: 0 1 420px; background: #f3efe7; color: #1e1c1a; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 24px;">
+    <div id="join" style="flex: 0 1 420px; background: #f3efe7; color: #1e1c1a; padding: 36px 32px; box-sizing: border-box; border-radius: 14px; box-shadow: 0 30px 80px rgba(0,0,0,.35); display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 24px;">
       <form id="joinform" novalidate>
         <div style="display: flex; flex-direction: column; gap: 18px;">
           <div style="display: flex; flex-direction: column; gap: 6px;">
@@ -68,15 +71,15 @@ details[open] .plus{transform:rotate(45deg)}
           </div>
           <div style="display: flex; flex-direction: column; gap: 6px;">
             <label for="fn" style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #4a443d;">First name</label>
-            <input id="fn" name="first_name" type="text" autocomplete="given-name" style="height: 48px; border: 1px solid #a39b8c; background: #ffffff; padding: 0 14px; font-size: 17px; color: #1e1c1a; border-radius: 0;">
+            <input id="fn" name="first_name" type="text" autocomplete="given-name" style="height: 52px; border: 1px solid #d8d1c4; background: #ffffff; padding: 0 16px; font-size: 17px; color: #1e1c1a; border-radius: 8px; transition: border-color .15s;">
           </div>
           <div style="display: flex; flex-direction: column; gap: 6px;">
             <label for="em" style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #4a443d;">Email</label>
-            <input id="em" name="email" type="email" autocomplete="email" style="height: 48px; border: 1px solid #a39b8c; background: #ffffff; padding: 0 14px; font-size: 17px; color: #1e1c1a; border-radius: 0;">
+            <input id="em" name="email" type="email" autocomplete="email" style="height: 52px; border: 1px solid #d8d1c4; background: #ffffff; padding: 0 16px; font-size: 17px; color: #1e1c1a; border-radius: 8px; transition: border-color .15s;">
           </div>
           <div style="display: flex; flex-direction: column; gap: 6px;">
             <label for="go" style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #4a443d;">What brings you in</label>
-            <select id="go" name="goal" style="height: 48px; border: 1px solid #a39b8c; background: #ffffff; padding: 0 12px; font-size: 17px; color: #1e1c1a; border-radius: 0;">
+            <select id="go" name="goal" style="height: 52px; border: 1px solid #d8d1c4; background: #ffffff; padding: 0 14px; font-size: 17px; color: #1e1c1a; border-radius: 8px; appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22><path d=%22M1 1l5 5 5-5%22 fill=%22none%22 stroke=%22%235f4535%22 stroke-width=%221.6%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;">
               <option>Getting stronger</option>
               <option>The café</option>
               <option>Fitness and conditioning</option>
@@ -85,7 +88,7 @@ details[open] .plus{transform:rotate(45deg)}
               <option>Not sure yet</option>
             </select>
           </div>
-          <button type="submit" style="height: 54px; border: 0; background: #5f4535; color: #f3efe7; font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; cursor: pointer;">Join the founding list</button>
+          <button type="submit" style="height: 54px; border: 0; background: #5f4535; color: #f3efe7; font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; border-radius: 8px; transition: background .15s;">Join the founding list</button>
           <p style="margin: 0; font-size: 13px; color: #5c554c; line-height: 1.4;">We'll only email you about Second Wind. Unsubscribe any time.</p>
         </div>
       </form>
@@ -111,7 +114,7 @@ details[open] .plus{transform:rotate(45deg)}
     <div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 22px;">
       <p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: #5f4535;">The café · open to everyone</p>
       <h2 id="cafe-h" style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(44px, 5.4vw, 76px); line-height: .92;">The front door.<br>Fuel good days.</h2>
-      <p style="margin: 0; font-size: 19px; color: #4a443d; max-width: 44ch;">Batch brew coffee, protein shakes and grab-and-go food, right on St Georges Terrace. Come in before work, refuel after a session, or just meet someone for a coffee. No membership needed.</p>
+      <p style="margin: 0; font-size: 19px; color: #4a443d; max-width: 44ch;">Batch brew coffee, protein shakes and grab-and-go food, on the ground floor at 220 St Georges Terrace. Come in before work, refuel after a session, or just meet someone for a coffee. No membership needed.</p>
       <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px;">
         <li style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; border: 1px solid #a39b8c; padding: 8px 12px;">Batch brew</li>
         <li style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; border: 1px solid #a39b8c; padding: 8px 12px;">Protein shakes</li>
@@ -141,8 +144,8 @@ details[open] .plus{transform:rotate(45deg)}
     </div>
     <div style="padding: 32px 32px 32px 0; display: flex; flex-direction: column; gap: 14px;">
       <p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: .14em; color: #5f4535;">03</p>
-      <h3 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 32px; line-height: 1;">Recovery</h3>
-      <p style="margin: 0; color: #4a443d;">Space to stretch and reset, then the café for a shake on the way out.</p>
+      <h3 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 32px; line-height: 1;">The track room</h3>
+      <p style="margin: 0; color: #4a443d;">A straight run of turf in its own glazed room, for sprints, sled pushes and carries. Every push starts on the symbol painted at the line.</p>
     </div>
   </div>
 </section>
@@ -192,7 +195,7 @@ details[open] .plus{transform:rotate(45deg)}
         <li style="padding: 14px 0; border-bottom: 1px solid rgba(243,239,231,.35); display: flex; gap: 18px;"><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #e7d8c4; padding-top: 4px;">03</span><span>A preview session in the finished club, before opening day</span></li>
         <li style="padding: 14px 0; border-bottom: 1px solid rgba(243,239,231,.35); display: flex; gap: 18px;"><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #e7d8c4; padding-top: 4px;">04</span><span>A member price on coffee and shakes</span></li>
       </ul>
-      <a href="#join" style="align-self: flex-start; background: #f3efe7; color: #1e1c1a; text-decoration: none; font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; padding: 0 28px; height: 54px; display: inline-flex; align-items: center;">Join the founding list</a>
+      <a href="#join" style="align-self: flex-start; background: #f3efe7; color: #1e1c1a; text-decoration: none; font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; padding: 0 28px; height: 54px; display: inline-flex; align-items: center; border-radius: 8px;">Join the founding list</a>
     </div>
   </div>
 </section>
@@ -224,7 +227,7 @@ details[open] .plus{transform:rotate(45deg)}
       <div style="display: flex; flex-direction: column; gap: 14px;">
         <h3 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 40px; line-height: .95;">Walk through it before it's built</h3>
         <p style="margin: 0; color: #d8cdb9; font-size: 17px;">A 3D model of the club from HUB's plan, to walk around before it's built.</p>
-        <a href="brand/walkthrough.html" style="align-self: flex-start; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; border: 1px solid rgba(243,239,231,.6); padding: 0 20px; height: 48px; display: inline-flex; align-items: center; text-decoration: none;">Open the walkthrough</a>
+        <a href="brand/walkthrough.html" style="align-self: flex-start; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; border: 1px solid rgba(243,239,231,.6); padding: 0 20px; height: 48px; display: inline-flex; align-items: center; text-decoration: none; border-radius: 8px;">Open the walkthrough</a>
       </div>
     </div>
   </div>
@@ -264,9 +267,9 @@ details[open] .plus{transform:rotate(45deg)}
   </div>
   <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; border-top: 1px solid #1e1c1a;">
     <li style="padding: 28px 28px 28px 0; display: flex; flex-direction: column; gap: 10px; border-top: 6px solid #5f4535; margin-top: -1px;">
-      <p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #5f4535;">Done</p>
+      <p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #5f4535;">In progress</p>
       <h3 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 28px; line-height: 1;">Concept and brand</h3>
-      <p style="margin: 0; color: #4a443d; font-size: 17px;">The café and gym designed with HUB Interiors. The identity finished.</p>
+      <p style="margin: 0; color: #4a443d; font-size: 17px;">The café and gym designed with HUB Interiors. The identity being finalised.</p>
     </li>
     <li style="padding: 28px 28px 28px 0; display: flex; flex-direction: column; gap: 10px;">
       <p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #5c554c;">Dates to be confirmed</p>
@@ -293,7 +296,7 @@ details[open] .plus{transform:rotate(45deg)}
       <p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: #5f4535;">Find us</p>
       <h2 id="loc-h" style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(44px, 5vw, 68px); line-height: .92;">Ground floor,<br>220 St Georges Terrace</h2>
       <address style="font-style: normal; font-size: 19px; color: #4a443d;">Suite G.01, 220 St Georges Terrace<br>Perth WA 6000</address>
-      <p style="margin: 0; font-size: 18px; color: #4a443d; max-width: 42ch;">In the Perth CBD, a short walk from Brookfield Place, with the café right on the street. Coffee before work, a session at lunch, a shake on the way home.</p>
+      <p style="margin: 0; font-size: 18px; color: #4a443d; max-width: 42ch;">In the Perth CBD, a short walk from Brookfield Place, with the café as the front door. Coffee before work, a session at lunch, a shake on the way home.</p>
       <dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 28px; font-size: 17px;">
         <dt style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #5c554c; padding-top: 4px;">Café</dt><dd style="margin: 0;">Hours to be confirmed</dd>
         <dt style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #5c554c; padding-top: 4px;">Gym</dt><dd style="margin: 0;">Hours to be confirmed</dd>
@@ -348,7 +351,7 @@ details[open] .plus{transform:rotate(45deg)}
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -8 228 82" style="width: 140px; height: 54px;" aria-hidden="true"><g fill="#f3efe7"><path d="M16 0L96 0L80 26L0 26ZM56 40L212 40L196 66L40 66Z"/></g></svg>
     <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(48px, 7vw, 104px); line-height: .9;">The first wind gets you here.</h2>
     <p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(26px, 2.6vw, 36px); color: #d8cdb9;">The second one is where the work starts.</p>
-    <a href="#join" style="background: #f3efe7; color: #1e1c1a; text-decoration: none; font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; padding: 0 32px; height: 56px; display: inline-flex; align-items: center; margin-top: 8px;">Join the founding list</a>
+    <a href="#join" style="background: #f3efe7; color: #1e1c1a; text-decoration: none; font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; padding: 0 32px; height: 56px; display: inline-flex; align-items: center; margin-top: 8px; border-radius: 8px;">Join the founding list</a>
   </div>
   <div style="max-width: 1296px; margin: clamp(80px, 9vw, 130px) auto 0; padding-top: 32px; border-top: 1px solid rgba(243,239,231,.2); display: flex; flex-wrap: wrap; gap: 28px 48px; align-items: flex-end; justify-content: space-between;">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 933 156" style="width: 280px; height: 47px; display: block;" role="img" aria-label="Second Wind Athletic Club"><g fill="#f3efe7"><path transform="translate(0 19)" d="M16 0L96 0L80 26L0 26ZM56 40L212 40L196 66L40 66Z"/><g transform="translate(252 0)"><path d="M0 0h56v9h-56ZM0 0h9v54.5h-9ZM0 45.5h56v9h-56ZM47 45.5h9v54.5h-9ZM0 91h56v9h-56Z"/><path transform="translate(66 0)" d="M0 0h9v100h-9ZM0 0h56v9h-56ZM0 45.5h48.16v9h-48.16ZM0 91h56v9h-56Z"/><path transform="translate(132 0)" d="M0 0h9v100h-9ZM0 0h56v9h-56ZM0 91h56v9h-56Z"/><path transform="translate(198 0)" d="M0 0h56v100h-56ZM9 9v82h38v-82Z"/><path transform="translate(264 0)" d="M0 0h9v100h-9ZM47 0h9v100h-9ZM0 0L9.45 0L56 100L46.55 100Z"/><path transform="translate(330 0)" d="M0 0H40.32L56 15.68V84.32L40.32 100H0ZM9 9V91H39.16L47 83.16V16.84L39.16 9Z"/><path transform="translate(426 0)" d="M0 0L8.55 0L27.41 100L18.86 100ZM37.73 0L46.28 0L27.41 100L18.86 100ZM37.73 0L46.28 0L65.14 100L56.59 100ZM75.45 0L84 0L65.14 100L56.59 100Z"/><path transform="translate(520 0)" d="M0 0h9v100h-9Z"/><path transform="translate(539 0)" d="M0 0h9v100h-9ZM47 0h9v100h-9ZM0 0L9.45 0L56 100L46.55 100Z"/><path transform="translate(605 0)" d="M0 0H40.32L56 15.68V84.32L40.32 100H0ZM9 9V91H39.16L47 83.16V16.84L39.16 9Z"/></g><text x="252" y="132" font-size="22" textLength="661" lengthAdjust="spacing" font-family="Barlow Semi Condensed, Arial Narrow, sans-serif" font-weight="600">ATHLETIC CLUB</text></g></svg>
