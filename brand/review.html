@@ -80,6 +80,22 @@ p { margin:0; max-width:62ch; }
 .rec th, .rec td { text-align:left; padding:10px 12px 10px 0; border-bottom:1px solid rgba(243,239,231,.25); vertical-align:top; }
 .rec th { font:500 11px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:#e7d8c4; }
 .rec .tw { overflow-x:auto; }
+/* Sergio's take: a verdict and a line per logo, remembered in this browser, sent as one email */
+.fb { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 22px; display:flex; flex-direction:column; gap:12px; }
+.fb .fbh { display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; justify-content:space-between; }
+.fb .opts { display:flex; gap:8px; flex-wrap:wrap; }
+.fb .opts button { font:500 12px var(--f-label); letter-spacing:.1em; text-transform:uppercase; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:0 14px; min-height:40px; cursor:pointer; }
+.fb .opts button.on { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.fb .opts button.on[data-v="like"] { background:var(--good); border-color:var(--good); color:#fff; }
+.fb .opts button.on[data-v="no"] { background:var(--bad); border-color:var(--bad); color:#fff; }
+.fb textarea { width:100%; box-sizing:border-box; min-height:64px; resize:vertical; font:16px/1.45 var(--f-body); color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:10px 12px; }
+.fb textarea:focus { outline:none; border-color:var(--walnut); }
+.sendbar { position:sticky; bottom:0; z-index:5; background:var(--ink); color:var(--linen); border-radius:12px 12px 0 0; padding:14px 18px; display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; justify-content:space-between; box-shadow:0 -10px 30px rgba(0,0,0,.18); margin-top:-24px; }
+.sendbar p { margin:0; font:500 12px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:#cfc7b8; }
+.sendbar .acts { display:flex; gap:8px; flex-wrap:wrap; }
+.sendbar button, .sendbar a { font:500 12px var(--f-label); letter-spacing:.12em; text-transform:uppercase; border-radius:8px; min-height:42px; padding:0 16px; display:inline-flex; align-items:center; cursor:pointer; text-decoration:none; }
+.sendbar .send { background:var(--linen); color:var(--ink); border:1px solid var(--linen); }
+.sendbar .copy { background:transparent; color:var(--linen); border:1px solid rgba(243,239,231,.4); }
 .btn { align-self:flex-start; font:500 13px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:var(--linen); background:#1e1c1a; text-decoration:none; padding:0 22px; min-height:48px; display:inline-flex; align-items:center; }
 .btn:hover { background:var(--bronze); }
 a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
@@ -93,6 +109,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
     <p class="label">Second Wind Athletic Club · logo review · for Sergio</p>
     <h1>Fourteen logos,<br>one test</h1>
     <p class="lead">Every logo we explored, put through the same test: the full mark, four weights, the icon it becomes when it's small, and how it behaved on the real walls, glass and cups of HUB's design. The same format for each, so the only thing that changes is the logo.</p>
+    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Sergio: under each logo, tap Like, Maybe or Not for me and add a line if you have one. The page remembers as you go. When you're done, press Send feedback at the bottom and it opens an email to Robbie with all fourteen filled in.</p>
     <p class="label" style="letter-spacing:.1em">How to read a spread: the hero is the logo at its best. The four weights are the same letters, thicker. The three squares are the icon at profile-picture size on linen, charcoal and walnut.</p>
   </header>
 
@@ -100,11 +117,13 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
 
   <div id="spreads"></div>
 
+  <div class="sendbar" id="sendbar"><p id="fbcount">0 of 14 rated</p><div class="acts"><button type="button" class="copy" id="fbcopy">Copy my feedback</button><button type="button" class="send" id="fbsend">Send feedback to Robbie</button></div></div>
+
   <section class="rec" aria-labelledby="h-rec">
-    <p class="label">Our recommendation</p>
+    <p class="label">My favourite</p>
     <h2 id="h-rec">Two strokes, two weights</h2>
     <p>Of the fourteen, two logos survive every test: the two strokes and the wing. Both have a real symbol that says something about the name, both hold up on glass and cups, and both gain from a bolder weight in the gym. Everything else either has no icon, or turns into "SW", which could be any gym in Perth.</p>
-    <p>We recommend the two strokes, light in the café and bold in the gym. It is the quieter of the two, which suits the room HUB has drawn, and it is the only one of the fourteen that is as much about the café as the gym: two strokes read as calm on a coffee cup and as effort on a gym wall. The wing is the strong alternative if you want more energy, and it would be a good choice too.</p>
+    <p>My favourite is the two strokes, light in the café and bold in the gym. It is the quieter of the two, which suits the room HUB has drawn, and it is the only one of the fourteen that is as much about the café as the gym: two strokes read as calm on a coffee cup and as effort on a gym wall. The wing is the strong alternative if you want more energy, and it would be a good choice too.</p>
     <div class="tw"><table>
       <tr><th>Test</th><th>Two strokes</th><th>The wing</th><th>SW marks</th><th>Name only</th></tr>
       <tr><td>Has an icon that means something</td><td>Yes: the effort, the pause, the second wind</td><td>Yes: a wing off the D</td><td>Initials only</td><td>None</td></tr>
@@ -127,7 +146,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
     B5: { title: 'Two strokes', fam: 'Nike, On, Asics: an idea, not a picture', idea: 'Two strokes, the first short, then a gap, then a longer one. The first effort, the pause, and the second wind. The name drawn in straight bars on one grid, light and upright, with the club line underneath.',
       works: ['Reads at every size, from a 3 m lit wall to a 40 mm emboss', 'The symbol tells the story on its own, so it can go on glass, cups and the start line without the name', 'Light suits the café, bold suits the gym, same logo'],
       struggles: ['Quiet by design: the light weight can feel delicate on a dark gym wall, which is why the bold weight exists', 'Needs the story told once; after that it sticks'],
-      verdict: 'good', vt: 'Recommended', vp: 'The only logo that passed every test, in the café and the gym.' },
+      verdict: 'good', vt: 'My favourite', vp: 'The only logo that passed every test, in the café and the gym.' },
     W1: { title: 'The wing', fam: "Sergio's original idea, rebuilt: Under Armour, Puma, a touch of Ferrari", idea: 'SECOND in wide letters, WIND heavier, with a three-feather wing flying off the D. Italic, forward, athletic. The version Sergio liked, redrawn on our letter grid so it can be made at any size.',
       works: ['Energy: the most athletic of the fourteen', 'A real icon: the D with its wing holds up on glass and at icon size', 'Strong on the gym wall in bold'],
       struggles: ['The fine feathers soften at 40 mm and under halo light', 'The script "Athletic Club" line cannot be made as a lit sign; it stays on print', 'Gym first: it is less at home on a coffee cup'],
@@ -201,10 +220,38 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
         '<figure><img src="photo/fam/' + id + '-shop.jpg" alt="' + r.title + ' lit on the shopfront fascia" loading="lazy"><figcaption>Shopfront · bold · lit</figcaption></figure></div></div>' +
       '<div class="copy"><div class="c"><h3>The idea</h3><p>' + r.idea + '</p></div><div class="c"><h3>Where it works</h3><ul>' + li(r.works) + '</ul></div><div class="c"><h3>Where it may struggle</h3><ul>' + li(r.struggles) + '</ul></div></div>' +
       '<div class="verdict"><b>' + r.vt + '</b><span class="pill ' + r.verdict + '">' + (r.verdict === 'good' ? 'Passes every test' : r.verdict === 'ok' ? 'Passes some' : 'Fails the small-size test') + '</span><p>' + r.vp + '</p></div>' +
+      '<div class="fb" data-id="' + id + '" data-title="' + num + ' · ' + r.title + '"><div class="fbh"><h3>Sergio\'s take</h3><div class="opts"><button type="button" data-v="like">Like it</button><button type="button" data-v="maybe">Maybe</button><button type="button" data-v="no">Not for me</button></div></div><textarea placeholder="Anything you like or don\'t about this one, in a line or two" aria-label="Comment on ' + r.title + '"></textarea></div>' +
       '</section>';
   });
   document.getElementById('toc').innerHTML = toc;
   document.getElementById('spreads').innerHTML = sp;
+  // Sergio's take: remembered in this browser; sent as one email
+  var KEY = 'sw-logo-feedback', TO = 'robcarpenter1111@gmail.com';
+  var state = {}; try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} count(); }
+  function count() { var n = order.filter(function (id) { return state[id] && state[id].v; }).length; document.getElementById('fbcount').textContent = n + ' of ' + order.length + ' rated'; }
+  Array.prototype.forEach.call(document.querySelectorAll('.fb'), function (box) {
+    var id = box.getAttribute('data-id'), st = state[id] || (state[id] = {});
+    var ta = box.querySelector('textarea'); if (st.c) ta.value = st.c;
+    Array.prototype.forEach.call(box.querySelectorAll('.opts button'), function (b) {
+      if (st.v === b.getAttribute('data-v')) b.classList.add('on');
+      b.addEventListener('click', function () { st.v = b.getAttribute('data-v'); Array.prototype.forEach.call(box.querySelectorAll('.opts button'), function (x) { x.classList.toggle('on', x === b); }); save(); });
+    });
+    ta.addEventListener('input', function () { st.c = ta.value; save(); });
+  });
+  function summary() {
+    var names = { like: 'Like it', maybe: 'Maybe', no: 'Not for me' };
+    return order.map(function (id) { var st = state[id] || {}, t = document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title');
+      return t + ' — ' + (names[st.v] || 'no verdict') + (st.c ? ' — ' + st.c.replace(/\s+/g, ' ').trim() : ''); }).join('\n');
+  }
+  document.getElementById('fbsend').addEventListener('click', function () {
+    var body = 'Logo feedback from the review page\n\n' + summary() + '\n\nOverall: ';
+    location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Second Wind logos: my feedback') + '&body=' + encodeURIComponent(body);
+  });
+  document.getElementById('fbcopy').addEventListener('click', function () {
+    var t = summary(), b = this; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy my feedback'; }, 1600); }, function () { window.prompt('Copy your feedback:', t); });
+  });
+  count();
   document.getElementById('spreads').style.display = 'flex'; document.getElementById('spreads').style.flexDirection = 'column'; document.getElementById('spreads').style.gap = '72px';
 })();
 </script>
