@@ -94,6 +94,52 @@
       var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : '';
       return { vb: '-10 -24 610 184', inner: '<text x="0" y="100" font-family="Barlow Semi Condensed" font-weight="' + fw + '"' + it + ' font-size="118" letter-spacing="-3" fill="currentColor">secondwind</text><text x="4" y="140" font-family="Barlow Semi Condensed" font-weight="500" font-size="22" letter-spacing="6" fill="currentColor">athletic club · perth</text>' };
     },
+    /* --- round two: drawn from the two favourites, the two strokes and the serif --- */
+    /* serif strokes: our symbol, the name in the fine serif beside it */
+    N1: function (p, k) {
+      var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : '';
+      var sy = (H - SW.SYM_H) / 2 + 2, wx = SW.SYM_W + 48, tw = 700;
+      return { vb: '-10 -14 ' + (wx + tw + 30) + ' 168', inner: '<g transform="translate(0 ' + sy + ')">' + sym() + '</g>' +
+        '<text x="' + wx + '" y="86" ' + SERF.replace('400', fw) + it + ' font-size="92" textLength="' + tw + '" lengthAdjust="spacing" fill="currentColor">SECOND WIND</text>' +
+        '<text x="' + (wx + 2) + '" y="132" ' + SERF + ' font-size="24" letter-spacing="13" fill="currentColor">ATHLETIC CLUB</text>' };
+    },
+    /* serif stacked: strokes centred above a two-line serif stack */
+    N2: function (p, k) {
+      var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : '';
+      var tw = 700, sc = 1.15, sw = SW.SYM_W * sc, sx = (tw - sw) / 2, ty = SW.SYM_H * sc + 118;
+      return { vb: '-10 -10 ' + (tw + 20) + ' ' + (ty + 70), inner: '<g transform="translate(' + sx + ' 0) scale(' + sc + ')">' + sym() + '</g>' +
+        '<text x="' + (tw / 2) + '" y="' + ty + '" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="92" textLength="' + tw + '" lengthAdjust="spacing" fill="currentColor">SECOND WIND</text>' +
+        '<text x="' + (tw / 2) + '" y="' + (ty + 46) + '" text-anchor="middle" ' + SERF + ' font-size="24" letter-spacing="13" fill="currentColor">ATHLETIC CLUB</text>' };
+    },
+    /* framed strokes: the bar letters tracked wide inside a hairline frame, the strokes leading */
+    N3: function (p, k) {
+      var w = wd('SECOND WIND', [Math.max(5, p[0] - 4), Math.max(5, p[1] - 4), 58, 24]);
+      var sc = .8, sy = (H - SW.SYM_H * sc) / 2 + 2, wx = SW.SYM_W * sc + 44, L = k === 'lean' ? 20 : 0;
+      var inner = '<g transform="translate(0 ' + sy + ') scale(' + sc + ')">' + sym() + '</g><g transform="translate(' + wx + ' 0)">' + (k === 'lean' ? lean(w.s, 10) : w.s) + '</g>';
+      var fr = k === 'light' ? 1.5 : 3, tw = wx + w.w + L;
+      return { vb: '-70 -70 ' + (tw + 140) + ' 270', inner: '<rect x="-50" y="-50" width="' + (tw + 100) + '" height="230" fill="none" stroke="currentColor" stroke-width="' + fr + '"/>' + inner + tag('ATHLETIC CLUB', wx + w.w * 0.3, 150, w.w * 0.4, 16) };
+    },
+    /* wide strokes: the two strokes mark with the letters tracked wide, no frame */
+    N4: function (p, k) {
+      var w = wd('SECOND WIND', [p[0], p[1], p[2], 22]), sy = (H - SW.SYM_H) / 2 + 2, wx = SW.SYM_W + 48;
+      var word = '<g transform="translate(' + wx + ' 0)">' + w.s + '</g>'; if (k === 'lean') word = lean(word, 12);
+      return { vb: '-10 -10 ' + (wx + w.w + 20 + (k === 'lean' ? 22 : 0)) + ' 156', inner: '<g transform="translate(0 ' + sy + ')">' + sym() + '</g>' + word + '<text x="' + (wx + 2) + '" y="134" ' + TAGF + ' font-size="22" letter-spacing="11" fill="currentColor">ATHLETIC CLUB</text>' };
+    },
+    /* monogram strokes: SW in the serif with the two strokes beneath, the name small under */
+    N5: function (p, k) {
+      var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : '';
+      var cx = 230, sc = .62, sw = SW.SYM_W * sc;
+      return { vb: '0 0 460 330', inner: '<text x="' + cx + '" y="150" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="150" letter-spacing="-10" fill="currentColor">SW</text>' +
+        '<g transform="translate(' + (cx - sw / 2) + ' 172) scale(' + sc + ')">' + sym() + '</g>' +
+        '<text x="' + cx + '" y="268" text-anchor="middle" ' + SERF + ' font-size="38" letter-spacing="12" fill="currentColor">SECOND WIND</text>' +
+        '<text x="' + cx + '" y="302" text-anchor="middle" ' + SERF + ' font-size="18" letter-spacing="10" fill="currentColor">ATHLETIC CLUB</text>' };
+    },
+    /* italic club line: the two strokes mark with Athletic Club in the serif italic */
+    N6: function (p, k) {
+      var w = wd('SECOND WIND', p), sy = (H - SW.SYM_H) / 2 + 2, wx = SW.SYM_W + 40;
+      var word = '<g transform="translate(' + wx + ' 0)">' + w.s + '</g>'; if (k === 'lean') word = lean(word, 12);
+      return { vb: '-10 -10 ' + (wx + w.w + 20 + (k === 'lean' ? 22 : 0)) + ' 170', inner: '<g transform="translate(0 ' + sy + ')">' + sym() + '</g>' + word + '<text x="' + (wx + 2) + '" y="146" ' + SERF + ' font-style="italic" font-size="42" letter-spacing="2" fill="currentColor">Athletic Club</text>' };
+    },
     /* luxury tracking */
     B7: function (p, k) {
       var w = wd('SECOND WIND', [Math.max(5, p[0] - 4), Math.max(5, p[1] - 4), 58, 24]);
@@ -119,7 +165,7 @@
       return { vb: '-140 0 880 170', inner: '<text x="300" y="86" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="92" letter-spacing="10" fill="currentColor">SECOND WIND</text><text x="300" y="134" text-anchor="middle" ' + SERF + ' font-size="26" letter-spacing="14" fill="currentColor">ATHLETIC CLUB</text>' };
     }
   };
-  var NAMES = { B5: 'Two strokes', W1: 'The wing', B1: 'Heritage arch', B4: 'Crest', F2: 'Interlocking SW', K1: 'Light and heavy', B6: 'Varsity 2', F6: 'Three stripes', B2: 'Condensed stack', B3: 'Lowercase', B7: 'Luxury tracking', G1: 'Extended', G2: 'Chamfered', F7: 'Fashion serif' };
+  var NAMES = { B5: 'Two strokes', W1: 'The wing', B1: 'Heritage arch', B4: 'Crest', F2: 'Interlocking SW', K1: 'Light and heavy', B6: 'Varsity 2', F6: 'Three stripes', B2: 'Condensed stack', B3: 'Lowercase', B7: 'Luxury tracking', G1: 'Extended', G2: 'Chamfered', F7: 'Fashion serif', N1: 'Serif strokes', N2: 'Serif stacked', N3: 'Framed strokes', N4: 'Wide strokes', N5: 'Monogram strokes', N6: 'Italic club line' };
   var SYMBOL = { // the compact mark each one becomes at icon size
     B5: function (p, k) { return { vb: '-8 -8 ' + (SW.SYM_W + 16) + ' ' + (SW.SYM_H + 16), inner: sym() }; },
     W1: function (p, k) { var d = SW.glyph('D', p[0] + 8, p[1] + 6, p[2] + 6); var wing = D.W1(p, k).inner.match(/<path fill="currentColor" d="M30 2[^"]+"\/>/)[0]; return { vb: '0 -74 ' + (300 + (k === 'lean' ? 20 : 0)) + ' 178', inner: lean('<path fill="currentColor" d="' + d.d + '"/>' + wing, k === 'lean' ? 16 : 10) }; },
@@ -128,6 +174,8 @@
     F2: function (p, k) { return D.F2(p, k); },
     K1: function (p, k) { var r = D.K1(p, k); return { vb: r.vb.split(' ').slice(0, 2).join(' ') + ' ' + (parseFloat(r.vb.split(' ')[2])) + ' 132', inner: r.inner.replace(/<text[\s\S]*<\/text>/, '') }; },
     B6: function (p, k) { var r = D.B6(p, k); return { vb: (k === 'lean' ? '-22' : '-6') + ' -6 ' + (k === 'lean' ? 256 : 240) + ' 202', inner: r.inner }; },
+    N1: function (p, k) { return SYMBOL.B5(p, k); }, N2: function (p, k) { return SYMBOL.B5(p, k); }, N3: function (p, k) { return SYMBOL.B5(p, k); }, N4: function (p, k) { return SYMBOL.B5(p, k); }, N6: function (p, k) { return SYMBOL.B5(p, k); },
+    N5: function (p, k) { var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : ''; var sc = .62, sw = SW.SYM_W * sc; return { vb: '20 10 260 230', inner: '<text x="150" y="150" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="150" letter-spacing="-10" fill="currentColor">SW</text><g transform="translate(' + (150 - sw / 2) + ' 172) scale(' + sc + ')">' + sym() + '</g>' }; },
     F7: function (p, k) { var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : ''; return { vb: '0 0 228 200', inner: '<text x="110" y="138" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="128" letter-spacing="-10" fill="currentColor">SW</text><path d="M68 160h84" stroke="currentColor" stroke-width="2"/><path d="M68 38h84" stroke="currentColor" stroke-width="2"/>' }; },
     F6: function (p, k) { var r = D.F6(p, k); return { vb: '-6 -6 ' + (k === 'lean' ? 220 : 192) + ' 112', inner: r.inner.replace(/<g transform="translate\(210 0\)">[\s\S]*$/, '') + (k === 'lean' ? '</g>' : '') }; }
   };

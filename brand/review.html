@@ -107,9 +107,10 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   <header class="head">
     <a href="index.html" style="font:500 11px 'DM Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:inherit;text-decoration:none;border:1px solid currentColor;padding:8px 12px;display:inline-flex;align-items:center;gap:8px;opacity:.8">&#8592; Brand review</a>
     <p class="label">Second Wind Athletic Club · logo review · for Sergio</p>
-    <h1>Fourteen logos,<br>one test</h1>
+    <h1>Twenty logos,<br>one test</h1>
     <p class="lead">Every logo we explored, put through the same test: the full mark, four weights, the icon it becomes when it's small, and how it behaved on the real walls, glass and cups of HUB's design. The same format for each, so the only thing that changes is the logo.</p>
-    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Sergio: under each logo, tap Like, Maybe or Not for me and add a line if you have one. The page remembers as you go. When you're done, press Send feedback at the bottom and it opens an email to Robbie with all fourteen filled in.</p>
+    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Sergio: under each logo, tap Like, Maybe or Not for me and add a line if you have one. The page remembers as you go. When you're done, press Send feedback at the bottom and it opens an email to Robbie with all twenty filled in. The six at the top are round two, drawn from the two we liked most: the two strokes and the serif.</p>
+    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Round two, 15 to 20, sits first. The original fourteen keep their numbers below.</p>
     <p class="label" style="letter-spacing:.1em">How to read a spread: the hero is the logo at its best. The four weights are the same letters, thicker. The three squares are the icon at profile-picture size on linen, charcoal and walnut.</p>
   </header>
 
@@ -122,8 +123,8 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   <section class="rec" aria-labelledby="h-rec">
     <p class="label">My favourite</p>
     <h2 id="h-rec">Two strokes, two weights</h2>
-    <p>Of the fourteen, two logos survive every test: the two strokes and the wing. Both have a real symbol that says something about the name, both hold up on glass and cups, and both gain from a bolder weight in the gym. Everything else either has no icon, or turns into "SW", which could be any gym in Perth.</p>
-    <p>My favourite is the two strokes, light in the café and bold in the gym. It is the quieter of the two, which suits the room HUB has drawn, and it is the only one of the fourteen that is as much about the café as the gym: two strokes read as calm on a coffee cup and as effort on a gym wall. The wing is the strong alternative if you want more energy, and it would be a good choice too.</p>
+    <p>Of the first fourteen, two logos survive every test: the two strokes and the wing. Both have a real symbol that says something about the name, both hold up on glass and cups, and both gain from a bolder weight in the gym. Everything else either has no icon, or turns into "SW", which could be any gym in Perth.</p>
+    <p>My favourite is the two strokes, light in the café and bold in the gym. It is the quieter of the two, which suits the room HUB has drawn, and it is the only one of the first fourteen that is as much about the café as the gym: two strokes read as calm on a coffee cup and as effort on a gym wall. The wing is the strong alternative if you want more energy, and it would be a good choice too.</p>
     <div class="tw"><table>
       <tr><th>Test</th><th>Two strokes</th><th>The wing</th><th>SW marks</th><th>Name only</th></tr>
       <tr><td>Has an icon that means something</td><td>Yes: the effort, the pause, the second wind</td><td>Yes: a wing off the D</td><td>Initials only</td><td>None</td></tr>
@@ -143,6 +144,30 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
 (function () {
   var W = [['light', 'Light'], ['medium', 'Medium'], ['bold', 'Bold'], ['lean', 'Bold, leaning']];
   var R = {
+    N1: { title: 'Serif strokes', fam: 'Round two: the two strokes dressed by the serif', idea: 'Our symbol, the name in the fine serif beside it. The strokes carry the story and the sport; the serif carries the café, the price point and the street. Two favourites, one mark.',
+      works: ['Keeps the icon that works on glass, cups and the start line', 'The serif name makes the café front and the menu look like a good hotel', 'Light in the café, bold on the gym wall, as before'],
+      struggles: ['Two voices in one line: the geometric strokes next to a classical serif can read as two brands if the spacing is off', 'Thin serifs still need bold on dark walls'],
+      verdict: 'ok', vt: 'The obvious cross', vp: 'If Sergio wants the serif but does not want to lose the symbol, this is it.' },
+    N2: { title: 'Serif stacked', fam: 'Round two: the counter-wall version of the serif strokes', idea: 'The strokes centred above a two-line serif stack. Built for the café wall above Fuel good days, the cup, the menu board and anything square.',
+      works: ['The best café-wall shape of the twenty', 'Reads as a label on a bottle or a cup', 'Square enough for social and app tiles with the name in'],
+      struggles: ['Too tall for the fascia and the gym end wall; those take the horizontal serif strokes instead', 'The two-line serif goes small quickly; the strokes alone take over under 40 mm'],
+      verdict: 'ok', vt: 'The café version', vp: 'Pairs with the serif strokes; it is a lockup more than a separate logo.' },
+    N3: { title: 'Framed strokes', fam: 'Round two: luxury tracking with a symbol', idea: 'Our bar letters tracked wide inside a hairline frame, the strokes leading the name. The calm of the framed look, but with the thing that says second wind.',
+      works: ['The frame makes a natural sign, label and stamp', 'Quiet, expensive, and still ours', 'Bold inside the frame holds on a dark wall'],
+      struggles: ['The frame has to be made as well as the letters: on a lit sign that is a second element to light', 'Wide tracking plus a frame is long; it needs width'],
+      verdict: 'ok', vt: 'The quiet one', vp: 'Luxury tracking done with our own letters and symbol.' },
+    N4: { title: 'Wide strokes', fam: 'Round two: the favourite, tracked wide', idea: 'The two strokes mark exactly as it is, with the letters spaced wide like the serif. The smallest change in the round and the biggest change in feel: slower, more expensive, less sport.',
+      works: ['Everything the two strokes already do', 'Reads as premium at a glance, especially light', 'No new parts to make'],
+      struggles: ['Longer, so it drops to the stacked form sooner on narrow spaces', 'Loses a little of the pace the tight spacing gave it'],
+      verdict: 'ok', vt: 'The refinement', vp: 'If the two strokes win, this is the spacing question to settle.' },
+    N5: { title: 'Monogram strokes', fam: 'Round two: the SW monogram with the strokes underneath', idea: 'SW in the serif with the two strokes beneath, where the hairline was. The name small under it. One object that is both the monogram and the symbol.',
+      works: ['The strongest single icon of the round: cup sleeve, cap, glass, app', 'Members\' club at once', 'The strokes give the monogram a meaning the letters alone lack'],
+      struggles: ['Tall: on the fascia and the gym wall it has to be large or be replaced by a horizontal lockup', 'The name is the smallest part, so it travels with the full name on anything new to people'],
+      verdict: 'ok', vt: 'The icon', vp: 'Best as the icon of the serif family rather than the whole identity.' },
+    N6: { title: 'Italic club line', fam: 'Round two: the favourite with one soft line', idea: 'The two strokes mark unchanged, with Athletic Club in the serif italic instead of the tracked capitals. One soft thing in a hard mark, the way the wing had its script line, but in the brand\'s own serif.',
+      works: ['Warms the mark up for the café and print without touching the logo', 'Looks right on a menu, a cup and a card', 'Everything else stays as the two strokes'],
+      struggles: ['The italic line cannot be a lit sign and comes off under 24 mm, so the sign lockup drops it', 'Two typefaces in one mark: it has to be set exactly, never approximated'],
+      verdict: 'ok', vt: 'The warm one', vp: 'A small change that moves the two strokes a long way towards the café.' },
     B5: { title: 'Two strokes', fam: 'Nike, On, Asics: an idea, not a picture', idea: 'Two strokes, the first short, then a gap, then a longer one. The first effort, the pause, and the second wind. The name drawn in straight bars on one grid, light and upright, with the club line underneath.',
       works: ['Reads at every size, from a 3 m lit wall to a 40 mm emboss', 'The symbol tells the story on its own, so it can go on glass, cups and the start line without the name', 'Light suits the café, bold suits the gym, same logo'],
       struggles: ['Quiet by design: the light weight can feel delicate on a dark gym wall, which is why the bold weight exists', 'Needs the story told once; after that it sticks'],
@@ -200,10 +225,11 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
       struggles: ['Thin serifs vanish on a lit wall and on textured concrete, so it has to go bold and large in the gym', 'Says taste before training; nothing in it moves', 'Never on the turf or the track'],
       verdict: 'ok', vt: 'Robbie\'s second favourite', vp: 'The café will love it; the gym has to be told to use it bold. Full presentation in the top four.' }
   };
-  var order = ['B5', 'W1', 'B1', 'B4', 'F2', 'K1', 'B6', 'F6', 'B2', 'B3', 'B7', 'G1', 'G2', 'F7'];
+  var first = ['B5', 'W1', 'B1', 'B4', 'F2', 'K1', 'B6', 'F6', 'B2', 'B3', 'B7', 'G1', 'G2', 'F7'], round2 = ['N1', 'N2', 'N3', 'N4', 'N5', 'N6'];
+  var order = round2.concat(first), NUM = {}; first.forEach(function (id, i) { NUM[id] = i + 1; }); round2.forEach(function (id, i) { NUM[id] = 15 + i; });
   var toc = '', sp = '';
   order.forEach(function (id, n) {
-    var r = R[id], num = (n + 1 < 10 ? '0' : '') + (n + 1);
+    var r = R[id], num = (NUM[id] < 10 ? '0' : '') + NUM[id];
     toc += '<a href="#l-' + id + '"><div class="mk">' + SWF.svg(id, 'light', '#1e1c1a').replace('<svg ', '<svg style="color:var(--ink)" ') + '</div><span>' + num + ' · ' + r.title + '</span></a>';
     var ws = ''; W.forEach(function (w) { ws += '<div class="w"><div class="mk">' + SWF.svg(id, w[0], '#1e1c1a') + '</div><span>' + w[1] + '</span></div>'; });
     var ic = SWF.hasSymbol(id)
