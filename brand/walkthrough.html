@@ -45,6 +45,13 @@ html, body { margin:0; height:100%; background:#141210; color:var(--linen); font
 .help { top:max(222px,calc(env(safe-area-inset-top) + 214px)) !important; width:320px; }
 .tourbtn { flex:1; font:500 11px var(--f-label); letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; padding:0 8px; color:var(--char); background:var(--linen); border:1px solid var(--linen); cursor:pointer; height:42px; }
 .tourbtn.on { background:var(--bronze); border-color:var(--bronze); color:var(--linen); }
+.hud { top:max(14px,env(safe-area-inset-top)); left:50%; transform:translateX(-50%); display:flex; gap:14px; align-items:center; background:rgba(20,18,16,.72); border:1px solid rgba(243,239,231,.18); padding:10px 14px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); pointer-events:auto; color:var(--linen); }
+.hud[hidden] { display:none; }
+.hud b { font:600 26px var(--f-display); letter-spacing:.02em; min-width:84px; font-variant-numeric:tabular-nums; }
+.hud span { font:500 11px var(--f-label); letter-spacing:.1em; text-transform:uppercase; opacity:.8; }
+.hud button { font:500 11px var(--f-label); letter-spacing:.08em; text-transform:uppercase; height:34px; padding:0 10px; background:transparent; color:var(--linen); border:1px solid rgba(243,239,231,.4); cursor:pointer; }
+.hud button#again { background:var(--linen); color:var(--char); border-color:var(--linen); }
+@media (max-width:640px) { .hud { top:auto; bottom:calc(max(14px,env(safe-area-inset-bottom)) + 150px); gap:10px; padding:8px 10px; } .hud b { font-size:20px; min-width:64px; } }
 @media (max-width:640px) { .logos { top:max(44px,calc(env(safe-area-inset-top) + 40px)); left:12px; right:12px; width:auto; gap:4px; } .logos label { display:none; } .logos select, .logos .lrow button { height:36px; font-size:11px; } }
 #load { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:#141210; z-index:5; font:500 11px var(--f-label); letter-spacing:.14em; text-transform:uppercase; color:var(--muted); transition:opacity .6s; }
 #err { position:fixed; inset:0; display:none; align-items:center; justify-content:center; text-align:center; padding:24px; background:#141210; z-index:6; font-size:16px; }
@@ -55,9 +62,10 @@ html, body { margin:0; height:100%; background:#141210; color:var(--linen); font
 <div id="load">Building the room…</div>
 <div id="err">This walkthrough needs WebGL, which this browser has turned off. Try another browser or device.</div>
 
-<div class="ui brand"><div class="mk" id="mk"></div><span>Walkthrough · HUB revision 2</span><a href="index.html" style="font:500 10px var(--f-label);letter-spacing:.14em;text-transform:uppercase;color:var(--linen);text-decoration:none;border:1px solid rgba(243,239,231,.4);padding:6px 10px;margin-left:8px">&#8592; Brand review</a></div>
+<div class="ui brand"><div class="mk" id="mk"></div><span>Walkthrough · draft 22 · HUB revision 2</span></div>
 <div class="ui help"><span class="k">Drag to look · W A S D or arrows to walk<br></span>Tap a place below to go there</div>
-<div class="ui logos" id="logos" role="group" aria-label="Compare logos in the room"><label for="logosel">Logo in the room</label><div class="lrow"><button type="button" id="lprev" aria-label="Previous logo">‹</button><select id="logosel" aria-label="Logo"></select><button type="button" id="lnext" aria-label="Next logo">›</button></div><div class="lrow"><select id="wsel" aria-label="Weight"></select><select id="csel" aria-label="Café sign"><option value="unlit">Café sign: bronze, unlit</option><option value="lit">Café sign: lit</option></select></div><div class="lrow"><select id="tsel" aria-label="Time of day"><option value="evening">Evening</option><option value="day">Morning</option></select><button type="button" id="tour" class="tourbtn">▶ Tour</button></div></div>
+<div class="ui logos" id="logos" role="group" aria-label="Compare logos in the room"><label for="logosel">Logo in the room</label><div class="lrow"><button type="button" id="lprev" aria-label="Previous logo">‹</button><select id="logosel" aria-label="Logo"></select><button type="button" id="lnext" aria-label="Next logo">›</button></div><div class="lrow"><select id="wsel" aria-label="Weight"></select><select id="csel" aria-label="Café sign"><option value="unlit">Café sign: bronze, unlit</option><option value="lit">Café sign: lit</option></select></div><div class="lrow"><select id="tsel" aria-label="Time of day"><option value="evening">Evening</option><option value="day">Morning</option></select><button type="button" id="tour" class="tourbtn">▶ Tour</button></div><div class="lrow"><select id="lsel" aria-label="Sled load"><option value="60">Sled · 60 kg</option><option value="100" selected>Sled · 100 kg</option><option value="140">Sled · 140 kg</option></select><button type="button" id="pushbtn" class="tourbtn">⟶ Push sled</button></div></div>
+<div class="ui hud" id="hud" hidden><b id="hudt">0.00 s</b><span id="hudd">0.0 m</span><span id="hudn">Push</span><button type="button" id="again">Again</button><button type="button" id="hudx">Walk on</button></div>
 <div class="ui card" id="card"><small id="cardk"></small><h2 id="cardh"></h2><p id="cardp"></p></div>
 <div class="ui pad"><button id="fwd" aria-label="Walk forward">▲</button><button id="back" aria-label="Walk back">▼</button></div>
 <div class="ui spots" id="spots"></div>
@@ -134,6 +142,7 @@ ribTex.wrapS = ribTex.wrapT = THREE.RepeatWrapping;
 /* which mark is in the room: B5 is the chosen identity; B1, B4, B6 are alternatives for comparison */
 const LOGO_GROUPS = [
   ['Two strokes · chosen', ['B5']],
+  ['Round two · from the favourites', ['N1', 'N2', 'N3', 'N4', 'N5', 'N6']],
   ['The wing', ['W1']],
   ['SW initials', ['B1', 'B4', 'F2', 'K1']],
   ['Number or stripes', ['B6', 'F6']],
@@ -165,7 +174,7 @@ function signText(s) {
     if (tl && x && parseFloat(tl[1]) / fs > 14) { const L = parseFloat(tl[1]), nl = fs * 12, cx = parseFloat(x[1]) + L / 2; b = b.replace(/textLength="[\d.]+"/, 'textLength="' + nl.toFixed(1) + '"').replace(/\sx="[\d.-]+"/, ' x="' + (cx - nl / 2).toFixed(1) + '"'); }
     return '<text' + b + ' stroke="currentColor" stroke-width="0.6" paint-order="stroke">';
   });
-  if (LOGO === 'B7' || LOGO === 'G1' || LOGO === 'F7') s = s.replace(/<g fill="([^"]+)">/, '<g fill="$1" stroke="$1" stroke-width="2.2" stroke-linejoin="miter">');
+  if (LOGO === 'B7' || LOGO === 'G1' || LOGO === 'F7' || LOGO === 'N1' || LOGO === 'N2' || LOGO === 'N3' || LOGO === 'N5') s = s.replace(/<g fill="([^"]+)">/, '<g fill="$1" stroke="$1" stroke-width="2.2" stroke-linejoin="miter">');
   return s.replace(/currentColor/g, '#ffffff');
 }
 function svgImage(variant, colour, w, sign) {
@@ -754,6 +763,55 @@ function resize() {
 }
 window.addEventListener('resize', resize); resize();
 
+/* ---------- the sled: a loaded prowler at the start of the track, and a push down it ---------- */
+let sledG = null, push = null; const SLED_START = PT(790, 322), SLED_END_X = mx(556);
+const LOADS = { 60: 3.5, 100: 2.8, 140: 2.15 }; let LOAD = 100;
+function buildSled() {
+  if (sledG) scene.remove(sledG);
+  const g = new THREE.Group(); g.position.set(SLED_START[0], 0, SLED_START[1]); g.rotation.y = Math.PI / 2; scene.add(g); sledG = g;
+  const add = (geo, mat, x, y, z, rx, rz) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); if (rx) m.rotation.x = rx; if (rz) m.rotation.z = rz; g.add(m); return m; };
+  for (const x of [-.26, .26]) add(new THREE.BoxGeometry(.06, .05, 1.2), M.frame, x, .035, 0);       // skids
+  add(new THREE.BoxGeometry(.6, .06, .5), M.frame, 0, .09, .05); add(new THREE.BoxGeometry(.06, .06, 1.1), M.frame, 0, .09, 0);
+  add(new THREE.CylinderGeometry(.025, .025, .6, 10), M.frame, 0, .4, -.05);                            // the post
+  const plates = []; [M.black, M.bronze, M.black, M.black].forEach((mt, i) => plates.push(add(new THREE.CylinderGeometry(.225, .225, .045, 28), mt, 0, .14 + i * .05, -.05)));
+  for (const x of [-.24, .24]) add(new THREE.CylinderGeometry(.018, .018, .95, 10), M.frame, x, .55, .55);   // high handles, where you stand
+  add(new THREE.CylinderGeometry(.018, .018, .54, 10), M.frame, 0, 1.0, .55, 0, Math.PI / 2);
+  for (const x of [-.24, .24]) add(new THREE.CylinderGeometry(.018, .018, .5, 10), M.frame, x, .3, -.55);    // low bar at the front
+  add(new THREE.CylinderGeometry(.018, .018, .54, 10), M.frame, 0, .55, -.55, 0, Math.PI / 2);
+  g.userData.plates = plates;
+}
+const hud = document.getElementById('hud'), hudT = document.getElementById('hudt'), hudD = document.getElementById('hudd'), hudN = document.getElementById('hudn');
+function startPush(fromTour) {
+  if (!fromTour) stopTour();
+  if (!sledG) return; fly = null; drag = null;
+  sledG.position.set(SLED_START[0], 0, SLED_START[1]);
+  push = { t: 0, x: SLED_START[0], v: 0, done: false, end: 0 };
+  hud.hidden = false; hudN.textContent = LOAD + ' kg'; document.getElementById('again').textContent = 'Again';
+  const tr = P.find(p => p.name === 'Track room'); if (tr) showCard(tr);
+}
+function endPush() { push = null; hud.hidden = true; }
+document.getElementById('pushbtn').addEventListener('click', () => startPush(false));
+document.getElementById('again').addEventListener('click', () => startPush(false));
+document.getElementById('hudx').addEventListener('click', () => { endPush(); pos.y = 1.65; });
+document.getElementById('lsel').addEventListener('change', e => { LOAD = +e.target.value; });
+function stepPush(dt) {
+  push.t += dt;
+  if (!push.done) {
+    const vmax = LOADS[LOAD], remaining = push.x - SLED_END_X;
+    const target = remaining < 1.6 ? vmax * Math.max(.12, remaining / 1.6) : vmax;
+    push.v += (target - push.v) * Math.min(1, dt * (push.v < target ? 1.6 : 3.5));
+    push.x -= push.v * dt;
+    if (push.x <= SLED_END_X + .02) { push.x = SLED_END_X; push.done = true; push.end = push.t; push.v = 0; hudN.textContent = LOAD + ' kg · ' + (SLED_START[0] - SLED_END_X).toFixed(1) + ' m · done'; }
+  }
+  sledG.position.x = push.x;
+  const stride = push.done ? 0 : Math.min(1, push.v / 2);
+  const bob = Math.sin(push.t * 8.5) * .025 * stride, sway = Math.sin(push.t * 4.25) * .012 * stride;
+  sledG.userData.plates.forEach((pl, i) => { pl.rotation.z = Math.sin(push.t * 21 + i * 1.3) * .012 * stride; });
+  pos.set(push.x + 1.15, 1.18 + bob, SLED_START[1] + sway);
+  yaw = Math.PI / 2 + Math.sin(push.t * 4.25) * .012 * stride; pitch = -.17 + (push.done ? .06 : 0);
+  hudT.textContent = (push.done ? push.end : push.t).toFixed(2) + ' s'; hudD.textContent = (SLED_START[0] - push.x).toFixed(1) + ' m';
+}
+
 /* ---------- places ---------- */
 const P = [
   { name:'Foyer', pos:[mx(948), 1.6, mz(400)], look:[mx(922), 1.9, mz(292)], k:'Café glass front · lit header · reeded panel', h:'From the building foyer', p:'HUB\'s page 8: standing in the building\'s foyer on the way to the lifts. The café is a glass box, doors closed, the name lit on the black header, reeded glass to the left hiding the gym, timber beside you, the building\'s stone wall on the right.' },
@@ -768,18 +826,20 @@ const P = [
   { name:'Turf loop', pos:[mx(605), 1.75, mz(290)], look:[mx(330), .5, mz(150)], k:'Olive turf · HUB revision 2', h:'The loop', p:'One continuous turf path round G.01: along the top, down the east side, back along the bottom and up through the hairpin. Sleds, carries, lunges.' },
   { name:'Treadmills', pos:[mx(300), 1.65, mz(300)], look:[mx(420), 1.0, mz(215)], k:'Timber platform · four treadmills', h:'Cardio in the middle', p:'The treadmills sit on a timber platform in the middle of the loop, planting at one end, the dumbbells beyond.' },
   { name:'Glass room', pos:[mx(690), 1.7, mz(256)], look:[mx(752), 1.0, mz(180)], k:'Glazed room · use to confirm with HUB', h:'The glass room', p:'A small glazed room off G.02 with plate-loaded machines. Heavy lifting, PT or small groups: HUB and Sergio to confirm.' },
-  { name:'Track room', pos:[mx(772), 1.75, mz(336)], look:[mx(822), 0, mz(322)], k:'Linen paint · 600 mm · distance bars every metre', h:'The track room', p:'A straight run of turf in its own glazed room, the symbol painted at the start. Every push begins on it.' }
+  { name:'Track room', pos:[mx(772), 1.75, mz(336)], look:[mx(822), 0, mz(322)], k:'Linen paint · 600 mm · distance bars every metre', h:'The track room', p:'A straight run of turf in its own glazed room, the symbol painted at the start. Every push begins on it. Press "Push sled" (top right) to take the prowler down the track yourself; choose the load first.' }
 ];
 /* ---------- guided tour ---------- */
 let tour = null;
 const TOUR = ['Foyer', 'Entry', 'Café', 'A table', 'Booths', 'Frosted glass', 'Café to gym', 'Strength', 'End wall', 'Turf loop', 'Treadmills', 'Glass room', 'Track room'];
 function tourStep() {
   if (!tour) return;
-  const idx = P.findIndex(p => p.name === TOUR[tour.i % TOUR.length]); if (idx >= 0) go(idx);
-  tour.i++; tour.t = setTimeout(tourStep, 7500);
+  const name = TOUR[tour.i % TOUR.length], idx = P.findIndex(p => p.name === name); if (idx >= 0) go(idx);
+  tour.i++;
+  if (name === 'Track room') { const tk = tour; tour.p = setTimeout(() => { if (tour === tk) startPush(true); }, 2600); tour.t = setTimeout(tourStep, 13000); }
+  else tour.t = setTimeout(tourStep, 7500);
 }
 function startTour() { stopTour(); tour = { i: 0, t: null }; document.getElementById('tour').classList.add('on'); document.getElementById('tour').textContent = '■ Stop'; tourStep(); }
-function stopTour() { if (!tour) return; clearTimeout(tour.t); tour = null; const b = document.getElementById('tour'); b.classList.remove('on'); b.textContent = '▶ Tour'; }
+function stopTour() { if (!tour) return; clearTimeout(tour.t); clearTimeout(tour.p); tour = null; const b = document.getElementById('tour'); b.classList.remove('on'); b.textContent = '▶ Tour'; }
 document.getElementById('tour').addEventListener('click', () => tour ? stopTour() : startTour());
 const spots = document.getElementById('spots');
 P.forEach((p, i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = p.name; b.addEventListener('click', () => { stopTour(); go(i); }); spots.appendChild(b); });
@@ -791,6 +851,7 @@ let yaw = 0, pitch = 0; const pos = new THREE.Vector3();
 function lookAt(from, to) { const d = new THREE.Vector3().subVectors(to, from); yaw = Math.atan2(-d.x, -d.z); pitch = Math.atan2(d.y, Math.hypot(d.x, d.z)); }
 let fly = null, cur = 0;
 function go(i, instant) {
+  if (push) endPush();
   cur = i; const p = P[i]; const to = new THREE.Vector3(...p.pos), look = new THREE.Vector3(...p.look);
   const sy = yaw, sp = pitch; lookAt(to, look); const ty = yaw, tp = pitch; yaw = sy; pitch = sp;
   let dy = ty - sy; while (dy > Math.PI) dy -= 2 * Math.PI; while (dy < -Math.PI) dy += 2 * Math.PI;
@@ -800,10 +861,10 @@ function go(i, instant) {
   showCard(p);
 }
 const keys = {};
-window.addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; if (!e.metaKey && !e.ctrlKey) stopTour(); });
+window.addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; if (!e.metaKey && !e.ctrlKey) { stopTour(); if (push && push.done) { endPush(); pos.y = 1.65; } } });
 window.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
 let drag = null;
-canvas.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId); fly = null; stopTour(); });
+canvas.addEventListener('pointerdown', e => { if (push && push.done) { endPush(); pos.y = 1.65; } if (push) return; drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId); fly = null; stopTour(); });
 canvas.addEventListener('pointermove', e => { if (!drag) return; yaw += (e.clientX - drag.x) * .0042; pitch += (e.clientY - drag.y) * .0034; pitch = Math.max(-1.1, Math.min(1.1, pitch)); drag = { x: e.clientX, y: e.clientY }; });
 canvas.addEventListener('pointerup', () => { drag = null; });
 let padDir = 0;
@@ -821,7 +882,7 @@ function blocked(x, z) {
 const clock = new THREE.Clock();
 function step() {
   const dt = Math.min(clock.getDelta(), .05);
-  if (fly) {
+  if (push) { stepPush(dt); } else if (fly) {
     fly.t = Math.min(1, fly.t + dt / (tour ? 3.2 : 1.8)); const e = fly.t < .5 ? 4 * fly.t ** 3 : 1 - Math.pow(-2 * fly.t + 2, 3) / 2;
     pos.lerpVectors(fly.from, fly.to, e); yaw = fly.sy + fly.dy * e; pitch = fly.sp + (fly.tp - fly.sp) * e;
     if (fly.t >= 1) fly = null;
@@ -882,7 +943,7 @@ let building = null;
 async function buildBrand() {
   for (const o of [...BG.children]) { BG.remove(o); o.geometry && o.geometry.dispose(); if (o.material) { o.material.map && o.material.map.dispose(); o.material.dispose(); } }
   const n0 = scene.children.length;
-  await buildTrack(); await buildFilm(); await buildProps();
+  await buildTrack(); buildSled(); await buildFilm(); await buildProps();
   await haloSign(LOGO === 'B5' ? 'lockup' : 'primary', 2.6, mx(938), 2.8, mz(162) + .1, 0, CAFE_LIT ? 0xf3efe7 : 0x151311, 1.0, !CAFE_LIT);
   await haloSign('stacked', LOGO === 'B5' ? 2.2 : 3.2, mx(131) + .11, 2.6, mz(175), Math.PI / 2, 0xf3efe7, 1.45);
   await haloSign('primary', 2.1, FXC, (H + 2.75) / 2, ZF + .14, 0, 0xf3efe7, .7);   // the black header over the café doors, read from the foyer
@@ -920,6 +981,6 @@ function setCafe(v) { const lit = v === 'lit'; if (lit === CAFE_LIT) return; CAF
 })();
 window.__logo = (k) => { setLogo(k); return building; }; window.__weight = (w) => { setWeight(w); return building; }; window.__cafe = (v) => { setCafe(v); return building; }; window.__time = (t) => setTime(t);
 window.__go = (i) => go(i, true);
-window.__cam = (px, py, h, lx, ly, lh) => { const to = new THREE.Vector3(mx(px), h, mz(py)); lookAt(to, new THREE.Vector3(mx(lx), lh, mz(ly))); pos.copy(to); fly = null; };
+window.__cam = (px, py, h, lx, ly, lh) => { if (push) endPush(); const to = new THREE.Vector3(mx(px), h, mz(py)); lookAt(to, new THREE.Vector3(mx(lx), lh, mz(ly))); pos.copy(to); fly = null; };
 </script>
 </html>
