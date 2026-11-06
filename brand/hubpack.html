@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-AU">
-<head>
+<head><meta http-equiv="Cache-Control" content="no-cache">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 228 82'><rect x='-8' y='-8' width='228' height='82' fill='%235f4535'/><g fill='%23f3efe7'><path d='M16 0L96 0L80 26L0 26ZM56 40L212 40L196 66L40 66Z'/></g></svg>">
@@ -94,7 +94,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   </section>
 </div>
 
-<script src="brand.js"></script>
+<script src="brand.js?v=8d7e29c1"></script>
 <script>
 (function () {
   document.querySelector('.brand').innerHTML = SW.svg('primary', 'currentColor', { attrs: ' aria-hidden="true"' });
@@ -115,9 +115,9 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
     var n = ('0' + pg[0]).slice(-2);
     html += '<section class="page" aria-labelledby="p' + n + '"><div class="ph"><div><p class="n">Page ' + pg[0] + ' of 10</p><h2 id="p' + n + '">' + pg[1] + '</h2></div>' + (pg[2] ? '<p class="what">' + pg[2] + '</p>' : '<p class="what">No branding on this page. Shown as HUB sent it.</p>') + '</div>';
     if (pg[2]) {
-      html += '<div class="cmp" style="--x:50%"><img class="after" src="hub/after-' + n + '.jpg" alt="Page ' + pg[0] + ' with the Second Wind mark" loading="lazy"><img class="before" src="hub/before-' + n + '.jpg" alt="" loading="lazy"><span class="tag l">HUB original</span><span class="tag r">With our mark</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after on page ' + pg[0] + '"><span class="bar"></span><span class="knob" aria-hidden="true">&#8596;</span></div>';
+      html += '<div class="cmp" style="--x:50%"><img class="after" src="hub/after-' + n + '.jpg?v=8d7e29c1" alt="Page ' + pg[0] + ' with the Second Wind mark" loading="lazy"><img class="before" src="hub/before-' + n + '.jpg?v=8d7e29c1" alt="" loading="lazy"><span class="tag l">HUB original</span><span class="tag r">With our mark</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after on page ' + pg[0] + '"><span class="bar"></span><span class="knob" aria-hidden="true">&#8596;</span></div>';
     } else {
-      html += '<div class="still"><img src="hub/after-' + n + '.jpg" alt="Page ' + pg[0] + ', ' + pg[1] + '" loading="lazy"></div>';
+      html += '<div class="still"><img src="hub/after-' + n + '.jpg?v=8d7e29c1" alt="Page ' + pg[0] + ', ' + pg[1] + '" loading="lazy"></div>';
     }
     html += '</section>';
   });
