@@ -34,7 +34,7 @@
       var inner = a.s + '<g transform="translate(' + bx + ' 0)">' + b.s + '<g transform="translate(' + dx + ' 0)">' + wing + '</g></g>';
       inner = lean(inner, k === 'lean' ? 16 : 10);
       var total = bx + b.w + 190;
-      return { vb: '-14 -80 ' + (total + 40) + ' 250', inner: inner + '<text x="' + (a.w * 0.2) + '" y="152" font-size="52" ' + SCRF + ' fill="currentColor">Athletic Club</text>' };
+      return { vb: '-14 -80 ' + (total + 40 + (k === 'lean' ? 20 : 4)) + ' 250', inner: inner + '<text x="' + (a.w * 0.2) + '" y="152" font-size="52" ' + SCRF + ' fill="currentColor">Athletic Club</text>' };
     },
     /* heritage arch: arched name, SW monogram, rule, club line */
     B1: function (p, k) {
@@ -55,7 +55,7 @@
       var cw = 110 + (p[0] - 9) * 2; var s = SW.glyph('S', p[0] + 15, p[1] + 15, cw), w = SW.glyph('W', p[0] + 14, p[1] + 14, cw);
       var inner = '<defs><mask id="flock" maskUnits="userSpaceOnUse" x="-500" y="-500" width="1500" height="1500"><rect x="-500" y="-500" width="1500" height="1500" fill="#fff"/><path transform="translate(-78 0)" d="' + s.d + '" fill="#000" stroke="#000" stroke-width="9"/></mask></defs><g transform="scale(2)"><g transform="translate(78 0)" mask="url(#flock)"><path fill="currentColor" d="' + w.d + '"/></g><path fill="currentColor" d="' + s.d + '"/></g>';
       if (k === 'lean') inner = lean(inner, 12);
-      return { vb: '-20 -20 ' + (560 + (k === 'lean' ? 40 : 0)) + ' 240', inner: inner };
+      return { vb: '-24 -20 ' + (580 + (k === 'lean' ? 40 : 0)) + ' 240', inner: inner };
     },
     /* light and heavy: SECOND light, WIND heavy, a cut through the middle */
     K1: function (p, k) {
@@ -72,7 +72,7 @@
       var b = wd('WIND', [p[0] + 6, p[1] + 6, 66 + (p[0] - 9), 8]);
       var inner = '<g transform="scale(1.9)">' + two + '</g><g transform="translate(250 0)">' + b.s + '<rect x="0" y="118" width="' + b.w + '" height="5" fill="currentColor"/>' + tag('SECOND WIND ATHLETIC CLUB', 0, 156, b.w, 17) + '</g>';
       if (k === 'lean') inner = lean(inner, 12);
-      return { vb: '-14 -14 ' + (250 + b.w + 28 + (k === 'lean' ? 40 : 0)) + ' 200', inner: inner };
+      return { vb: '-24 -14 ' + (250 + b.w + 48 + (k === 'lean' ? 40 : 0)) + ' 210', inner: inner };
     },
     /* three stripes */
     F6: function (p, k) {
@@ -87,12 +87,12 @@
       var cs = Math.min(p[0] + 2, 15), cw = 40 + (p[0] - 9) * 1.2; var a = wd('SECOND', [cs, Math.min(p[1] + 1, 13), cw, 6]), b = wd('WIND', [cs, Math.min(p[1] + 1, 13), cw, 6]), s = a.w / b.w;
       var inner = '<g transform="scale(1 1.5)">' + a.s + '</g><g transform="translate(0 165) scale(' + s + ' ' + (1.5 * s) + ')">' + b.s + '</g>';
       if (k === 'lean') inner = lean(inner, 10);
-      return { vb: '-14 -14 ' + (a.w + 28 + (k === 'lean' ? 50 : 0)) + ' ' + (165 + 150 * s + 72), inner: inner + tag('ATHLETIC CLUB', 0, 165 + 150 * s + 40, a.w, 16) };
+      return { vb: '' + (k === 'lean' ? -58 : -14) + ' -14 ' + (a.w + 28 + (k === 'lean' ? 60 : 0)) + ' ' + (165 + 150 * s + 72), inner: inner + tag('ATHLETIC CLUB', 0, 165 + 150 * s + 40, a.w, 16) };
     },
     /* lowercase: the one that isn't bar-built, so weight is the font weight */
     B3: function (p, k) {
       var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : '';
-      return { vb: '-10 0 610 160', inner: '<text x="0" y="100" font-family="Barlow Semi Condensed" font-weight="' + fw + '"' + it + ' font-size="118" letter-spacing="-3" fill="currentColor">secondwind</text><text x="4" y="140" font-family="Barlow Semi Condensed" font-weight="500" font-size="22" letter-spacing="6" fill="currentColor">athletic club · perth</text>' };
+      return { vb: '-10 -24 610 184', inner: '<text x="0" y="100" font-family="Barlow Semi Condensed" font-weight="' + fw + '"' + it + ' font-size="118" letter-spacing="-3" fill="currentColor">secondwind</text><text x="4" y="140" font-family="Barlow Semi Condensed" font-weight="500" font-size="22" letter-spacing="6" fill="currentColor">athletic club · perth</text>' };
     },
     /* luxury tracking */
     B7: function (p, k) {
@@ -127,9 +127,9 @@
     B4: function (p, k) { var r = D.B4(p, k); return { vb: '12 2 276 336', inner: r.inner }; },
     F2: function (p, k) { return D.F2(p, k); },
     K1: function (p, k) { var r = D.K1(p, k); return { vb: r.vb.split(' ').slice(0, 2).join(' ') + ' ' + (parseFloat(r.vb.split(' ')[2])) + ' 132', inner: r.inner.replace(/<text[\s\S]*<\/text>/, '') }; },
-    B6: function (p, k) { var r = D.B6(p, k); return { vb: '-6 -6 240 202', inner: r.inner }; },
-    F7: function (p, k) { var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : ''; return { vb: '0 0 200 200', inner: '<text x="100" y="138" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="128" letter-spacing="-10" fill="currentColor">SW</text><path d="M58 160h84" stroke="currentColor" stroke-width="2"/><path d="M58 38h84" stroke="currentColor" stroke-width="2"/>' }; },
-    F6: function (p, k) { var r = D.F6(p, k); return { vb: '-6 -6 192 112', inner: r.inner.replace(/<g transform="translate\(210 0\)">[\s\S]*$/, '') + (k === 'lean' ? '</g>' : '') }; }
+    B6: function (p, k) { var r = D.B6(p, k); return { vb: (k === 'lean' ? '-22' : '-6') + ' -6 ' + (k === 'lean' ? 256 : 240) + ' 202', inner: r.inner }; },
+    F7: function (p, k) { var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : ''; return { vb: '0 0 228 200', inner: '<text x="110" y="138" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="128" letter-spacing="-10" fill="currentColor">SW</text><path d="M68 160h84" stroke="currentColor" stroke-width="2"/><path d="M68 38h84" stroke="currentColor" stroke-width="2"/>' }; },
+    F6: function (p, k) { var r = D.F6(p, k); return { vb: '-6 -6 ' + (k === 'lean' ? 220 : 192) + ' 112', inner: r.inner.replace(/<g transform="translate\(210 0\)">[\s\S]*$/, '') + (k === 'lean' ? '</g>' : '') }; }
   };
   window.SWF = {
     ids: Object.keys(D), names: NAMES, weights: ['light', 'medium', 'bold', 'lean'],
