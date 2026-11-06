@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 228 82'><rect x='-8' y='-8' width='228' height='82' fill='%235f4535'/><g fill='%23f3efe7'><path d='M16 0L96 0L80 26L0 26ZM56 40L212 40L196 66L40 66Z'/></g></svg>">
+<meta name="theme-color" content="#1e1c1a">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Brand guidelines for Second Wind Athletic Club.">
+<link rel="canonical" href="https://secondwindgym.com.au/brand/guidelines.html">
+<meta property="og:title" content="Second Wind, brand guidelines">
+<meta property="og:type" content="website">
+<meta property="og:description" content="Brand guidelines for Second Wind Athletic Club.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Second Wind Guidelines</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,700&family=Barlow+Condensed:wght@600;700&family=DM+Mono:wght@400;500&family=Playball&family=Alfa+Slab+One&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Big+Shoulders+Stencil+Text:wght@800&display=swap">
+<style>
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+/* Brand guidelines, draft 1. One document a designer, printer or signage fabricator can work from. Marks pulled live from the chosen options. */
+:root {
+  --bg:#ece8de; --ink:#151613; --muted:#5d5f57; --card:#f6f3ea; --line:#d6cfc1; --green:#5f4535; --bone:#f3efe7; --copper:#a2723f; --stone:#a39b8c; --black:#1e1c1a;
+  --f-label:'DM Mono',ui-monospace,Menlo,monospace; --f-body:'Barlow Semi Condensed','Arial Narrow',Arial,sans-serif; --f-cond:'Barlow Condensed','Arial Narrow',sans-serif; --f-ed:'Cormorant Garamond',Georgia,serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#111311; --ink:#ecebe3; --muted:#9ea196; --card:#1b1e1b; --line:#343833; color-scheme:dark; } }
+:root[data-theme="dark"] { --bg:#111311; --ink:#ecebe3; --muted:#9ea196; --card:#1b1e1b; --line:#343833; color-scheme:dark; }
+body { background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:17px; line-height:1.5; margin:0; padding-bottom:80px; }
+.wrap { max-width:1100px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px)); display:flex; flex-direction:column; gap:22px; }
+.toolbar { display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; position:sticky; top:0; z-index:3; background:var(--bg); padding:10px 0; border-bottom:1px solid var(--line); }
+.toolbar label { font-family:var(--f-label); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:6px; }
+select, button { font:500 12px var(--f-label); letter-spacing:.06em; text-transform:uppercase; background:var(--card); color:var(--ink); border:1px solid var(--line); padding:8px 10px; min-height:36px; cursor:pointer; max-width:220px; }
+.links { display:flex; gap:14px; flex-wrap:wrap; margin-left:auto; }
+.links a { font-family:var(--f-label); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink); }
+nav.toc { display:flex; flex-wrap:wrap; gap:8px; }
+nav.toc a { font:500 11px var(--f-label); letter-spacing:.08em; text-transform:uppercase; color:var(--ink); text-decoration:none; border:1px solid var(--line); background:var(--card); padding:7px 10px; }
+section.ch { display:flex; flex-direction:column; gap:14px; scroll-margin-top:70px; padding-top:18px; border-top:1px solid var(--line); }
+.ch h2 { margin:0; font-size:clamp(26px,4vw,38px); line-height:1; font-weight:700; }
+.ch h2 small { display:block; font-family:var(--f-label); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--green); margin-bottom:8px; font-weight:500; }
+.ch h3 { margin:14px 0 0; font-size:19px; font-weight:700; }
+.ch p { margin:0; max-width:70ch; }
+.ch p.lead { font-size:19px; }
+.muted { color:var(--muted); }
+ul { margin:0; padding-left:20px; max-width:70ch; }
+li { margin:3px 0; }
+table { border-collapse:collapse; width:100%; font-size:15px; }
+th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { font-family:var(--f-label); font-weight:500; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+td.mono { font-family:var(--f-label); font-size:13px; }
+.two { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:16px; }
+.three { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:16px; }
+/* frames */
+.f { position:relative; overflow:hidden; aspect-ratio:16/9; background:var(--bone); color:var(--black); container-type:inline-size; border:1px solid var(--line); }
+.f.sq { aspect-ratio:1/1; }
+.f.w { aspect-ratio:2/1; }
+.f.g { background:var(--green); color:var(--bone); }
+.f.k { background:var(--black); color:var(--bone); }
+.f.s { background:#e6e0d4; }
+.f .n { position:absolute; left:2.2cqw; top:2cqw; font-family:var(--f-label); font-size:1.2cqw; letter-spacing:.14em; text-transform:uppercase; opacity:.6; }
+.f.sq .n, .f.w .n { font-size:2.2cqw; }
+.f .cap { position:absolute; right:2.2cqw; bottom:2cqw; font-family:var(--f-label); font-size:1.2cqw; letter-spacing:.12em; text-transform:uppercase; opacity:.6; text-align:right; }
+.f.sq .cap, .f.w .cap { font-size:2.2cqw; }
+.slot { position:absolute; }
+.slot svg { width:100%; height:100%; display:block; overflow:visible; }
+.slot[data-fit="none"] svg { transform:scaleX(1.25); transform-origin:center; }
+.f .t { position:absolute; margin:0; }
+.cond { font-family:var(--f-cond); font-weight:700; text-transform:uppercase; line-height:.95; }
+.mono { font-family:var(--f-label); text-transform:uppercase; letter-spacing:.12em; }
+.ed { font-family:var(--f-ed); }
+.bar { position:absolute; background:currentColor; }
+.grid-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(0,0,0,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.12) 1px, transparent 1px); }
+.dash { position:absolute; border:1px dashed rgba(0,0,0,.5); }
+.dim { position:absolute; font-family:var(--f-label); font-size:1.3cqw; letter-spacing:.08em; }
+.f.sq .dim { font-size:2.4cqw; }
+.cross { position:absolute; left:4%; right:4%; top:50%; height:3px; background:#b3261e; transform:rotate(-20deg); opacity:.85; }
+.photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.sw { display:flex; flex-direction:column; gap:8px; }
+.sw i { display:block; aspect-ratio:3/2; border:1px solid var(--line); }
+.sw b { font-family:var(--f-label); font-weight:500; font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+.sw span { font-family:var(--f-label); font-size:12px; color:var(--muted); line-height:1.6; }
+.ratio { display:flex; height:28px; border:1px solid var(--line); }
+.ratio i { display:block; }
+.spec-type { display:flex; flex-direction:column; gap:10px; padding:18px; border:1px solid var(--line); background:var(--card); }
+.ok, .no { font-family:var(--f-label); font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:3px 7px; border:1px solid currentColor; }
+.ok { color:var(--black); } .no { color:#9b2c22; }
+.phrase { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.phrase div { border:1px solid var(--line); background:var(--card); padding:16px; }
+.phrase h4 { margin:0 0 8px; font-family:var(--f-label); font-weight:500; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+.phrase p { margin:0 0 6px; }
+.pattern { position:absolute; inset:0; }
+.draft { font-family:var(--f-label); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--copper); }
+.hidden { position:absolute; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none; left:-9999px; }
+.tag { font-family:'Barlow Semi Condensed','Arial Narrow',sans-serif; font-weight:600; }
+.lbl { font-family:'DM Mono',ui-monospace,monospace; font-weight:400; }
+.script { font-family:'Playball','Brush Script MT',cursive; font-weight:400; }
+.slab { font-family:'Alfa Slab One',Rockwell,serif; }
+.serif { font-family:'Cormorant Garamond',Georgia,serif; }
+.sten { font-family:'Big Shoulders Stencil Text',Impact,sans-serif; font-weight:800; }
+.ital { font-family:'Barlow Semi Condensed'; font-style:italic; font-weight:700; }
+:focus-visible { outline:2px solid var(--green); outline-offset:3px; }
+@media (max-width:640px) { .phrase { grid-template-columns:1fr; } table { font-size:13px; } th, td { padding:6px 6px; } .toolbar { gap:8px; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <pattern id="tonal" width="56" height="40" patternUnits="userSpaceOnUse" patternTransform="skewX(-12)">
+    <rect x="0" y="4" width="20" height="4" fill="rgba(0,0,0,.09)"/><rect x="24" y="4" width="28" height="4" fill="rgba(0,0,0,.09)"/>
+    <rect x="0" y="12" width="52" height="4" fill="rgba(0,0,0,.06)"/><rect x="0" y="20" width="12" height="4" fill="rgba(0,0,0,.09)"/><rect x="16" y="20" width="36" height="4" fill="rgba(0,0,0,.06)"/>
+    <rect x="0" y="28" width="52" height="4" fill="rgba(0,0,0,.08)"/><rect x="0" y="36" width="30" height="4" fill="rgba(0,0,0,.05)"/>
+  </pattern>
+</defs></svg>
+
+<div class="wrap">
+  <div class="toolbar"><span style="font-family:var(--f-label);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Brand guidelines · Draft 01</span><div class="links"><a href="identity.html">Identity presentation</a></div></div>
+
+  <!-- cover -->
+  <div class="f g" id="cover">
+    <div class="slot" data-sw="primary" data-c="bone" style="left:8%;top:14%;width:40%;height:20%"></div>
+    <p class="t cond" style="left:8%;bottom:20%;font-size:7cqw;width:80%">Brand<br>guidelines</p>
+    <p class="t mono" style="left:8%;bottom:9%;font-size:1.4cqw;opacity:.8">Draft 01 · November 2026 · Second Wind Athletic Club · Perth</p>
+    <p class="t mono" style="right:8%;bottom:9%;font-size:1.2cqw;opacity:.6;text-align:right">Prepared by Dryve Digital</p>
+  </div>
+
+  <nav class="toc" aria-label="Contents">
+    <a href="#c1">1 The idea</a><a href="#c2">2 Logo</a><a href="#c3">3 Signage</a><a href="#c4">4 Colour</a><a href="#c5">5 Type</a><a href="#c6">6 Voice</a><a href="#c7">7 Photography</a><a href="#c8">8 Devices</a><a href="#c9">9 Applications</a><a href="#c10">10 Timeline</a><a href="#c11">11 Files</a>
+  </nav>
+
+  <p class="muted">How to use this: hand it to anyone making anything for the club. Items marked <span class="draft">draft</span> need Sergio's sign-off. The rationale for the mark is in the Identity presentation; this document is the rules.</p>
+
+  <!-- 1 the idea -->
+  <section class="ch" id="c1">
+    <h2><small>01</small>The idea</h2>
+    <p class="lead">Second Wind Athletic Club is a premium café and training club in the Perth CBD: a public café as the front door, warm and refined in the room, serious on the floor behind the glass.</p>
+    <p>HUB Interiors' design sets the tone: walnut, bronze, concrete and warm light, curves instead of hard edges. The identity belongs to that room. The training is the real thing and the welcome is warm. The entry criterion is effort, not ability.</p>
+    <p>A second wind is the turn that arrives after the point you thought you were finished. It lives in the identity as the symbol: two strokes, the first short, a gap, the second longer. It is never spelled out in motivational copy.</p>
+    <div class="three">
+      <div class="spec-type"><b>Feels like</b><p class="muted">Warm, refined, confident, direct, athletic, considered, crafted, grown up, alive.</p></div>
+      <div class="spec-type"><b>Never</b><p class="muted">Shouty, laddish, corporate, sentimental, motivational-poster, precious. Not a chain gym, not a nightclub, not a supplement brand.</p></div>
+      <div class="spec-type"><b>Who is in the room</b><p class="muted">CBD professionals and serious lifters, together, by design. Credible to the strongest person in the room, welcoming to the newest.</p></div>
+    </div>
+  </section>
+
+  <!-- 2 logo -->
+  <section class="ch" id="c2">
+    <h2><small>02</small>Logo system</h2>
+    <p>Three marks, one family. The primary carries the symbol and the full name. The stacked lockup is for squares and tall formats. The symbol stands alone on equipment, caps, avatars and small screens. The letters are drawn from bars on one grid; the symbol is drawn from the same bar, leaning thirty degrees.</p>
+    <div class="three">
+      <div class="f sq"><span class="n">Primary</span><div class="slot" data-sw="primary" data-c="ink" style="left:12%;top:30%;width:76%;height:40%"></div><span class="cap">Full name · default</span></div>
+      <div class="f sq"><span class="n">Stacked</span><div class="slot" data-sw="stacked" data-c="ink" style="left:18%;top:18%;width:64%;height:64%"></div><span class="cap">Squares · signage · social</span></div>
+      <div class="f sq"><span class="n">Symbol</span><div class="slot" data-sw="symbol" data-c="ink" style="left:22%;top:22%;width:56%;height:56%"></div><span class="cap">Equipment · caps · avatar · favicon</span></div>
+    </div>
+    <h3>Colour versions</h3>
+    <p>The mark is always one colour. Charcoal on linen by default; linen on walnut or charcoal when reversed; bronze only as foil or metal. Never in concrete or saddle, and never in two colours.</p>
+    <div class="three">
+      <div class="f sq"><span class="n">Charcoal on linen</span><div class="slot" data-sw="primary" data-c="ink" style="left:12%;top:32%;width:76%;height:36%"></div></div>
+      <div class="f sq g"><span class="n">Linen on walnut</span><div class="slot" data-sw="primary" data-c="bone" style="left:12%;top:32%;width:76%;height:36%"></div></div>
+      <div class="f sq k"><span class="n">Linen on charcoal</span><div class="slot" data-sw="primary" data-c="bone" style="left:12%;top:32%;width:76%;height:36%"></div></div>
+    </div>
+    <h3>Clear space and minimum size</h3>
+    <div class="two">
+      <div class="f s"><span class="n">Clear space</span>
+        <div class="grid-bg" style="background-size:4cqw 4cqw"></div>
+        <div class="dash" style="left:22%;top:24%;width:56%;height:52%"></div>
+        <div class="slot" data-sw="primary" data-c="ink" style="left:30%;top:36%;width:40%;height:28%"></div>
+        <span class="dim" style="left:30%;top:19.5%">8X</span><span class="dim" style="left:17.5%;top:48%">2X</span><span class="dim" style="left:79%;top:70%">X = cap height ÷ 4</span>
+        <span class="cap">Nothing inside the dashed line</span></div>
+      <div class="spec-type">
+        <b>Minimum sizes</b>
+        <table><tr><th>Mark</th><th>Print</th><th>Screen</th><th>Embroidery</th></tr>
+          <tr><td>Primary</td><td class="mono">40 mm wide</td><td class="mono">160 px</td><td class="mono">75 mm</td></tr>
+          <tr><td>Stacked</td><td class="mono">22 mm wide</td><td class="mono">96 px</td><td class="mono">50 mm</td></tr>
+          <tr><td>Symbol</td><td class="mono">6 mm</td><td class="mono">16 px</td><td class="mono">14 mm</td></tr></table>
+        <p class="muted">Below these, drop to the next smaller mark. The gap between the two strokes closes in thread under 14 mm, so the symbol is never embroidered smaller than that.</p>
+      </div>
+    </div>
+    <h3>Construction</h3>
+    <div class="f"><span class="n">Construction</span>
+      <div class="grid-bg" style="background-size:2cqw 2cqw;opacity:.5"></div>
+      <div class="slot" data-sw="primary" data-c="ink" style="left:18%;top:30%;width:64%;height:40%"></div>
+      <div class="bar" style="left:12%;right:12%;top:36.6%;height:1px;opacity:.5"></div><span class="dim" style="left:12%;top:33.5%">cap</span>
+      <div class="bar" style="left:12%;right:12%;top:47.6%;height:1px;opacity:.7;background:var(--copper)"></div><span class="dim" style="left:12%;top:48.5%;color:var(--copper)">symbol centre line</span>
+      <div class="bar" style="left:12%;right:12%;top:56.4%;height:1px;opacity:.5"></div><span class="dim" style="left:12%;top:57.5%">base</span>
+      <span class="cap">Cap 100 · stem 9 · width 56 · symbol stroke 26 · gap 14 · lean 30°</span></div>
+    <h3>Misuse</h3>
+    <p>If it is not on this page, don't do it. The six below are the ones that will be tried.</p>
+    <div class="three">
+      <div class="f sq"><span class="n">Don't stretch</span><div class="slot" data-sw="primary" data-c="ink" data-fit="none" style="left:6%;top:36%;width:88%;height:28%"></div><div class="cross"></div></div>
+      <div class="f sq"><span class="n">Don't recolour</span><div class="slot" data-sw="primary" data-c="#3f7a5a" style="left:12%;top:32%;width:76%;height:36%"></div><div class="cross"></div></div>
+      <div class="f sq"><span class="n">Don't rotate</span><div class="slot" data-sw="primary" data-c="ink" style="left:12%;top:32%;width:76%;height:36%;transform:rotate(-14deg)"></div><div class="cross"></div></div>
+      <div class="f sq"><span class="n">No effects</span><div class="slot" data-sw="primary" data-c="ink" style="left:12%;top:32%;width:76%;height:36%;filter:drop-shadow(1cqw 1cqw 0 #a2723f)"></div><div class="cross"></div></div>
+      <div class="f sq"><span class="n">Not on busy photos</span><img class="photo" src="photo/floor.jpg" alt=""><div class="slot" data-sw="primary" data-c="bone" style="left:12%;top:32%;width:76%;height:36%"></div><div class="cross"></div></div>
+      <div class="f sq g"><span class="n">Don't add a tagline</span><div class="slot" data-sw="primary" data-c="bone" style="left:12%;top:26%;width:76%;height:36%"></div><p class="t cond" style="left:0;right:0;top:66%;text-align:center;font-size:5cqw">Unleash your potential</p><div class="cross"></div></div>
+    </div>
+  </section>
+
+  <!-- 3 signage -->
+  <section class="ch" id="c3">
+    <h2><small>03</small>Signage in the space</h2>
+    <p>HUB Interiors' concept, revision 2, sets where the brand appears. You arrive through the building's foyer; the café is a glass box on that foyer and the gym sits behind it, so the café front is the brand's first appearance, then the counter wall, the glazing between café and gym, the gym's end wall and the turf track. The full name goes in three places only; the symbol does the rest.</p>
+    <p><b>Weights.</b> Light in the café and on anything held or read up close (counter wall, cups, menus, print, the website). Bold in the gym and anywhere the mark must carry distance (gym walls, the café front header, merch, social). One logo, two weights, never mixed on one surface. <span class="draft">Split to be confirmed by Sergio</span></p>
+    <div class="two">
+      <div class="f" style="background:#1e1c1a"><img class="photo" src="photo/fam/B5-cafe.jpg" alt="The café counter wall, the stacked mark in blackened bronze above Fuel good days"><span class="cap" style="color:#fff">Café counter wall · light · render by HUB Interiors</span></div>
+      <div class="f" style="background:#1e1c1a"><img class="photo" src="photo/fam/B5-gym.jpg" alt="The gym end wall with the stacked lockup in bold, halo-lit"><span class="cap" style="color:#fff">Gym end wall · bold</span></div>
+    </div>
+    <table>
+      <tr><th>Place</th><th>Mark</th><th>Specification</th></tr>
+      <tr><td>Café front, onto the building foyer</td><td>Primary lockup on the header over the doors; symbol on the reeded panel</td><td>Linen letters, bold weight, 2.1 m wide, halo-lit 3000 K on the black header above the glass doors, read from the foyer and the lifts. Symbol etched clear in the reeded glass panel left of the doors at 1550 mm. The foyer is the building's common area. <span class="draft">Building manager approval</span></td></tr>
+      <tr><td>Street side, the terrace entry</td><td>Symbol plaque; blade sign</td><td>Brushed bronze symbol plaque, 150 mm, at the terrace entry. Blade sign if permitted: 450 mm walnut disc, linen symbol both faces, lit from within at low level. <span class="draft">Subject to building and City of Perth approval</span></td></tr>
+      <tr><td>Café counter wall</td><td>Stacked mark, light, with "Fuel good days" beneath</td><td>Blackened bronze letters, light weight, 10 mm, pinned 15 mm off the concrete, unlit (the café is lit by HUB's pendants). Dark letters on the light concrete, for contrast: polished bronze disappears against it. Slogan in Barlow Condensed caps below, the bronze rule underneath.</td></tr>
+      <tr><td>Gym end wall</td><td>Stacked lockup, bold</td><td>Linen acrylic letters, bold weight, 20 mm, 30 mm stand-off, warm white halo 3000 K, no face lighting, on the charcoal wall. <span class="draft">Wall to confirm with HUB</span></td></tr>
+      <tr><td>Glazing between café and gym</td><td>Symbol, and the strokes as a band</td><td>Frosted (etch-effect) film, 400 mm band from 1200 to 1600 mm, with the strokes cut clear from the frost. Printed to read the right way round from both sides. Nothing else on the glass: the symbol by each door goes on a small bronze plaque beside the opening, at 1550 mm.</td></tr>
+      <tr><td>Slogan walls</td><td>Type only</td><td>Three or four words, stacked, Barlow Condensed caps, a full stop, a short bronze rule. Café: charcoal on concrete. Gym: linen on charcoal. No logo on a slogan wall.</td></tr>
+      <tr><td>Turf track</td><td>Symbol</td><td>Painted or inlaid in linen on the olive turf at the start line, 600 mm wide. Distance marks as plain bars.</td></tr>
+      <tr><td>Equipment</td><td>Symbol</td><td>Embossed on the tan upholstery, 40 mm, tonal. Never a sticker.</td></tr>
+    </table>
+    <p class="muted">Lighting: every illuminated element is warm white, 3000 K, matching HUB's linear and halo lighting. Never cool white, never RGB.</p>
+  </section>
+
+  <!-- 4 colour -->
+  <section class="ch" id="c4">
+    <h2><small>04</small>Colour</h2>
+    <p>The palette is taken from HUB Interiors' finish board, so the brand and the room are one thing. Walnut is the slat wall, the dark timber and the joinery. Bronze is the tapware, trims and metalwork. Concrete is the floor and the light stone. Charcoal is the equipment frames and the turf. Saddle is the tan of the upholstery. Linen is the field for everything printed and on screen.</p>
+    <div class="three">
+      <div class="sw"><i style="background:#f3efe7"></i><b>Linen · field</b><span>HEX #F3EFE7<br>RGB 243 239 231<br>CMYK 0 2 5 5<br>Uncoated warm white stock where possible</span></div>
+      <div class="sw"><i style="background:#5f4535"></i><b>Walnut · brand colour</b><span>HEX #5F4535<br>RGB 95 69 53<br>CMYK 0 27 44 63<br>Pantone nearest to be matched at proof</span></div>
+      <div class="sw"><i style="background:#1e1c1a"></i><b>Charcoal · type and mark</b><span>HEX #1E1C1A<br>RGB 30 28 26<br>CMYK 0 7 13 88<br>Pantone Black 7 C</span></div>
+      <div class="sw"><i style="background:#a39b8c"></i><b>Concrete · secondary</b><span>HEX #A39B8C<br>RGB 163 155 140<br>CMYK 0 5 14 36<br>Pantone nearest to be matched at proof</span></div>
+      <div class="sw"><i style="background:#a2723f"></i><b>Bronze · accent</b><span>HEX #A2723F<br>RGB 162 114 63<br>CMYK 0 30 61 36<br>Bronze foil on print; brushed bronze on metal</span></div>
+      <div class="sw"><i style="background:#8b5427"></i><b>Saddle · sparingly</b><span>HEX #8B5427<br>RGB 139 84 39<br>CMYK 0 40 72 45<br>The upholstery tan</span></div>
+      <div class="sw"><i style="background:#4d5634"></i><b>Olive · material only</b><span>HEX #4D5634<br>The turf and the café chairs<br>Never for type or the mark</span></div>
+    </div>
+    <p class="muted"><span class="draft">Draft</span> Sampled from HUB's finish swatches on screen. Match to their physical samples, and set Pantone references, before anything is printed or stitched.</p>
+    <h3>Proportion</h3>
+    <div class="ratio"><i style="flex:58;background:#f3efe7"></i><i style="flex:16;background:#a39b8c"></i><i style="flex:14;background:#5f4535"></i><i style="flex:8;background:#1e1c1a"></i><i style="flex:3;background:#a2723f"></i><i style="flex:1;background:#8b5427"></i></div>
+    <p class="muted">Roughly 58 linen, 16 concrete, 14 walnut, 8 charcoal, 3 bronze, 1 saddle across any page or screen. The room runs darker than print, and that's right: the room is lit, the page isn't.</p>
+    <h3>Contrast</h3>
+    <table>
+      <tr><th>Pair</th><th>Ratio</th><th>Use</th></tr>
+      <tr><td>Charcoal on linen / linen on charcoal</td><td class="mono">14.8 : 1</td><td><span class="ok">Any size</span></td></tr>
+      <tr><td>Linen on walnut / walnut on linen</td><td class="mono">7.7 : 1</td><td><span class="ok">Any size</span></td></tr>
+      <tr><td>Charcoal on concrete</td><td class="mono">6.2 : 1</td><td><span class="ok">Any size</span></td></tr>
+      <tr><td>Saddle on linen</td><td class="mono">5.4 : 1</td><td><span class="ok">Any size</span></td></tr>
+      <tr><td>Bronze on charcoal</td><td class="mono">4.1 : 1</td><td><span class="no">Large text and rules only</span></td></tr>
+      <tr><td>Bronze on linen</td><td class="mono">3.7 : 1</td><td><span class="no">Large text and rules only</span></td></tr>
+      <tr><td>Bronze on walnut</td><td class="mono">2.1 : 1</td><td><span class="no">Never</span></td></tr>
+    </table>
+    <h3>Reproduction notes</h3>
+    <ul>
+      <li><b>Print:</b> linen as an uncoated warm white stock, not printed. Walnut in CMYK or Pantone; proof under warm light. Bronze as foil rather than a flat ink.</li>
+      <li><b>Embroidery:</b> thread matched to the swatches on a stitched sample. Thread reads darker than screen.</li>
+      <li><b>Screen print:</b> charcoal or walnut on linen fabric; linen ink on walnut or charcoal fabric needs an underbase.</li>
+      <li><b>Glass:</b> frosted etch-effect film only. No coloured film on glass.</li>
+      <li><b>Signage at night:</b> warm white, 3000 K, as HUB's lighting. Never cool white, never RGB.</li>
+    </ul>
+  </section>
+
+  <!-- 5 type -->
+  <section class="ch" id="c5">
+    <h2><small>05</small>Typography</h2>
+    <p>Four faces, each with one job. Display is condensed and loud enough for a wall. Body is its semi-condensed sibling for everything read. Utility is a mono for labels, numbers and coordinates. Editorial is a serif, used sparingly, to bridge performance and hospitality.</p>
+    <div class="two">
+      <div class="spec-type"><p class="cond" style="font-size:52px;margin:0">Barlow Condensed</p><b>Display · Bold 700</b><p class="muted">Headlines, posters, track numbers, big numbers. Caps, tracking 1 to 3%. Never below 24 px.</p></div>
+      <div class="spec-type"><p style="font-size:30px;margin:0;font-weight:500">Barlow Semi Condensed</p><b>Body · Regular 400, Medium 500, Semibold 600</b><p class="muted">Paragraphs, interface, captions, email. 17 px base on web, 10 pt print. Line height 1.45.</p></div>
+      <div class="spec-type"><p class="mono" style="font-size:22px;margin:0">DM Mono · 31.9531° S</p><b>Utility · Regular 400, Medium 500</b><p class="muted">Labels, member numbers, coordinates, dates, specs. Caps with 10 to 14% tracking at small sizes.</p></div>
+      <div class="spec-type"><p class="ed" style="font-size:34px;margin:0;font-style:italic">You've done the hard years.</p><b>Editorial · Cormorant Garamond Italic 400</b><p class="muted">House rules, one-line statements, the occasional pull quote. Never for body copy or interface.</p></div>
+    </div>
+    <h3>Hierarchy</h3>
+    <div class="f"><span class="n">Specimen</span>
+      <p class="t mono" style="left:6%;top:14%;font-size:1.3cqw;color:var(--copper)">Membership · 02</p>
+      <p class="t cond" style="left:6%;top:20%;font-size:7cqw;width:80%">Fuel good days.</p>
+      <p class="t" style="left:6%;top:50%;width:52%;font-size:2.1cqw;line-height:1.4;font-family:var(--f-body)">Three sessions a week, 50 minutes, coached. Month to month at $42 a week, or $35 a week paid annually. No contracts. No join fee. If you're pushing hard, you belong here.</p>
+      <p class="t ed" style="left:6%;top:80%;font-size:2.6cqw;font-style:italic">Effort, not ability.</p>
+      <span class="cap">Display · body · editorial · utility</span></div>
+    <h3>Licensing</h3>
+    <table>
+      <tr><th>Face</th><th>Licence</th><th>Web</th><th>Print and signage</th><th>Cost</th></tr>
+      <tr><td>Barlow Condensed, Barlow Semi Condensed</td><td>SIL Open Font Licence</td><td>Self-host or Google Fonts</td><td>Free to use, embed, cut as signage</td><td class="mono">$0</td></tr>
+      <tr><td>DM Mono</td><td>SIL Open Font Licence</td><td>Self-host or Google Fonts</td><td>Free</td><td class="mono">$0</td></tr>
+      <tr><td>Cormorant Garamond</td><td>SIL Open Font Licence</td><td>Self-host or Google Fonts</td><td>Free</td><td class="mono">$0</td></tr>
+    </table>
+    <p class="muted">All four are open licence, which keeps the ten-year lease simple. <span class="draft">Draft</span>: if Sergio wants a face with more character for display, the candidates are Druk Condensed (Commercial Type, about AUD 1,200 for web and desktop) or Roobert (Displaay, about AUD 600). Flagged for cost, not recommended yet.</p>
+  </section>
+
+  <!-- 6 voice -->
+  <section class="ch" id="c6">
+    <h2><small>06</small>Tone of voice</h2>
+    <p>The voice already exists. It is Sergio's. Direct, unsentimental, standards stated plainly rather than enforced. Plain verbs. No filler. Encouraging without cheerleading. Slightly masculine in tone, and every woman, beginner and older member must feel entirely comfortable reading it.</p>
+    <div class="three">
+      <div class="spec-type"><b>Short sentences</b><p class="muted">Under 15 words where possible. One idea each. Full stops, not exclamation marks.</p></div>
+      <div class="spec-type"><b>Specific over hype</b><p class="muted">"Three sessions a week, 50 minutes, coached" beats "unleash your potential". Numbers, names, times.</p></div>
+      <div class="spec-type"><b>We, not you</b><p class="muted">"We choose to be here." Coaches and members together. Never "you will" or "you need to".</p></div>
+    </div>
+    <h3>Phrase bank</h3>
+    <div class="phrase">
+      <div><h4>Approved · Sergio's words</h4>
+        <p>If you're pushing hard, you belong here.</p>
+        <p>You respect the rules, you respect the equipment, you clean up after yourself.</p>
+        <p>We choose to be here, and we can all make the space better together.</p>
+        <p>Effort, not ability.</p></div>
+      <div><h4>Drafted · <span class="draft">for sign-off</span></h4>
+        <p>Serious training. Explained.</p>
+        <p>You've done the hard years. Let's get you strong again.</p>
+        <p>Coached, not supervised.</p>
+        <p>What's heavy is relative. Pushing isn't.</p>
+        <p>Great PB. Catch you Tuesday.</p></div>
+    </div>
+    <table>
+      <tr><th>We say</th><th>We don't say</th></tr>
+      <tr><td>Coach, session, the floor, member, club</td><td>PT, class, workout zone, client</td></tr>
+      <tr><td>Strong, capable, technique, progression</td><td>Shredded, beast, grind, transformation, journey</td></tr>
+      <tr><td>Bodybuilding, as a craft</td><td>Bodybuilding, as a look</td></tr>
+      <tr><td>Welcome back. Rack 2 is yours.</td><td>Let's gooo. No excuses. Rise and grind.</td></tr>
+      <tr><td>Founding member No. 07</td><td>VIP, elite, exclusive</td></tr>
+    </table>
+    <p class="muted">The service reference is Riggs Gym, Queensland: a hardcore room where the receptionist knew every member's name and context. That warmth inside a serious room is the tone of every message, from the booking confirmation to the sign on the chalk bucket.</p>
+  </section>
+
+  <!-- 7 photography -->
+  <section class="ch" id="c7">
+    <h2><small>07</small>Photography and art direction</h2>
+    <p>Reference is MAAP: athletes look serious and human rather than posed. Natural or warm light, real members, the actual room. Documenting the work, not performing it.</p>
+    <div class="two">
+      <div class="spec-type"><b>Do</b><ul><li>Warm, available light; 3000 K interiors as they are</li><li>Real members and coaches, mid-set, between sets, chalk on hands</li><li>Walnut, bronze, concrete and tan upholstery in frame as the palette</li><li>The build: shell, flooring, deliveries, first session, in order</li><li>Portraits straight to camera, calm, no flex</li><li>Detail: knurling, a plate, the cut on a cap</li></ul></div>
+      <div class="spec-type"><b>Don't</b><ul><li>Blue or cool grading, neon, lens flare, HDR</li><li>Stock models, posed flexing, sweat spray</li><li>Dark-for-premium: crushed blacks, moody vignettes</li><li>Motivational text over photos</li><li>Mirror selfies as brand content</li><li>Anyone looking intimidated or intimidating</li></ul></div>
+    </div>
+    <h3>Treatment</h3>
+    <div class="three">
+      <div class="f sq"><img class="photo" src="photo/rack.jpg" alt="" style="filter:saturate(.7) sepia(.12) contrast(.98)"><span class="cap" style="color:#fff">Warm, desaturated 30%</span></div>
+      <div class="f sq"><img class="photo" src="photo/tank-worn.jpg" alt="" style="filter:saturate(.75) sepia(.1)"><span class="cap" style="color:#fff">People: straight, calm</span></div>
+      <div class="f sq"><img class="photo" src="photo/polo.jpg" alt="" style="filter:saturate(.8) sepia(.08)"><span class="cap" style="color:#fff">Coaches: in the kit, outdoors is fine</span></div>
+    </div>
+    <h3>The launch shot list <span class="draft">draft</span></h3>
+    <table>
+      <tr><th>Phase</th><th>Shots</th><th>Use</th></tr>
+      <tr><td>Empty shell</td><td>Wide of the raw space, the glass from the street, Sergio alone in it</td><td>Announcement, LinkedIn cover</td></tr>
+      <tr><td>Floor and walls</td><td>Rubber going down, timber floor laid, slat wall going up</td><td>Weekly progress posts</td></tr>
+      <tr><td>Deliveries</td><td>Crates, the first Citadel unboxed, Panatta on the forks</td><td>Stories, countdown</td></tr>
+      <tr><td>Signage</td><td>Reception letters going on, the film on the curved glass, night shot</td><td>Opening week</td></tr>
+      <tr><td>First session</td><td>The founding fifty, first bar loaded, chalk</td><td>Hero imagery for website and presale close</td></tr>
+    </table>
+  </section>
+
+  <!-- 8 devices -->
+  <section class="ch" id="c8">
+    <h2><small>08</small>Devices and motifs</h2>
+    <div class="three">
+      <div class="f sq"><span class="n">The gap</span><div class="slot" data-sw="symbol" data-c="ink" style="left:16%;top:28%;width:68%;height:44%"></div><span class="cap">Two strokes · the pause · 1 : 1.95</span></div>
+      <div class="f sq s"><span class="n">Tonal pattern</span><svg class="pattern" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice"><rect width="400" height="400" fill="url(#tonal)"/><rect width="400" height="400" fill="url(#tonal)"/></svg><span class="cap">Knit, emboss, frost. Never printed loud</span></div>
+      <div class="f sq"><span class="n">The rule</span><div class="bar" style="left:12%;top:44%;width:30%;height:.6cqw;background:var(--copper)"></div><p class="t mono" style="left:12%;top:50%;font-size:2.4cqw">31.9531° S · 115.8533° E</p><p class="t mono" style="left:12%;top:58%;font-size:2.4cqw;opacity:.6">No. 07 / 50</p><span class="cap">Bronze rule, coordinates, numbering</span></div>
+    </div>
+    <ul>
+      <li><b>The gap</b> between the two strokes is the brand's only ornament: the pause before the second wind. It appears in the symbol and as the pause in motion. The strokes are never a stripe, a swoosh or a wing.</li>
+      <li><b>The tonal pattern</b> is the bar letterforms sliced by the cut, used tonally only: knitted, embossed, frosted. It is never printed in a contrasting colour.</li>
+      <li><b>The bronze rule</b> is a short horizontal line, 14 to 30% of the width, placed above a label. One per layout.</li>
+      <li><b>Coordinates and numbering</b> locate things: the door, the founding tees, the member card. Set in DM Mono.</li>
+    </ul>
+  </section>
+
+  <!-- 9 applications -->
+  <section class="ch" id="c9">
+    <h2><small>09</small>Applications</h2>
+    <h3>Environment</h3>
+    <table>
+      <tr><th>Place</th><th>Treatment</th></tr>
+      <tr><td>Glazing</td><td>Frosted film: the strokes cut clear from a band at 1200 to 1600 mm, reading correctly from both sides. Nothing else on the glass; a bronze symbol plaque sits beside each door.</td></tr>
+      <tr><td>Café</td><td>Cups carry the symbol on the sleeve and the name on the cup; shake cups print one colour. Menu in Barlow Condensed and DM Mono. No separate café logo.</td></tr>
+      <tr><td>Zone names</td><td>The Café, the Floor, the Turf, the Heavy Room. Barlow Condensed, 60 mm, linen on walnut or charcoal on concrete. <span class="draft">Names draft</span></td></tr>
+      <tr><td>Wayfinding</td><td>DM Mono labels at 24 mm. Arrows are bars from the letter grid.</td></tr>
+      <tr><td>House rules</td><td>One panel at the entrance, editorial face, the three lines, nothing more.</td></tr>
+    </table>
+    <h3>Equipment</h3>
+    <p>Panatta, Nautilus and Citadel Strength, chosen piece by piece by Sergio. All three make to order: specify one frame colour and one upholstery across every supplier so three makers read as one floor. Frames RAL 9005 jet black, matte or fine texture; upholstery saddle tan to match the booths (Saddle #8B5427), or charcoal if quieter is wanted. Approve physical powder-coat and vinyl samples before ordering. Olive stays on the turf and café chairs, never on machines. The manufacturers' badges stay; ours goes on the upholstery, embossed, 40 mm, tonal, never a sticker. <span class="draft">Equipment list to confirm</span></p>
+    <h3>Apparel</h3>
+    <p>See the Range and Lookbook pages. Rules in short: the mark stays small on the chest or hip; typography carries the back; the Founding 50 tee is numbered and never reprinted; tees land at $80 to $100 on quality fabric, tanks lower, caps embroidered. Everything must be wearable to a cafe on Saturday.</p>
+    <h3>Digital</h3>
+    <table>
+      <tr><th>Surface</th><th>Rule</th></tr>
+      <tr><td>Website</td><td>Linen field, walnut anchors, big display type, the actual floor in photos. Warm and open, like the room. Not the typographic-logo-plus-curated-images template every gym uses.</td></tr>
+      <tr><td>Social</td><td>Symbol as avatar on walnut. Covers per the Social page. Grid alternates photo, type and build-progress tiles.</td></tr>
+      <tr><td>Member app</td><td>Walnut icon with the symbol. Notifications in the voice: "Session with Sergio, 6.30. Rack 2 is yours."</td></tr>
+      <tr><td>Email</td><td>Linen background, charcoal type, one bronze rule, mark at 160 px. Plain text where possible.</td></tr>
+    </table>
+    <h3>Launch and presale</h3>
+    <p>Presale landing page with tiered release pricing, the Founding 50 tee, waitlist capture, and a countdown fed by the build photography. The identity must sit on half-built construction footage for months before it sits on a finished room, so progress templates are part of the system, not an afterthought.</p>
+    <h3>Print</h3>
+    <p>Membership cards in walnut with the member's name and number and the symbol in bronze foil; coffee cups with the symbol only; towels with the symbol woven tonally; staff polos per the Range; presentations on linen with walnut section dividers.</p>
+  </section>
+
+  <!-- 10 timeline -->
+  <section class="ch" id="c10">
+    <h2><small>10</small>Timeline <span class="draft">draft</span></h2>
+    <p>Worked back from signage, because landlord and possibly local authority approval carry lead times and the artwork must exist well before fitout completion. Dates depend on the opening date Sergio confirms.</p>
+    <table>
+      <tr><th>Week</th><th>Milestone</th><th>Needs</th></tr>
+      <tr><td class="mono">0</td><td>Sergio picks the mark from the options</td><td>Likes and passes, answers to the four questions</td></tr>
+      <tr><td class="mono">1–2</td><td>Mark refined, stacked and monogram finalised, vector masters</td><td>Dryve</td></tr>
+      <tr><td class="mono">2–3</td><td>Signage artwork to HUB and the fabricator; landlord submission</td><td>Fabricator quote, lease conditions</td></tr>
+      <tr><td class="mono">3–4</td><td>Embroidery and print samples: cap, polo, tee</td><td>Supplier, thread matches</td></tr>
+      <tr><td class="mono">4–6</td><td>Website and presale page live, Founding 50 on sale</td><td>Copy sign-off, photography of the shell</td></tr>
+      <tr><td class="mono">6–12</td><td>Build content weekly; social templates in use</td><td>Phone photos from site, weekly</td></tr>
+      <tr><td class="mono">–4 to open</td><td>Signage installed, interior signage, member cards printed</td><td>Approvals cleared</td></tr>
+      <tr><td class="mono">Open</td><td>First session photography, guidelines v1.0 issued</td><td></td></tr>
+    </table>
+  </section>
+
+  <!-- 11 files -->
+  <section class="ch" id="c11">
+    <h2><small>11</small>Files and ownership</h2>
+    <ul>
+      <li>Logo masters in SVG, PDF and EPS: primary, stacked, wordmark, symbol, vertical, each in charcoal, linen and walnut, plus single-colour and reversed. Supplied on final sign-off.</li>
+      <li>Signage artwork as vector at 1:1 for the fabricator: reception lockup, feature wall, glazing film, turf track.</li>
+      <li>Colour as ASE and this document's values. Pantone matched at first print proof.</li>
+      <li>Type: open-licence files bundled, with the licence text.</li>
+      <li>Social, email and presentation templates as editable files.</li>
+      <li>Copyright and full ownership transfer to Second Wind Athletic Club on completion.</li>
+    </ul>
+    <p class="muted">Draft 01, November 2026. Questions to Dryve Digital.</p>
+  </section>
+</div>
+
+<script src="brand.js"></script>
+<script>SW.fill();</script>
+</html>

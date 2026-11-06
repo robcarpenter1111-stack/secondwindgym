@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 228 82'><rect x='-8' y='-8' width='228' height='82' fill='%235f4535'/><g fill='%23f3efe7'><path d='M16 0L96 0L80 26L0 26ZM56 40L212 40L196 66L40 66Z'/></g></svg>">
+<meta name="theme-color" content="#1e1c1a">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Walk through the club on HUB's Revision 2 plan.">
+<link rel="canonical" href="https://secondwindgym.com.au/brand/walkthrough.html">
+<meta property="og:title" content="Second Wind, 3D walkthrough">
+<meta property="og:type" content="website">
+<meta property="og:description" content="Walk through the club on HUB's Revision 2 plan.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Second Wind Walkthrough</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* 3D walkthrough of the reception and turf-track zone, with the brand in place. Built on three.js, bundled locally. */
+:root { --linen:#f3efe7; --walnut:#5f4535; --char:#1e1c1a; --bronze:#a2723f; --muted:#b9b1a3; --f-label:'DM Mono',ui-monospace,Menlo,monospace; --f-body:'Barlow Semi Condensed','Arial Narrow',Arial,sans-serif; --f-cond:'Barlow Condensed','Arial Narrow',sans-serif; }
+html, body { margin:0; height:100%; background:#141210; color:var(--linen); font-family:var(--f-body); overflow:hidden; }
+#c { position:fixed; inset:0; width:100%; height:100%; display:block; touch-action:none; cursor:grab; }
+#c:active { cursor:grabbing; }
+.ui { position:fixed; z-index:2; pointer-events:none; }
+.ui * { pointer-events:auto; }
+.brand { top:max(14px,env(safe-area-inset-top)); left:max(16px,env(safe-area-inset-left)); display:flex; align-items:center; gap:12px; }
+.brand .mk { width:140px; height:24px; }
+.brand span { font:500 10px var(--f-label); letter-spacing:.14em; text-transform:uppercase; opacity:.7; }
+.spots { bottom:max(14px,env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%); display:flex; gap:6px; flex-wrap:wrap; justify-content:center; width:min(96vw,760px); }
+.spots button { font:500 11px var(--f-label); letter-spacing:.1em; text-transform:uppercase; color:var(--linen); background:rgba(20,18,16,.62); border:1px solid rgba(243,239,231,.25); padding:9px 12px; min-height:38px; cursor:pointer; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.spots button.on { background:var(--linen); color:var(--char); border-color:var(--linen); }
+.card { top:auto; bottom:calc(max(14px,env(safe-area-inset-bottom)) + 104px); left:max(16px,env(safe-area-inset-left)); width:min(330px,calc(100vw - 32px)); background:rgba(20,18,16,.7); border:1px solid rgba(243,239,231,.18); padding:14px 16px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); transition:opacity .4s; }
+.card h2 { margin:0 0 6px; font:700 22px/1 var(--f-cond); text-transform:uppercase; letter-spacing:.02em; }
+.card p { margin:0 0 6px; font-size:15px; line-height:1.4; color:#e6dfd2; }
+.card small { display:block; font:400 10px/1.6 var(--f-label); letter-spacing:.1em; text-transform:uppercase; color:var(--bronze); }
+.help { top:max(14px,env(safe-area-inset-top)); right:max(16px,env(safe-area-inset-right)); font:400 10px/1.6 var(--f-label); letter-spacing:.08em; text-transform:uppercase; opacity:.65; text-align:right; }
+.pad { bottom:calc(max(14px,env(safe-area-inset-bottom)) + 96px); right:max(16px,env(safe-area-inset-right)); display:none; flex-direction:column; gap:8px; }
+.pad button { width:54px; height:54px; border-radius:50%; font:500 18px var(--f-label); color:var(--linen); background:rgba(20,18,16,.6); border:1px solid rgba(243,239,231,.3); }
+@media (pointer:coarse) { .pad { display:flex; } .help .k { display:none; } }
+.logos { top:max(52px,calc(env(safe-area-inset-top) + 44px)); right:max(16px,env(safe-area-inset-right)); display:flex; flex-direction:column; gap:6px; width:320px; }
+.logos label { font:500 10px var(--f-label); letter-spacing:.14em; text-transform:uppercase; opacity:.75; text-align:right; }
+.logos .lrow { display:flex; gap:4px; }
+.logos select { flex:1; min-width:0; height:42px; font:400 12px var(--f-label); letter-spacing:.04em; color:var(--linen); background:rgba(20,18,16,.72); border:1px solid rgba(243,239,231,.3); padding:0 10px; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); border-radius:0; }
+.logos select option, .logos select optgroup { color:#1e1c1a; background:#f3efe7; }
+.logos .lrow button { width:42px; height:42px; font:400 20px var(--f-label); color:var(--linen); background:rgba(20,18,16,.72); border:1px solid rgba(243,239,231,.3); cursor:pointer; }
+.help { top:max(222px,calc(env(safe-area-inset-top) + 214px)) !important; width:320px; }
+.tourbtn { flex:1; font:500 11px var(--f-label); letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; padding:0 8px; color:var(--char); background:var(--linen); border:1px solid var(--linen); cursor:pointer; height:42px; }
+.tourbtn.on { background:var(--bronze); border-color:var(--bronze); color:var(--linen); }
+@media (max-width:640px) { .logos { top:max(44px,calc(env(safe-area-inset-top) + 40px)); left:12px; right:12px; width:auto; gap:4px; } .logos label { display:none; } .logos select, .logos .lrow button { height:36px; font-size:11px; } }
+#load { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:#141210; z-index:5; font:500 11px var(--f-label); letter-spacing:.14em; text-transform:uppercase; color:var(--muted); transition:opacity .6s; }
+#err { position:fixed; inset:0; display:none; align-items:center; justify-content:center; text-align:center; padding:24px; background:#141210; z-index:6; font-size:16px; }
+@media (max-width:640px) { .spots { flex-wrap:nowrap; overflow-x:auto; justify-content:flex-start; width:100vw; padding:0 12px 4px; box-sizing:border-box; scrollbar-width:none; } .spots::-webkit-scrollbar { display:none; } .spots button { flex:0 0 auto; } .pad { bottom:calc(max(14px,env(safe-area-inset-bottom)) + 62px); } .card { top:auto; bottom:calc(max(14px,env(safe-area-inset-bottom)) + 62px); left:12px; width:calc(100vw - 100px); padding:10px 12px; } .card h2 { font-size:18px; } .card p { font-size:13px; } .brand .mk { width:110px; } .help { display:none; } }
+</style>
+
+<canvas id="c" aria-label="3D walkthrough of the Second Wind reception and turf track"></canvas>
+<div id="load">Building the room…</div>
+<div id="err">This walkthrough needs WebGL, which this browser has turned off. Try another browser or device.</div>
+
+<div class="ui brand"><div class="mk" id="mk"></div><span>Walkthrough · draft 21 · HUB revision 2</span></div>
+<div class="ui help"><span class="k">Drag to look · W A S D or arrows to walk<br></span>Tap a place below to go there</div>
+<div class="ui logos" id="logos" role="group" aria-label="Compare logos in the room"><label for="logosel">Logo in the room</label><div class="lrow"><button type="button" id="lprev" aria-label="Previous logo">‹</button><select id="logosel" aria-label="Logo"></select><button type="button" id="lnext" aria-label="Next logo">›</button></div><div class="lrow"><select id="wsel" aria-label="Weight"></select><select id="csel" aria-label="Café sign"><option value="unlit">Café sign: bronze, unlit</option><option value="lit">Café sign: lit</option></select></div><div class="lrow"><select id="tsel" aria-label="Time of day"><option value="evening">Evening</option><option value="day">Morning</option></select><button type="button" id="tour" class="tourbtn">▶ Tour</button></div></div>
+<div class="ui card" id="card"><small id="cardk"></small><h2 id="cardh"></h2><p id="cardp"></p></div>
+<div class="ui pad"><button id="fwd" aria-label="Walk forward">▲</button><button id="back" aria-label="Walk back">▼</button></div>
+<div class="ui spots" id="spots"></div>
+
+<script src="brand.js"></script>
+<script src="fonts.js"></script>
+<script src="family.js"></script>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const C = { linen:0xf3efe7, walnut:0x5f4535, char:0x1e1c1a, concrete:0xa39b8c, bronze:0xa2723f, saddle:0x8b5427, warm:0xffcf9a };
+
+
+/* ---------- renderer ---------- */
+const canvas = document.getElementById('c');
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas, antialias:true, powerPreference:'high-performance' }); }
+catch (e) { document.getElementById('err').style.display = 'flex'; document.getElementById('load').style.display = 'none'; throw e; }
+const DPR = Math.min(window.devicePixelRatio || 1, 1.6);
+renderer.setPixelRatio(DPR);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x15130f);
+scene.fog = new THREE.Fog(0x15130f, 18, 34);
+const camera = new THREE.PerspectiveCamera(62, 1, 0.05, 80);
+
+/* ---------- procedural textures ---------- */
+function cv(w, h, draw) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; }
+function rnd(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+const R = rnd(7);
+
+const woodTex = cv(1024, 1024, (g, w, h) => {
+  const pw = w / 6;
+  for (let i = 0; i < 6; i++) for (let j = 0; j < 3; j++) {
+    const y0 = j * h / 3 + (i % 2) * h / 6, L = 52 + R() * 14;
+    g.fillStyle = `hsl(24, 30%, ${L * 0.52}%)`; g.fillRect(i * pw, y0, pw, h / 3); g.fillRect(i * pw, y0 - h, pw, h / 3);
+    for (let k = 0; k < 40; k++) { g.strokeStyle = `rgba(30,18,10,${0.04 + R() * 0.08})`; g.lineWidth = 1 + R() * 2; const x = i * pw + R() * pw; g.beginPath(); g.moveTo(x, y0); g.bezierCurveTo(x + 6, y0 + 80, x - 6, y0 + 200, x + 3, y0 + h / 3); g.stroke(); }
+  }
+  g.strokeStyle = 'rgba(15,9,5,.55)'; g.lineWidth = 2;
+  for (let i = 0; i <= 6; i++) { g.beginPath(); g.moveTo(i * pw, 0); g.lineTo(i * pw, h); g.stroke(); }
+  for (let i = 0; i < 6; i++) for (let j = 0; j < 4; j++) { const y = j * h / 3 + (i % 2) * h / 6; g.beginPath(); g.moveTo(i * pw, y); g.lineTo((i + 1) * pw, y); g.stroke(); }
+});
+woodTex.wrapS = woodTex.wrapT = THREE.RepeatWrapping;
+
+const rubberTex = cv(512, 512, (g, w, h) => {
+  g.fillStyle = '#131211'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 9000; i++) { const v = 22 + R() * 34; g.fillStyle = `rgba(${v + 8},${v + 2},${v - 4},${0.25 + R() * 0.4})`; g.fillRect(R() * w, R() * h, 1 + R() * 2, 1 + R() * 2); }
+  for (let i = 0; i < 260; i++) { g.fillStyle = `rgba(150,110,70,${0.2 + R() * 0.3})`; g.fillRect(R() * w, R() * h, 2, 2); }
+});
+rubberTex.wrapS = rubberTex.wrapT = THREE.RepeatWrapping;
+
+const concreteTex = cv(512, 512, (g, w, h) => {
+  g.fillStyle = '#b4ac9e'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 2600; i++) { const v = 150 + R() * 50; g.fillStyle = `rgba(${v},${v - 6},${v - 16},${R() * 0.25})`; const r = 2 + R() * 18; g.beginPath(); g.arc(R() * w, R() * h, r, 0, 7); g.fill(); }
+});
+concreteTex.wrapS = concreteTex.wrapT = THREE.RepeatWrapping;
+
+const ribTex = cv(256, 64, (g, w, h) => {
+  for (let x = 0; x < w; x += 16) { const gr = g.createLinearGradient(x, 0, x + 16, 0); gr.addColorStop(0, '#121110'); gr.addColorStop(.5, '#2b2926'); gr.addColorStop(1, '#121110'); g.fillStyle = gr; g.fillRect(x, 0, 16, h); }
+});
+ribTex.wrapS = ribTex.wrapT = THREE.RepeatWrapping;
+
+/* which mark is in the room: B5 is the chosen identity; B1, B4, B6 are alternatives for comparison */
+const LOGO_GROUPS = [
+  ['Two strokes · chosen', ['B5']],
+  ['The wing', ['W1']],
+  ['SW initials', ['B1', 'B4', 'F2', 'K1']],
+  ['Number or stripes', ['B6', 'F6']],
+  ['Name only, no icon', ['B2', 'B3', 'B7', 'G1', 'G2', 'F7']]
+];
+const LOGOS = [].concat(...LOGO_GROUPS.map(g => g[1]));
+const LOGO_NAMES = SWF.names;
+const WEIGHTS = [['light', 'Light'], ['medium', 'Medium'], ['bold', 'Bold'], ['lean', 'Bold, leaning']];
+const q0 = new URLSearchParams(location.search);
+let LOGO = (q0.get('logo') || 'B5').toUpperCase().replace(/^B5(M|B|BL)$/, 'B5'); if (!LOGOS.includes(LOGO)) LOGO = 'B5';
+let WEIGHT = q0.get('w') || 'light'; if (!WEIGHTS.some(w => w[0] === WEIGHT)) WEIGHT = 'light';
+let CAFE_LIT = q0.get('cafe') === 'lit';
+function markSvg(variant, colour) {
+  if (variant === 'symbol') return SWF.hasSymbol(LOGO) ? SWF.symbol(LOGO, WEIGHT, colour) : SWF.svg(LOGO, WEIGHT, colour);
+  if (LOGO === 'B5') return SW.svg(variant, colour, { weight: WEIGHT === 'lean' ? 'bold' : WEIGHT, lean: WEIGHT === 'lean' });
+  return SWF.svg(LOGO, WEIGHT, colour);
+}
+/* on a sign, the small lines (ATHLETIC CLUB, PERTH · EST.) are made bigger so they can be cut and read from across the room:
+   same width, larger letters, tighter spacing. Applies to signs only, never to the logo itself. */
+function signText(s) {
+  // the small lines keep their designed size and position; they get a bolder face and a hair of stroke so they can be cut and read.
+  s = s.replace(/font-family="Barlow Semi Condensed, Arial Narrow, sans-serif"/g, 'font-family="SWTag, Arial Narrow, sans-serif"');
+  if (s.indexOf('SWTag') > -1 && s.indexOf('@font-face') < 0) s = s.replace(/(<svg[^>]*>)/, '$1<defs><style>' + window.ALT.__fonts + '</style></defs>');
+  s = s.replace(/<text\b([^>]*)>/g, (m, a) => {
+    const fs = parseFloat((a.match(/font-size="([\d.]+)"/) || [0, 0])[1]); if (!fs || fs >= 30 || /textPath/.test(a)) return m;
+    let b = a.replace(/font-weight="\d+"/, 'font-weight="700"'); if (!/font-weight=/.test(b)) b += ' font-weight="700"';
+    // a tag spread across a very wide sign is tightened to a readable run, still centred
+    const tl = b.match(/textLength="([\d.]+)"/); const x = b.match(/\sx="([\d.-]+)"/);
+    if (tl && x && parseFloat(tl[1]) / fs > 14) { const L = parseFloat(tl[1]), nl = fs * 12, cx = parseFloat(x[1]) + L / 2; b = b.replace(/textLength="[\d.]+"/, 'textLength="' + nl.toFixed(1) + '"').replace(/\sx="[\d.-]+"/, ' x="' + (cx - nl / 2).toFixed(1) + '"'); }
+    return '<text' + b + ' stroke="currentColor" stroke-width="0.6" paint-order="stroke">';
+  });
+  if (LOGO === 'B7' || LOGO === 'G1' || LOGO === 'F7') s = s.replace(/<g fill="([^"]+)">/, '<g fill="$1" stroke="$1" stroke-width="2.2" stroke-linejoin="miter">');
+  return s.replace(/currentColor/g, '#ffffff');
+}
+function svgImage(variant, colour, w, sign) {
+  return new Promise(res => {
+    let s = markSvg(variant, colour);
+    if (sign && LOGO !== 'B5') s = signText(s);  // the chosen mark is drawn to be made as it is
+    const vb = s.match(/viewBox="([^"]+)"/)[1].split(/\s+/).map(Number);
+    s = s.replace('<svg ', '<svg width="' + w + '" height="' + Math.round(w * vb[3] / vb[2]) + '" ');
+    const img = new Image(); img.onload = () => res(img); img.onerror = () => res(img); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
+  });
+}
+
+/* ---------- materials ---------- */
+const M = {
+  wood: new THREE.MeshStandardMaterial({ map: woodTex, roughness: .55, metalness: 0 }),
+  rubber: new THREE.MeshStandardMaterial({ map: rubberTex, roughness: .95 }),
+  concrete: new THREE.MeshStandardMaterial({ map: concreteTex, roughness: .85 }),
+  black: new THREE.MeshStandardMaterial({ color: 0x1a1816, roughness: .7 }),
+  frame: new THREE.MeshStandardMaterial({ color: 0x141312, roughness: .45, metalness: .5 }),
+  tan: new THREE.MeshStandardMaterial({ color: C.saddle, roughness: .6 }),
+  walnut: new THREE.MeshStandardMaterial({ color: 0x4e3627, roughness: .6 }),
+  stone: new THREE.MeshStandardMaterial({ map: concreteTex, color: 0xe4ddd0, roughness: .5 }),
+  bronze: new THREE.MeshStandardMaterial({ color: C.bronze, roughness: .32, metalness: .9 }),
+  linen: new THREE.MeshStandardMaterial({ color: 0xe9e1d2, roughness: .9 }),
+  led: new THREE.MeshBasicMaterial({ color: 0xffd9a8 }),
+  ledHot: new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffd2a0).multiplyScalar(2.2) }),
+  ceil: new THREE.MeshStandardMaterial({ color: 0x0f0e0d, roughness: 1 }),
+  glass: new THREE.MeshPhysicalMaterial({ color: 0xcfd8d6, roughness: .05, metalness: 0, transmission: 0, transparent: true, opacity: .14 }),
+  plant: new THREE.MeshStandardMaterial({ color: 0x4a5a32, roughness: .9 }),
+  ribs: new THREE.MeshStandardMaterial({ map: ribTex, roughness: .8 })
+};
+
+/* ---------- geometry helpers ---------- */
+function box(w, h, d, mat, x, y, z, ry) { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); if (ry) m.rotation.y = ry; scene.add(m); return m; }
+function plane(w, h, mat, x, y, z, rx, ry) { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat); m.position.set(x, y, z); m.rotation.set(rx || 0, ry || 0, 0); scene.add(m); return m; }
+
+/* ---------- the world, built from HUB's plan (revision 2) ----------
+   Everything is placed in the plan's own pixel grid (revision 2 concept plan, 1304x978) and converted to metres
+   at 26 px per metre. The plan is a concept render, not a survey: dimensions are approximate. */
+const S = 26, OX = 128, OY = 44, H = 3.8;
+const mx = px => (px - OX) / S, mz = py => (py - OY) / S, PT = (px, py) => [mx(px), mz(py)];
+const WX = mx(1050), WZ = mz(405);
+
+/* floor: one canvas with the zones drawn where the plan has them */
+const FS = 4;
+const floorCanvas = document.createElement('canvas'); floorCanvas.width = (1050 - OX) * FS; floorCanvas.height = (405 - OY) * FS;
+{
+  const g = floorCanvas.getContext('2d');
+  const r = (x0, y0, x1, y1) => [(x0 - OX) * FS, (y0 - OY) * FS, (x1 - x0) * FS, (y1 - y0) * FS];
+  const P = (x, y) => [(x - OX) * FS, (y - OY) * FS];
+  const pat = (tex, scale) => { const p = g.createPattern(tex.image, 'repeat'); const m = new DOMMatrix(); m.a = scale; m.d = scale; p.setTransform(m); return p; };
+  const wood = pat(woodTex, .5), rub = pat(rubberTex, .6), conc = pat(concreteTex, .8);
+  g.fillStyle = conc; g.fillRect(0, 0, floorCanvas.width, floorCanvas.height);
+  g.fillStyle = rub; g.fillRect(...r(133, 50, 625, 304)); g.fillRect(...r(600, 163, 838, 298));
+  // timber treadmill platform, rounded
+  g.fillStyle = wood; g.beginPath(); g.roundRect(...r(320, 187, 497, 270), 14 * FS); g.fill();
+  // glazed room: timber
+  g.fillRect(...r(677, 167, 823, 233));
+  // track room: rubber strip under the turf, timber below
+  g.fillStyle = rub; g.fillRect(...r(533, 298, 828, 346)); g.fillStyle = wood; g.fillRect(...r(533, 346, 828, 400));
+  // cafe: timber under a curved east edge
+  g.fillStyle = wood; g.beginPath(); g.moveTo(...P(838, 163)); g.lineTo(...P(975, 163)); g.arc(...P(975, 226), 63 * FS, -Math.PI / 2, Math.PI / 2, false); g.lineTo(...P(838, 289)); g.lineTo(...P(838, 400)); g.lineTo(...P(893, 400)); g.lineTo(...P(893, 300)); g.lineTo(...P(838, 300)); g.closePath(); g.fill();
+  // entry corridor: concrete, with the dark mat
+  g.fillStyle = conc; g.fillRect(...r(893, 292, 975, 405));
+}
+const floorTex = new THREE.CanvasTexture(floorCanvas); floorTex.colorSpace = THREE.SRGBColorSpace; floorTex.anisotropy = 8;
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(WX, WZ), new THREE.MeshStandardMaterial({ map: floorTex, roughness: .8 }));
+floor.rotation.x = -Math.PI / 2; floor.position.set(WX / 2, 0, WZ / 2); scene.add(floor);
+
+// ceiling: exposed black, with HUB's rounded LED loops and long strips
+plane(WX, WZ, M.ceil, WX / 2, H, WZ / 2, Math.PI / 2);
+function ledLoop(x0, y0, x1, y1, r, y) {
+  const a = PT(x0, y0), b = PT(x1, y1), w = b[0] - a[0], d = b[1] - a[1], rr = r / S;
+  const sh = new THREE.Shape(); sh.moveTo(rr, 0); sh.lineTo(w - rr, 0); sh.absarc(w - rr, rr, rr, -Math.PI / 2, 0); sh.lineTo(w, d - rr); sh.absarc(w - rr, d - rr, rr, 0, Math.PI / 2); sh.lineTo(rr, d); sh.absarc(rr, d - rr, rr, Math.PI / 2, Math.PI); sh.lineTo(0, rr); sh.absarc(rr, rr, rr, Math.PI, 1.5 * Math.PI);
+  const pts = sh.getSpacedPoints(160).map(p => new THREE.Vector3(a[0] + p.x, y, a[1] + p.y));
+  const tube = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, true), 320, .025, 6, true), M.ledHot); scene.add(tube);
+}
+ledLoop(180, 70, 600, 150, 30, H - .3); ledLoop(300, 175, 560, 280, 30, H - .3); ledLoop(620, 180, 820, 280, 26, H - .3);
+for (let z of [1.4, 4.4, 7.4]) box(mx(620) - .8, .03, .05, M.ledHot, mx(620) / 2 + .2, H - .1, z);
+for (let z of [2.2, 5.8, 8.4]) { const d = new THREE.Mesh(new THREE.CylinderGeometry(.2, .2, WX - 5, 12), M.frame); d.rotation.z = Math.PI / 2; d.position.set(WX / 2 + 2, H - .45, z); scene.add(d); }
+
+/* walls, plan px */
+function wallPx(x0, y0, x1, y1, mat, h) {
+  const a = PT(x0, y0), b = PT(x1, y1), len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+  return box(len, h || H, .2, mat || M.black, (a[0] + b[0]) / 2, (h || H) / 2, (a[1] + b[1]) / 2, -Math.atan2(b[1] - a[1], b[0] - a[0]));
+}
+wallPx(128, 48, 628, 48);                       // G.01 north
+wallPx(131, 45, 131, 306);                      // G.01 west: the end wall
+wallPx(128, 305, 535, 305);                     // G.01 south
+wallPx(624, 45, 624, 165);                      // G.01 east, to the out-of-scope room
+wallPx(622, 162, 840, 162);                     // G.02 north
+wallPx(530, 401, 830, 401); wallPx(531, 300, 531, 403); wallPx(829, 297, 829, 403);  // track room
+wallPx(836, 162, 976, 162, new THREE.MeshStandardMaterial({ color: 0x8a8274, map: concreteTex, roughness: .9 }));  // cafe north: concrete
+wallPx(829, 403, 893, 403);   // the nook's south wall; the foyer's east wall is the building's stone, below
+
+// LED channels set into the floor along the turf, as in the plan
+function litPx(x0, y0, x1, y1) {
+  const a = PT(x0, y0), b = PT(x1, y1), len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+  box(len, .012, .05, M.ledHot, (a[0] + b[0]) / 2, .012, (a[1] + b[1]) / 2, -Math.atan2(b[1] - a[1], b[0] - a[0]));
+}
+litPx(533, 297, 828, 297);   // the track room's glazed edge
+{ const c = PT(975, 226); for (let i = 0; i < 24; i++) { const a0 = -Math.PI / 2 + Math.PI * i / 24, a1 = -Math.PI / 2 + Math.PI * (i + 1) / 24, r = 61 / S;
+  const p0 = [c[0] + Math.cos(a0) * r, c[1] + Math.sin(a0) * r], p1 = [c[0] + Math.cos(a1) * r, c[1] + Math.sin(a1) * r], len = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]);
+  box(len, .012, .05, M.ledHot, (p0[0] + p1[0]) / 2, .012, (p0[1] + p1[1]) / 2, -Math.atan2(p1[1] - p0[1], p1[0] - p0[0])); } }
+
+/* columns */
+for (const [x, y] of [[624, 165], [836, 162], [836, 300], [531, 300]]) { const p = PT(x, y); box(.6, H, .6, M.concrete, p[0], H / 2, p[1]); }
+
+/* ---------- the turf: one continuous olive path round G.01, and a straight track in its own room ---------- */
+const turfTex = cv(256, 160, (g, w, h) => {
+  g.fillStyle = '#4d5634'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 2600; i++) { const v = R(); g.fillStyle = v > .5 ? 'rgba(120,135,80,.35)' : 'rgba(30,36,20,.35)'; g.fillRect(R() * w, R() * h, 1.5, 1.5); }
+  g.fillStyle = '#e8e2d6'; g.fillRect(0, 4, w, 5); g.fillRect(0, h - 9, w, 5); g.fillRect(w / 2 - 3, h * .3, 6, h * .4);
+});
+turfTex.wrapS = turfTex.wrapT = THREE.RepeatWrapping;
+const turfPlain = new THREE.MeshStandardMaterial({ color: 0x4d5634, roughness: .95 });
+function turfSeg(x0, y0, x1, y1, wd) {
+  const a = PT(x0, y0), b = PT(x1, y1), len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+  const t = turfTex.clone(); t.needsUpdate = true; t.repeat.set(Math.max(1, Math.round(len / 2)), 1);
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(len, wd), new THREE.MeshStandardMaterial({ map: t, roughness: .95 }));
+  m.rotation.x = -Math.PI / 2; m.rotation.z = -Math.atan2(b[1] - a[1], b[0] - a[0]); m.position.set((a[0] + b[0]) / 2, .008, (a[1] + b[1]) / 2); scene.add(m);
+}
+function turfArc(cx, cy, r, a0, a1, wd) {
+  const c = PT(cx, cy), rr = r / S;
+  const m = new THREE.Mesh(new THREE.RingGeometry(rr - wd / 2, rr + wd / 2, 24, 1, a0, a1 - a0), turfPlain);
+  m.rotation.x = -Math.PI / 2; m.position.set(c[0], .008, c[1]); scene.add(m);
+}
+{ const W = 1.3;
+  turfSeg(362, 137, 518, 137, W); turfArc(518, 159, 22, 0, Math.PI / 2, W);           // top run, round the corner
+  turfSeg(540, 159, 540, 262, W); turfArc(518, 262, 22, -Math.PI / 2, 0, W);         // east run down
+  turfSeg(518, 284, 219, 284, W); turfArc(219, 262, 22, -Math.PI, -Math.PI / 2, W);   // bottom run west
+  turfSeg(197, 262, 197, 113, W); turfArc(227, 113, 30, 0, Math.PI, W);              // up the west side, the hairpin
+  turfSeg(257, 113, 257, 222, W); }
+
+/* ---------- the track room's straight, with the symbol at the start ---------- */
+async function buildTrack() {
+  const x0 = 545, x1 = 822, yc = 322, L = mx(x1) - mx(x0), Wd = 1.6, PPM = 200;
+  const sym = await svgImage('symbol', '#ece6da', 600);
+  const tex = cv(Math.round(L * PPM), Math.round(Wd * PPM), (g, w, h) => {
+    g.fillStyle = '#4d5634'; g.fillRect(0, 0, w, h);
+    for (let i = 0; i < 26000; i++) { const v = R(); g.fillStyle = v > .5 ? 'rgba(120,135,80,.35)' : 'rgba(30,36,20,.35)'; g.fillRect(R() * w, R() * h, 1.4, 1.4); }
+    g.fillStyle = '#ece6da'; g.fillRect(0, 6, w, 10); g.fillRect(0, h - 16, w, 10);
+    for (let m = 1; m < L - 1.2; m++) { const x = w - (1.4 + m) * PPM; g.fillRect(x, h * .2, .05 * PPM, h * .12); g.fillRect(x, h * .68, .05 * PPM, h * .12); }
+    const sx = w - .6 * PPM; g.fillRect(sx - .62 * PPM, 16, .05 * PPM, h - 32);
+    g.save(); g.translate(sx, h / 2); g.rotate(-Math.PI / 2); const sw = Math.min(1.1, 1.0 * sym.width / sym.height) * PPM, sh = sw * sym.height / sym.width; g.drawImage(sym, -sw / 2, -sh / 2, sw, sh); g.restore();
+  });
+  plane(L, Wd, new THREE.MeshStandardMaterial({ map: tex, roughness: .95 }), mx(x0) + L / 2, .01, mz(yc), -Math.PI / 2);
+}
+
+const Q = Math.PI / 2;
+/* ---------- equipment library: black frames, tan pads ---------- */
+const padGeo = (w, h, d) => new RoundedBoxGeometry(w, h, d, 3, .035);
+function piece(kind, px, py, rot) {
+  const p = PT(px, py); const g = new THREE.Group(); g.position.set(p[0], 0, p[1]); g.rotation.y = rot || 0; scene.add(g);
+  const add = (geo, mat, x, y, z, rx, rz) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); if (rx) m.rotation.x = rx; if (rz) m.rotation.z = rz; g.add(m); return m; };
+  const bar = (len, x, y, z, rz) => add(new THREE.CylinderGeometry(.015, .015, len, 8), M.bronze, x, y, z, 0, rz === undefined ? Math.PI / 2 : rz);
+  let rad = .9;
+  switch (kind) {
+    case 'machine': // selectorised: seat, back pad, weight stack tower
+      add(new THREE.BoxGeometry(1.1, .08, .7), M.frame, 0, .04, 0);
+      add(new THREE.BoxGeometry(.06, 1.7, .06), M.frame, .45, .85, -.25); add(new THREE.BoxGeometry(.06, 1.7, .06), M.frame, .45, .85, .25);
+      add(new THREE.BoxGeometry(.22, 1.2, .5), M.black, .45, .68, 0); add(new THREE.BoxGeometry(.24, .02, .54), M.frame, .45, 1.3, 0);
+      add(new THREE.BoxGeometry(.06, .5, .06), M.frame, -.15, .3, 0);
+      add(padGeo(.45, .09, .42), M.tan, -.15, .56, 0); add(padGeo(.4, .55, .09), M.tan, -.4, .9, 0, 0, .2);
+      add(new THREE.BoxGeometry(.06, 1.0, .06), M.frame, -.42, .5, 0); bar(.7, .1, 1.1, 0, 0);
+      rad = .8; break;
+    case 'legpress':
+      add(new THREE.BoxGeometry(1.8, .08, .9), M.frame, 0, .04, 0);
+      add(padGeo(.6, .1, .55), M.tan, -.5, .35, 0); add(padGeo(.55, .7, .1), M.tan, -.85, .75, 0, 0, .35);
+      add(new THREE.BoxGeometry(.06, 1.4, .06), M.frame, .5, .7, -.4); add(new THREE.BoxGeometry(.06, 1.4, .06), M.frame, .5, .7, .4);
+      add(new THREE.BoxGeometry(.08, .75, .7), M.black, .35, 1.0, 0, 0, -.5);
+      for (let s of [-.45, .45]) { const pl = add(new THREE.CylinderGeometry(.2, .2, .05, 24), M.frame, .55, 1.35, s); pl.rotation.x = Math.PI / 2; }
+      rad = 1.1; break;
+    case 'plate': // plate-loaded, long lever arms
+      add(new THREE.BoxGeometry(1.4, .08, .8), M.frame, 0, .04, 0);
+      add(new THREE.BoxGeometry(.06, 1.5, .06), M.frame, .5, .75, -.3); add(new THREE.BoxGeometry(.06, 1.5, .06), M.frame, .5, .75, .3);
+      add(new THREE.BoxGeometry(1.2, .06, .06), M.frame, 0, 1.2, 0, 0, .3);
+      add(padGeo(.45, .09, .4), M.tan, -.2, .5, 0); add(padGeo(.4, .5, .09), M.tan, -.45, .85, 0, 0, .25);
+      for (let s of [-.3, .3]) { const pl = add(new THREE.CylinderGeometry(.22, .22, .04, 24), M.frame, .65, 1.4, s); pl.rotation.x = Math.PI / 2; }
+      rad = .95; break;
+    case 'cable': // tall cable tower
+      add(new THREE.BoxGeometry(.9, .08, .7), M.frame, 0, .04, 0);
+      add(new THREE.BoxGeometry(.08, 2.3, .08), M.frame, 0, 1.15, -.3); add(new THREE.BoxGeometry(.08, 2.3, .08), M.frame, 0, 1.15, .3);
+      add(new THREE.BoxGeometry(.3, 1.3, .5), M.black, 0, .75, 0); add(new THREE.BoxGeometry(.5, .08, .7), M.frame, 0, 2.3, 0);
+      bar(.6, .3, 1.5, 0, 0); rad = .6; break;
+    case 'bench':
+      add(new THREE.BoxGeometry(.08, .42, 1.1), M.frame, 0, .21, 0); add(new THREE.BoxGeometry(.5, .05, .08), M.frame, 0, .05, .45); add(new THREE.BoxGeometry(.5, .05, .08), M.frame, 0, .05, -.45);
+      add(padGeo(.3, .09, 1.2), M.tan, 0, .47, 0); rad = .6; break;
+    case 'rig': { // 4.6 x 2.3 m rack system
+      const w = 4.6, d = 2.3;
+      for (let x of [-w / 2, -w / 6, w / 6, w / 2]) for (let z of [-d / 2, d / 2]) add(new THREE.BoxGeometry(.08, 2.4, .08), M.frame, x, 1.2, z);
+      for (let z of [-d / 2, d / 2]) add(new THREE.BoxGeometry(w, .08, .08), M.frame, 0, 2.4, z);
+      for (let x of [-w / 2, -w / 6, w / 6, w / 2]) add(new THREE.BoxGeometry(.08, .08, d), M.frame, x, 2.4, 0);
+      for (let x of [-w / 3, 0, w / 3]) { bar(2.2, x, 1.0 + (x ? .4 : 0), -d / 2 + .15); bar(1.2, x, 2.4, 0, 0).rotation.set(Math.PI / 2, 0, 0); }
+      for (let x of [-w / 3, w / 3]) for (let s of [-.95, .95]) { const pl = add(new THREE.CylinderGeometry(.22, .22, .04, 24), M.frame, x + s, 1.4, -d / 2 + .15); pl.rotation.z = Math.PI / 2; }
+      rad = 0; break; }
+    case 'rack': // half rack / landmine post
+      add(new THREE.BoxGeometry(.9, .08, .9), M.frame, 0, .04, 0);
+      for (let z of [-.35, .35]) add(new THREE.BoxGeometry(.08, 2.2, .08), M.frame, .3, 1.1, z);
+      add(new THREE.BoxGeometry(.08, .08, .8), M.frame, .3, 2.2, 0); bar(2.0, -.2, 1.3, 0);
+      rad = .7; break;
+    case 'dbrack': { // two-tier dumbbell rack, 3.3 m, along x
+      const w = 3.3;
+      for (let y of [.35, .75]) add(new THREE.BoxGeometry(w, .05, .5), M.frame, 0, y, 0);
+      for (let x of [-w / 2 + .05, 0, w / 2 - .05]) add(new THREE.BoxGeometry(.06, .8, .5), M.frame, x, .4, 0);
+      for (let y of [.35, .75]) for (let i = 0; i < 10; i++) { const x = -w / 2 + .25 + i * (w - .5) / 9, r = .05 + i * .006; for (let z of [-.14, .14]) add(new THREE.CylinderGeometry(r, r, .08, 10), M.frame, x, y + .1, z, Math.PI / 2); add(new THREE.CylinderGeometry(.014, .014, .3, 6), M.bronze, x, y + .1, 0, Math.PI / 2); }
+      rad = 0; break; }
+    case 'kbrack':
+      add(new THREE.BoxGeometry(.5, .05, 1.6), M.frame, 0, .3, 0); add(new THREE.BoxGeometry(.5, .05, 1.6), M.frame, 0, .7, 0);
+      for (let z of [-.75, 0, .75]) add(new THREE.BoxGeometry(.5, .75, .05), M.frame, 0, .375, z);
+      for (let y of [.3, .7]) for (let i = 0; i < 5; i++) add(new THREE.SphereGeometry(.09, 10, 8, 0, Math.PI * 2, 0, Math.PI / 2), M.frame, 0, y + .025, -.65 + i * .32);
+      rad = .5; break;
+    case 'kbwall': // kettlebells and plates stacked along the wall
+      for (let i = 0; i < 6; i++) add(new THREE.SphereGeometry(.11 + i * .012, 12, 8), M.frame, 0, .13, -.9 + i * .36);
+      for (let i = 0; i < 6; i++) add(new THREE.TorusGeometry(.07, .015, 6, 14, Math.PI), M.frame, 0, .26 + i * .012, -.9 + i * .36);
+      rad = .4; break;
+    case 'treadmill':
+      add(new THREE.BoxGeometry(.8, .22, 2.0), M.frame, 0, .11, .1); add(new THREE.BoxGeometry(.55, .02, 1.6), M.black, 0, .23, .15);
+      for (const x of [-.36, .36]) add(new THREE.BoxGeometry(.06, 1.3, .06), M.frame, x, .8, -.82, -.15);
+      add(new THREE.BoxGeometry(.8, .35, .1), M.black, 0, 1.4, -.9, -.6); rad = .9; break;
+    case 'bike':
+      add(new THREE.BoxGeometry(.2, .08, 1.2), M.frame, 0, .05, 0); add(new THREE.CylinderGeometry(.32, .32, .12, 24), M.frame, 0, .45, -.4, 0, Q);
+      add(new THREE.BoxGeometry(.06, .8, .06), M.frame, 0, .45, .25, .25); add(padGeo(.25, .07, .3), M.tan, 0, .88, .35); add(new THREE.BoxGeometry(.6, .05, .05), M.frame, 0, 1.15, -.3); rad = .6; break;
+    case 'stool':
+      add(new THREE.CylinderGeometry(.19, .19, .06, 24), M.olive, 0, .76, 0); for (const [x, z] of [[-.13, -.13], [.13, -.13], [-.13, .13], [.13, .13]]) add(new THREE.CylinderGeometry(.015, .015, .76, 6), M.frame, x, .38, z);
+      add(new THREE.TorusGeometry(.15, .01, 6, 24), M.frame, 0, .3, 0, Q); rad = .3; break;
+    case 'ctable':
+      add(new THREE.CylinderGeometry(.42, .42, .04, 32), M.walnut, 0, .74, 0); add(new THREE.CylinderGeometry(.04, .04, .72, 8), M.frame, 0, .37, 0); add(new THREE.CylinderGeometry(.25, .25, .03, 24), M.frame, 0, .02, 0); rad = .55; break;
+    case 'cchair':
+      add(padGeo(.46, .07, .44), M.olive, 0, .46, 0); add(new THREE.CylinderGeometry(.26, .26, .34, 24, 1, true, Math.PI * .2, Math.PI * .6), M.olive, 0, .72, .02);
+      for (const [x, z] of [[-.18, -.17], [.18, -.17], [-.18, .17], [.18, .17]]) add(new THREE.CylinderGeometry(.015, .015, .46, 6), M.frame, x, .23, z); rad = .35; break;
+    case 'plant':
+      add(new THREE.CylinderGeometry(.3, .26, .55, 20), M.stone, 0, .27, 0);
+      for (let i = 0; i < 10; i++) add(new THREE.IcosahedronGeometry(.2 + R() * .14, 0), M.plant, (R() - .5) * .5, .65 + R() * .6, (R() - .5) * .5); rad = .4; break;
+    case 'block': add(padGeo(.6, .6, .6), M.stone, 0, .3, 0); rad = .5; break;
+    case 'tree': {
+      add(new THREE.CylinderGeometry(.35, .28, .55, 24), M.stone, 0, .27, 0); add(new THREE.CylinderGeometry(.045, .07, 1.6, 8), M.walnut, 0, 1.2, 0);
+      for (let i = 0; i < 14; i++) add(new THREE.IcosahedronGeometry(.3 * (.6 + R() * .5), 0), M.plant, (R() - .5) * .9, 1.9 + R() * .9, (R() - .5) * .9);
+      rad = .5; break; }
+    case 'sled': // prowler
+      add(new THREE.BoxGeometry(.5, .06, 1.1), M.frame, 0, .06, 0); for (let x of [-.22, .22]) add(new THREE.BoxGeometry(.06, .06, 1.2), M.frame, x, .1, 0);
+      for (let x of [-.18, .18]) add(new THREE.BoxGeometry(.05, .9, .05), M.frame, x, .5, -.45); add(new THREE.CylinderGeometry(.03, .03, .5, 8), M.frame, 0, .45, .3);
+      add(new THREE.CylinderGeometry(.2, .2, .04, 20), M.frame, 0, .45, .3, Math.PI / 2 * 0, 0).rotation.set(0, 0, 0);
+      rad = .5; break;
+    case 'plyo': { // triangular plyo platform
+      const sh = new THREE.Shape(); sh.moveTo(-.9, -.55); sh.lineTo(.9, -.55); sh.lineTo(0, .75); sh.closePath();
+      add(new THREE.ExtrudeGeometry(sh, { depth: .55, bevelEnabled: false }), M.frame, 0, .55, 0, Math.PI / 2);
+      add(padGeo(.5, .08, .5), M.tan, 0, .6, -.05); rad = .9; break; }
+    case 'bag': add(new THREE.CylinderGeometry(.03, .03, 2.6, 8), M.frame, 0, 1.3, 0); add(new THREE.CylinderGeometry(.2, .2, 1.0, 16), M.black, 0, 1.3, 0); add(new THREE.SphereGeometry(.34, 16, 12), M.frame, 0, .34, .5); rad = .5; break;
+    case 'chair': add(new THREE.CylinderGeometry(.42, .36, .44, 28), M.tan, 0, .22, 0); add(new THREE.CylinderGeometry(.42, .42, .5, 28, 1, true, Math.PI * .15, Math.PI * .7), M.tan, 0, .55, 0); rad = .5; break;
+
+    /* ---- Citadel Strength: the eight plate-loaded machines, drawn to type at typical commercial proportions.
+       Citadel publish no dimensions; these are the right shapes and the right scale (users 142–203 cm), not their drawings.
+       Local axes: the lifter faces -x; z is the machine's width. One spec throughout: black frame, saddle pads, steel sleeves. ---- */
+    case 'pendulum': { // Pendulum Squat: tall rear frame, pendulum arms from a top pivot, back pad hanging forward, footplate low at the front
+      add(new THREE.BoxGeometry(2.0, .08, .1), M.frame, 0, .04, -.55); add(new THREE.BoxGeometry(2.0, .08, .1), M.frame, 0, .04, .55); add(new THREE.BoxGeometry(.1, .08, 1.2), M.frame, .9, .04, 0);
+      for (const z of [-.5, .5]) add(new THREE.BoxGeometry(.1, 2.0, .1), M.frame, .85, 1.0, z);
+      add(new THREE.BoxGeometry(.1, .1, 1.1), M.frame, .85, 2.0, 0);
+      for (const z of [-.42, .42]) { const a = add(new THREE.BoxGeometry(.07, 1.25, .07), M.frame, .5, 1.42, z); a.rotation.z = .5; }
+      const bp = add(padGeo(.12, 1.05, .5), M.tan, .18, 1.25, 0); bp.rotation.z = -.32;
+      for (const z of [-.2, .2]) { const sp = add(padGeo(.3, .12, .14), M.tan, -.02, 1.78, z); sp.rotation.z = -.32; }
+      const fp = add(new THREE.BoxGeometry(.6, .04, .7), M.black, -.45, .34, 0); fp.rotation.z = .35;
+      add(new THREE.BoxGeometry(.08, .34, .08), M.frame, -.3, .17, -.25); add(new THREE.BoxGeometry(.08, .34, .08), M.frame, -.3, .17, .25);
+      for (const z of [-.36, .36]) bar(.5, .05, 1.45, z, 0);
+      for (const z of [-1, 1]) { add(new THREE.CylinderGeometry(.025, .025, .34, 10), M.chrome, .75, 1.3, z * .72, Math.PI / 2); for (let i = 0; i < 2; i++) add(new THREE.CylinderGeometry(.225, .225, .03, 28), M.frame, .75, 1.3, z * (.6 + i * .05), Math.PI / 2); }
+      rad = 1.05; break; }
+    case 'hack35': { // 3n1 Hack Squat: 35° rails, wheeled carriage with back and shoulder pads, big footplate low at the front
+      const A = 35 * Math.PI / 180;
+      add(new THREE.BoxGeometry(2.1, .08, .1), M.frame, 0, .04, -.52); add(new THREE.BoxGeometry(2.1, .08, .1), M.frame, 0, .04, .52);
+      for (const z of [-.42, .42]) { const r = add(new THREE.BoxGeometry(2.0, .1, .08), M.frame, .05, .85, z); r.rotation.z = -A; }
+      for (const z of [-.42, .42]) add(new THREE.BoxGeometry(.08, 1.45, .08), M.frame, .9, .72, z);
+      add(new THREE.BoxGeometry(.08, .08, .95), M.frame, .9, 1.45, 0);
+      const bp = add(padGeo(.12, .95, .5), M.tan, .12, .98, 0); bp.rotation.z = -A;
+      for (const z of [-.19, .19]) { const sp = add(padGeo(.3, .12, .14), M.tan, -.2, 1.45, z); sp.rotation.z = -A; }
+      const fp = add(new THREE.BoxGeometry(.85, .04, .8), M.black, -.9, .3, 0); fp.rotation.z = A;
+      for (const z of [-.32, .32]) bar(.4, -.1, 1.3, z, 0);
+      for (const z of [-1, 1]) { add(new THREE.CylinderGeometry(.025, .025, .34, 10), M.chrome, .45, 1.2, z * .7, Math.PI / 2); for (let i = 0; i < 2; i++) add(new THREE.CylinderGeometry(.225, .225, .03, 28), M.frame, .45, 1.2, z * (.58 + i * .05), Math.PI / 2); }
+      rad = 1.1; break; }
+    case 'linhack': { // Linear Hack Squat: steeper rails, an upright back pad on a linear carriage, footplate ahead
+      const A = 45 * Math.PI / 180;
+      add(new THREE.BoxGeometry(2.0, .08, .1), M.frame, 0, .04, -.5); add(new THREE.BoxGeometry(2.0, .08, .1), M.frame, 0, .04, .5);
+      for (const z of [-.4, .4]) { const r = add(new THREE.BoxGeometry(1.9, .1, .08), M.frame, .15, .85, z); r.rotation.z = -A; }
+      for (const z of [-.4, .4]) add(new THREE.BoxGeometry(.08, 1.6, .08), M.frame, .85, .8, z);
+      add(new THREE.BoxGeometry(.08, .08, .9), M.frame, .85, 1.6, 0);
+      const bp = add(padGeo(.12, .9, .48), M.tan, .2, 1.1, 0); bp.rotation.z = -.18;
+      for (const z of [-.18, .18]) { const sp = add(padGeo(.28, .12, .14), M.tan, 0, 1.58, z); sp.rotation.z = -.18; }
+      const fp = add(new THREE.BoxGeometry(.8, .04, .75), M.black, -.7, .28, 0); fp.rotation.z = .5;
+      for (const z of [-.3, .3]) bar(.4, .02, 1.4, z, 0);
+      for (const z of [-1, 1]) { add(new THREE.CylinderGeometry(.025, .025, .34, 10), M.chrome, .5, 1.25, z * .66, Math.PI / 2); add(new THREE.CylinderGeometry(.225, .225, .03, 28), M.frame, .5, 1.25, z * .56, Math.PI / 2); }
+      rad = 1.05; break; }
+    case 'hippress': { // 2n1 Hip Press: standing platform, rear tower, loadable belt arm at hip height, back and shoulder pads
+      add(new THREE.BoxGeometry(1.0, .12, 1.1), M.frame, -.15, .06, 0); add(new THREE.BoxGeometry(.9, .02, 1.0), M.black, -.15, .13, 0);
+      for (const z of [-.4, .4]) add(new THREE.BoxGeometry(.1, 1.5, .1), M.frame, .7, .75, z);
+      add(new THREE.BoxGeometry(.1, .1, .9), M.frame, .7, 1.5, 0);
+      add(new THREE.BoxGeometry(1.1, .08, .08), M.frame, .15, 1.05, 0); add(padGeo(.45, .12, .5), M.tan, -.2, 1.05, 0);
+      add(padGeo(.1, .6, .45), M.tan, .5, 1.3, 0); for (const z of [-.18, .18]) add(padGeo(.28, .12, .14), M.tan, .35, 1.6, z);
+      for (const z of [-.3, .3]) bar(.4, .1, 1.25, z, 0);
+      add(new THREE.CylinderGeometry(.025, .025, .34, 10), M.chrome, .95, .95, 0, 0, Math.PI / 2); for (let i = 0; i < 2; i++) add(new THREE.CylinderGeometry(.225, .225, .03, 28), M.frame, 1.0 + i * .05, .95, 0, 0, Math.PI / 2);
+      rad = .95; break; }
+    case 'hipthrust': { // Hip Thrust: long bench, lumbar pad, angled footplate, a loadable arm over the hips from a rear post
+      add(new THREE.BoxGeometry(2.0, .08, .1), M.frame, 0, .04, -.4); add(new THREE.BoxGeometry(2.0, .08, .1), M.frame, 0, .04, .4);
+      add(new THREE.BoxGeometry(.1, .4, .6), M.frame, .4, .2, 0); add(padGeo(1.2, .12, .6), M.tan, .05, .46, 0);
+      const lp = add(padGeo(.5, .12, .6), M.tan, .62, .62, 0); lp.rotation.z = -.55;
+      const fp = add(new THREE.BoxGeometry(.6, .04, .8), M.black, -.8, .22, 0); fp.rotation.z = .45; add(new THREE.BoxGeometry(.08, .22, .08), M.frame, -.65, .11, 0);
+      add(new THREE.BoxGeometry(.1, 1.2, .1), M.frame, .95, .6, 0); add(new THREE.BoxGeometry(1.4, .07, .07), M.frame, .3, 1.1, 0);
+      add(padGeo(.36, .1, .55), M.tan, -.1, .8, 0); add(new THREE.BoxGeometry(.06, .3, .06), M.frame, -.1, .95, 0);
+      add(new THREE.CylinderGeometry(.025, .025, .34, 10), M.chrome, 1.2, 1.1, 0, 0, Math.PI / 2); for (let i = 0; i < 2; i++) add(new THREE.CylinderGeometry(.225, .225, .03, 28), M.frame, 1.22 + i * .05, 1.1, 0, 0, Math.PI / 2);
+      for (const z of [-.3, .3]) bar(.3, .55, .9, z, 0);
+      rad = 1.05; break; }
+    case 'tbar': { // T-Bar Row: chest-supported, lever pivoting at the rear floor, plates and handles under the chest pad
+      add(new THREE.BoxGeometry(2.1, .08, .1), M.frame, 0, .04, -.45); add(new THREE.BoxGeometry(2.1, .08, .1), M.frame, 0, .04, .45); add(new THREE.BoxGeometry(.1, .08, 1.0), M.frame, .95, .04, 0);
+      add(new THREE.BoxGeometry(.1, .9, .1), M.frame, -.15, .45, 0); const cp = add(padGeo(.12, .85, .5), M.tan, -.32, .95, 0); cp.rotation.z = -.7;
+      const fp = add(new THREE.BoxGeometry(.5, .04, .8), M.black, -.75, .25, 0); fp.rotation.z = .4; add(new THREE.BoxGeometry(.08, .25, .08), M.frame, -.6, .12, 0);
+      const lv = add(new THREE.BoxGeometry(1.45, .07, .07), M.frame, .2, .32, 0); lv.rotation.z = -.3;
+      add(new THREE.CylinderGeometry(.025, .025, .5, 10), M.chrome, -.5, .55, 0, 0, Math.PI / 2 + .3); add(new THREE.CylinderGeometry(.225, .225, .03, 28), M.frame, -.55, .57, 0, 0, Math.PI / 2 + .3); add(new THREE.CylinderGeometry(.225, .225, .03, 28), M.frame, -.6, .585, 0, 0, Math.PI / 2 + .3);
+      bar(.5, -.42, .62, 0); for (const z of [-.22, .22]) bar(.25, -.42, .62, z, 0);
+      rad = .95; break; }
+    case 'latpull': { // Lat Pulldown, plate-loaded: seat and thigh pads, tall frame, lever arms from a top pivot, handles ahead
+      add(new THREE.BoxGeometry(1.5, .08, .1), M.frame, 0, .04, -.45); add(new THREE.BoxGeometry(1.5, .08, .1), M.frame, 0, .04, .45);
+      add(new THREE.BoxGeometry(.1, .45, .1), M.frame, 0, .22, 0); add(padGeo(.42, .09, .42), M.tan, 0, .49, 0);
+      add(new THREE.BoxGeometry(.06, .5, .06), M.frame, -.18, .62, 0); add(padGeo(.3, .1, .5), M.tan, -.18, .85, 0);
+      for (const z of [-.4, .4]) add(new THREE.BoxGeometry(.1, 2.1, .1), M.frame, .55, 1.05, z); add(new THREE.BoxGeometry(.1, .1, .9), M.frame, .55, 2.1, 0);
+      for (const z of [-.33, .33]) { const a = add(new THREE.BoxGeometry(1.0, .07, .07), M.frame, .1, 1.95, z); a.rotation.z = .25; }
+      for (const z of [-.33, .33]) add(new THREE.BoxGeometry(.06, .4, .06), M.frame, -.35, 1.62, z); bar(.9, -.35, 1.42, 0);
+      for (const z of [-1, 1]) { add(new THREE.CylinderGeometry(.025, .025, .34, 10), M.chrome, .6, 1.65, z * .62, Math.PI / 2); add(new THREE.CylinderGeometry(.225, .225, .03, 28), M.frame, .6, 1.65, z * .52, Math.PI / 2); }
+      rad = .85; break; }
+    case 'vertpull': { // Vertical Pulldown: seated under the handles, chest pad, overhead arms
+      add(new THREE.BoxGeometry(1.4, .08, .1), M.frame, 0, .04, -.45); add(new THREE.BoxGeometry(1.4, .08, .1), M.frame, 0, .04, .45);
+      add(new THREE.BoxGeometry(.1, .45, .1), M.frame, .1, .22, 0); add(padGeo(.42, .09, .42), M.tan, .1, .49, 0);
+      add(new THREE.BoxGeometry(.06, .7, .06), M.frame, -.3, .85, 0); add(padGeo(.1, .4, .4), M.tan, -.3, 1.25, 0);
+      for (const z of [-.4, .4]) add(new THREE.BoxGeometry(.1, 2.15, .1), M.frame, .6, 1.07, z); add(new THREE.BoxGeometry(.1, .1, .9), M.frame, .6, 2.15, 0);
+      for (const z of [-.3, .3]) { const a = add(new THREE.BoxGeometry(.9, .07, .07), M.frame, .2, 2.0, z); a.rotation.z = .35; }
+      for (const z of [-.3, .3]) bar(.3, -.2, 1.85, z, 0);
+      for (const z of [-1, 1]) { add(new THREE.CylinderGeometry(.025, .025, .34, 10), M.chrome, .65, 1.7, z * .62, Math.PI / 2); add(new THREE.CylinderGeometry(.225, .225, .03, 28), M.frame, .65, 1.7, z * .52, Math.PI / 2); }
+      rad = .85; break; }
+    case 'rower': add(new THREE.BoxGeometry(.1, .08, 2.3), M.frame, 0, .33, .2, .08); add(new THREE.CylinderGeometry(.35, .35, .2, 24), M.frame, 0, .5, -1.0, 0, Math.PI / 2); add(padGeo(.3, .06, .3), M.tan, 0, .42, .6); rad = .6; break;
+  }
+  if (rad) solids.push({ c: [p[0], p[1]], r: rad });
+  return g;
+}
+const solids = [];
+M.olive = new THREE.MeshStandardMaterial({ color: 0x4d5634, roughness: .7 });
+M.chrome = new THREE.MeshStandardMaterial({ color: 0xc8c8c4, roughness: .28, metalness: .95 });
+M.terracotta = new THREE.MeshStandardMaterial({ color: 0xa24f2c, roughness: .5, side: THREE.DoubleSide });
+M.leather = new THREE.MeshStandardMaterial({ color: 0x8b5427, roughness: .55 });
+M.glassFrame = new THREE.MeshStandardMaterial({ color: 0x111110, roughness: .4, metalness: .6 });
+
+/* ---------- the gym, from the plan ---------- */
+[ // kind, plan x, plan y, rotation
+  ['dbrack', 316, 64, 0],
+  ['bench', 315, 97, Q], ['bench', 315, 125, Q], ['bench', 315, 160, Q],
+  ['pendulum', 380, 90, Q], ['hack35', 443, 90, Q], ['hippress', 513, 90, Q], ['linhack', 575, 88, Q],   // Citadel, along the north wall
+  ['machine', 373, 110, 0], ['machine', 433, 108, 0],
+  ['dbrack', 420, 158, 0], ['block', 500, 168, 0],
+  ['cable', 577, 122, 0], ['machine', 577, 190, Q], ['rack', 590, 238, Q],
+  ['cable', 227, 92, 0], ['bike', 227, 165, 0], ['bike', 227, 205, 0],
+  ['kbrack', 150, 128, 0], ['kbrack', 150, 175, 0], ['kbrack', 150, 222, 0],
+  ['treadmill', 343, 228, 0], ['treadmill', 373, 228, 0], ['treadmill', 407, 228, 0], ['treadmill', 440, 228, 0],
+  ['plant', 480, 200, 0], ['plant', 478, 258, 0],
+  ['rack', 563, 258, 0], ['rack', 601, 258, 0], ['latpull', 645, 264, Q], ['bench', 700, 268, Q], ['vertpull', 755, 266, Q],
+  ['tbar', 718, 198, Q], ['hipthrust', 786, 198, Q],   // Citadel
+  ['kbwall', 541, 368, 0], ['rack', 607, 374, Q], ['plyo', 690, 376, 0], ['sled', 768, 372, Q],
+  // the cafe
+  ['stool', 858, 261, 0], ['stool', 870, 261, 0], ['stool', 882, 261, 0], ['stool', 894, 261, 0], ['stool', 906, 261, 0], ['stool', 918, 261, 0],
+  ['ctable', 958, 226, 0], ['cchair', 946, 214, -Math.PI * .75], ['cchair', 970, 238, Math.PI * .25], ['cchair', 946, 238, -Math.PI * .25],
+  ['ctable', 865, 326, 0], ['cchair', 865, 312, Math.PI], ['cchair', 865, 340, 0], ['ctable', 865, 368, 0], ['cchair', 853, 380, -Math.PI * .75], ['cchair', 877, 380, Math.PI * .75],
+  ['plant', 846, 292, 0], ['plant', 884, 395, 0], ['plant', 990, 300, 0]
+].forEach(a => piece(a[0], a[1], a[2], a[3]));
+
+/* ---------- the cafe ---------- */
+// back counter, open shelving lit from beneath, the menu board, and the concrete panel for the sign
+{ const a = PT(845, 168), b = PT(900, 168), L = b[0] - a[0], cx = (a[0] + b[0]) / 2;
+  box(L, .9, .6, M.walnut, cx, .45, a[1] + .1); box(L + .04, .04, .64, M.stone, cx, .92, a[1] + .1);
+  box(.5, .45, .45, M.frame, a[0] + .5, 1.16, a[1] + .1); box(.3, .32, .3, M.bronze, a[0] + 1.2, 1.1, a[1] + .1);
+  const s0 = PT(845, 163), s1 = PT(872, 163), sl = s1[0] - s0[0], sc = (s0[0] + s1[0]) / 2;
+  for (const y of [1.45, 1.85, 2.25, 2.65]) { box(sl, .04, .32, M.walnut, sc, y, s0[1] + .27); box(sl - .1, .015, .02, M.ledHot, sc, y - .03, s0[1] + .4);
+    for (let i = 0; i < 6; i++) box(.12, .18 + R() * .08, .1, i % 2 ? M.linen : M.stone, s0[0] + .2 + i * (sl - .4) / 5, y + .12, s0[1] + .27); }
+  // menu board: charcoal, drawn in the brand's type
+  const mb = cv(512, 640, (g, w, h) => {
+    g.fillStyle = '#1e1c1a'; g.fillRect(0, 0, w, h);
+    g.fillStyle = '#f3efe7'; g.font = '700 54px "Barlow Condensed", "Arial Narrow", sans-serif'; g.fillText('COFFEE', 44, 96);
+    g.font = '500 24px "DM Mono", monospace'; ['BATCH BREW', 'ESPRESSO', 'FLAT WHITE', 'COLD BREW'].forEach((t, i) => g.fillText(t, 44, 146 + i * 40));
+    g.font = '700 54px "Barlow Condensed", "Arial Narrow", sans-serif'; g.fillText('SHAKES', 44, 352);
+    g.font = '500 24px "DM Mono", monospace'; ['THE GREEN ONE', 'CHOCOLATE', 'BANANA AND OAT'].forEach((t, i) => g.fillText(t, 44, 402 + i * 40));
+    g.fillStyle = '#a2723f'; g.font = '700 30px "Barlow Condensed", "Arial Narrow", sans-serif'; g.fillText('GOOD COFFEE.', 44, 568); g.fillText('STRONGER PEOPLE.', 44, 604);
+  });
+  const m0 = PT(874, 163), m1 = PT(900, 163);
+  plane(m1[0] - m0[0], (m1[0] - m0[0]) * 1.25, new THREE.MeshStandardMaterial({ map: mb, roughness: .8 }), (m0[0] + m1[0]) / 2, 2.15, m0[1] + .12);
+}
+// front counter: stone top with a bronze edge, fluted timber front, warm underglow
+function roundRect(w, d, r) { const s = new THREE.Shape(); s.moveTo(-w / 2 + r, -d / 2); s.lineTo(w / 2 - r, -d / 2); s.absarc(w / 2 - r, -d / 2 + r, r, -Math.PI / 2, 0, false); s.lineTo(w / 2, d / 2 - r); s.absarc(w / 2 - r, d / 2 - r, r, 0, Math.PI / 2, false); s.lineTo(-w / 2 + r, d / 2); s.absarc(-w / 2 + r, d / 2 - r, r, Math.PI / 2, Math.PI, false); s.lineTo(-w / 2, -d / 2 + r); s.absarc(-w / 2 + r, -d / 2 + r, r, Math.PI, 1.5 * Math.PI, false); return s; }
+function counterPart(x0, y0, x1, y1) {
+  const a = PT(x0, y0), b = PT(x1, y1), w = b[0] - a[0], d = b[1] - a[1], cx = (a[0] + b[0]) / 2, cz = (a[1] + b[1]) / 2, rr = Math.min(w, d) * .45;
+  const fluted = new THREE.MeshStandardMaterial({ map: (() => { const t = woodTex.clone(); t.needsUpdate = true; t.repeat.set(3, .4); return t; })(), color: 0xc49a72, roughness: .6 });
+  const body = new THREE.Mesh(new THREE.ExtrudeGeometry(roundRect(w, d, rr), { depth: 1.0, bevelEnabled: false, curveSegments: 16 }), fluted); body.rotation.x = -Math.PI / 2; body.position.set(cx, .06, cz); scene.add(body);
+  const top = new THREE.Mesh(new THREE.ExtrudeGeometry(roundRect(w + .1, d + .1, rr + .05), { depth: .05, bevelEnabled: false, curveSegments: 16 }), M.stone); top.rotation.x = -Math.PI / 2; top.position.set(cx, 1.06, cz); scene.add(top);
+  const edge = new THREE.Mesh(new THREE.ExtrudeGeometry(roundRect(w + .12, d + .12, rr + .06), { depth: .012, bevelEnabled: false, curveSegments: 16 }), M.bronze); edge.rotation.x = -Math.PI / 2; edge.position.set(cx, 1.05, cz); scene.add(edge);
+  const gl = new THREE.Mesh(new THREE.ExtrudeGeometry(roundRect(w + .06, d + .06, rr + .03), { depth: .03, bevelEnabled: false, curveSegments: 16 }), M.ledHot); gl.rotation.x = -Math.PI / 2; gl.position.set(cx, .02, cz); scene.add(gl);
+  solids.push({ c: [cx, cz], r: Math.max(w, d) / 2 + .25 });
+}
+counterPart(850, 234, 942, 250); counterPart(928, 206, 944, 250);
+{ const c = PT(900, 240); box(.55, .45, .45, M.frame, c[0], 1.31, c[1]); box(.2, .35, .2, M.bronze, c[0] + .6, 1.26, c[1]); }
+// terracotta pendants over the counter
+for (const x of [865, 890, 915]) { const p = PT(x, 241);
+  const shade = new THREE.Mesh(new THREE.ConeGeometry(.24, .26, 28, 1, true), M.terracotta); shade.position.set(p[0], 2.35, p[1]); scene.add(shade);
+  const bulb = new THREE.Mesh(new THREE.SphereGeometry(.06, 12, 8), M.ledHot); bulb.position.set(p[0], 2.24, p[1]); scene.add(bulb);
+  box(.008, H - 2.48, .008, M.frame, p[0], (H + 2.48) / 2, p[1]); }
+// booth along the curved glass: tan leather, lit beneath
+function arcShape(r1, r2, a0, a1) { const s = new THREE.Shape(); s.absarc(0, 0, r2, a0, a1, false); s.absarc(0, 0, r1, a1, a0, true); return s; }
+{ const c = PT(975, 226), R2 = 58 / S;
+  const seat = new THREE.Mesh(new THREE.ExtrudeGeometry(arcShape(R2 - .6, R2, -.42 * Math.PI, .42 * Math.PI), { depth: .45, bevelEnabled: true, bevelSize: .03, bevelThickness: .03, curveSegments: 48 }), M.leather);
+  seat.rotation.x = -Math.PI / 2; seat.position.set(c[0], 0, c[1]); scene.add(seat);
+  const back = new THREE.Mesh(new THREE.ExtrudeGeometry(arcShape(R2 - .14, R2, -.42 * Math.PI, .42 * Math.PI), { depth: .95, bevelEnabled: true, bevelSize: .03, bevelThickness: .03, curveSegments: 48 }), M.leather);
+  back.rotation.x = -Math.PI / 2; back.position.set(c[0], 0, c[1]); scene.add(back);
+  for (const a of [-.25, 0, .25]) { const p = [c[0] + Math.cos(a * Math.PI) * (R2 - 1.0), c[1] - Math.sin(a * Math.PI) * (R2 - 1.0)];
+    const t = new THREE.Mesh(new THREE.CylinderGeometry(.32, .32, .04, 28), M.walnut); t.position.set(p[0], .74, p[1]); scene.add(t); box(.06, .72, .06, M.frame, p[0], .36, p[1]); solids.push({ c: p, r: .5 }); }
+  solids.push({ c: [c[0], c[1]], r: 0, ring: [R2 - .7, R2 + 1] }); }
+
+/* ---------- glass: the curved street front, the cafe-to-gym partition, the glass room, the track room ---------- */
+const gC = new THREE.Vector2(mx(975), mz(226)), gR = 63 / S;
+{ const glass = new THREE.Mesh(new THREE.CylinderGeometry(gR, gR, H - .1, 64, 1, true, 0, Math.PI), M.glass); glass.position.set(gC.x, (H - .1) / 2, gC.y); scene.add(glass);
+  for (let i = 0; i <= 8; i++) { const t = Math.PI * i / 8; box(.05, H - .1, .05, M.glassFrame, gC.x + Math.sin(t) * gR, (H - .1) / 2, gC.y + Math.cos(t) * gR); } }
+function glassRun(x0, y0, x1, y1, gaps) {
+  const a = PT(x0, y0), b = PT(x1, y1), horiz = Math.abs(b[0] - a[0]) > Math.abs(b[1] - a[1]);
+  const t0 = horiz ? a[0] : a[1], t1 = horiz ? b[0] : b[1], fixed = horiz ? a[1] : a[0];
+  const cuts = [t0]; for (const g of gaps || []) { cuts.push(horiz ? mx(g[0]) : mz(g[0])); cuts.push(horiz ? mx(g[1]) : mz(g[1])); } cuts.push(t1);
+  for (let i = 0; i < cuts.length; i += 2) { const s0 = cuts[i], s1 = cuts[i + 1], len = s1 - s0, mid = (s0 + s1) / 2;
+    if (len <= 0) continue;
+    const p = box(horiz ? len : .03, H - .1, horiz ? .03 : len, M.glass, horiz ? mid : fixed, (H - .1) / 2, horiz ? fixed : mid);
+    const n = Math.max(1, Math.round(len / 1.5)); for (let k = 0; k <= n; k++) { const t = s0 + len * k / n; box(.05, H - .1, .05, M.glassFrame, horiz ? t : fixed, (H - .1) / 2, horiz ? fixed : t); } }
+  for (const g of gaps || []) { const s0 = horiz ? mx(g[0]) : mz(g[0]), s1 = horiz ? mx(g[1]) : mz(g[1]); box(horiz ? s1 - s0 : .06, .1, horiz ? .06 : s1 - s0, M.glassFrame, horiz ? (s0 + s1) / 2 : fixed, 2.3, horiz ? fixed : (s0 + s1) / 2); }
+}
+glassRun(838, 164, 838, 300, [[262, 292]]);                    // cafe to gym
+glassRun(677, 164, 677, 233); glassRun(823, 164, 823, 233); glassRun(677, 233, 823, 233, [[738, 768]]);   // glass room
+glassRun(533, 297, 829, 297, [[545, 575]]);                    // track room
+// outside the curve: evening, planting, the terrace
+const day = new THREE.Mesh(new THREE.BoxGeometry(8, H + 3, mz(420) - mz(120)), new THREE.MeshBasicMaterial({ color: new THREE.Color(0x3c4048), side: THREE.BackSide }));
+day.position.set(mx(1040) + 4, (H + 3) / 2 - 1, (mz(420) + mz(120)) / 2); scene.add(day);
+for (let i = 0; i < 18; i++) { const t = Math.PI * (i + .5) / 18, r = gR + .55 + R() * .5; const b = new THREE.Mesh(new THREE.IcosahedronGeometry(.32 + R() * .3, 0), M.plant); b.position.set(gC.x + Math.sin(t) * r, .3 + R() * .5, gC.y + Math.cos(t) * r); scene.add(b); }
+box(8, .02, mz(420) - mz(120), M.concrete, mx(1040) + 4, -.01, (mz(420) + mz(120)) / 2);
+
+const pointLights = [];
+/* ---------- the café front and the building foyer, from HUB's page 8 and the plan ----------
+   The café is a glass box on the building's own foyer: black-framed glazing with a pair of glass doors at plan y 292,
+   a reeded panel to the left of the doors, the nook's east wall timber-clad with a lit soffit, the building's stone wall
+   on the right, a dark stone inlay on the foyer floor. The foyer runs south to the tower lobby and the lifts. */
+const ZF = mz(292), FX0 = mx(893), FX1 = mx(962), FXC = (FX0 + FX1) / 2, FW = FX1 - FX0;
+M.reeded = new THREE.MeshPhysicalMaterial({ map: (() => { const t = ribTex.clone(); t.needsUpdate = true; t.repeat.set(6, 1); return t; })(), color: 0xece8e0, roughness: .3, transparent: true, opacity: .74, side: THREE.DoubleSide });
+M.timber = new THREE.MeshStandardMaterial({ map: (() => { const t = woodTex.clone(); t.needsUpdate = true; t.repeat.set(1.5, 1); return t; })(), color: 0x6b4a33, roughness: .6 });
+M.stonewall = new THREE.MeshStandardMaterial({ map: concreteTex, color: 0xc9b58f, roughness: .8 });
+M.inlay = new THREE.MeshStandardMaterial({ color: 0x2a2724, roughness: .6 });
+{
+  const gh = 2.75, gy = gh / 2;
+  // the glass front: reeded panel, two door leaves, a fixed light, black frames, black header above
+  const r0 = FX0, r1 = mx(915), d0 = r1, d1 = mx(957);
+  const reed = new THREE.Mesh(new THREE.PlaneGeometry(r1 - r0, gh), M.reeded); reed.position.set((r0 + r1) / 2, gy, ZF); scene.add(reed);
+  box(FX1 - d1, gh, .03, M.glass, (d1 + FX1) / 2, gy, ZF);
+  for (const x of [r0, r1, (d0 + d1) / 2, d1, FX1]) box(.06, gh, .08, M.glassFrame, x, gy, ZF);
+  box(FW, .08, .08, M.glassFrame, FXC, gh - .04, ZF); box(FW, .05, .08, M.glassFrame, FXC, .025, ZF);
+  for (const [a, b] of [[d0, (d0 + d1) / 2], [(d0 + d1) / 2, d1]]) { const c = (a + b) / 2;
+    box(b - a - .06, 2.35, .025, M.glass, c, 1.2, ZF); box(b - a - .06, .05, .08, M.glassFrame, c, 2.38, ZF);
+    const hx = c + (a === d0 ? .3 : -.3); box(.025, .7, .025, M.bronze, hx, 1.05, ZF + .06); box(.025, .7, .025, M.bronze, hx, 1.05, ZF - .06); }
+  box(FW + .1, H - gh, .25, M.black, FXC, (H + gh) / 2, ZF);                         // black header: the sign goes here
+  // the nook's east wall, timber-clad, facing the foyer, with a lit soffit; its return along the south
+  box(.22, H, mz(403) - ZF, M.timber, FX0 - .11, H / 2, (ZF + mz(403)) / 2);
+  box(.02, .02, mz(403) - ZF - .2, M.ledHot, FX0 + .02, H - .32, (ZF + mz(403)) / 2); box(.3, .3, mz(403) - ZF, M.black, FX0 + .05, H - .15, (ZF + mz(403)) / 2);
+  // the building's stone wall on the east, with planting along its foot
+  box(.3, H, mz(470) - ZF + 1, M.stonewall, mx(975) + .15, H / 2, (ZF + mz(470)) / 2);
+  for (let i = 0; i < 5; i++) { const z = mz(302 + i * 16); box(.5, .4, .5, M.black, mx(968), .2, z); for (let k = 0; k < 5; k++) { const b = new THREE.Mesh(new THREE.IcosahedronGeometry(.16 + R() * .12, 0), M.plant); b.position.set(mx(968) + (R() - .5) * .3, .5 + R() * .4, z + (R() - .5) * .3); scene.add(b); } }
+  // foyer floor: dark stone inlay on the concrete; the floor and a dark ceiling continue south to the lobby
+  box(mx(950) - mx(900), .012, mz(372) - mz(300), M.inlay, (mx(950) + mx(900)) / 2, .006, (mz(372) + mz(300)) / 2);
+  box(mx(975) - FX0 + 6, .02, mz(480) - mz(405), M.concrete, (FX0 + mx(975)) / 2 - 3, -.01, (mz(480) + mz(405)) / 2);
+  plane(mx(975) - FX0 + 6, mz(480) - mz(405), M.ceil, (FX0 + mx(975)) / 2 - 3, H, (mz(480) + mz(405)) / 2, Math.PI / 2);
+  // west of the foyer below the nook: the wall to the lift lobby, with the main entry doors in it
+  box(.22, H, mz(420) - mz(403), M.stone, FX0 - .11, H / 2, (mz(403) + mz(420)) / 2); box(.22, H, mz(480) - mz(448), M.stone, FX0 - .11, H / 2, (mz(448) + mz(480)) / 2);
+  box(.06, H - 2.4, mz(448) - mz(420), M.stone, FX0 - .11, (H + 2.4) / 2, (mz(420) + mz(448)) / 2);
+  for (const z of [mz(420), mz(434), mz(448)]) box(.08, 2.4, .08, M.glassFrame, FX0, 1.2, z);
+  box(.03, 2.35, mz(448) - mz(420) - .1, M.glass, FX0, 1.2, (mz(420) + mz(448)) / 2);
+  // the lobby beyond: a far wall and a dim glow, enough to read as the building, not ours
+  box(mx(975) - FX0 + 6, H, .3, M.stone, (FX0 + mx(975)) / 2 - 3, H / 2, mz(480));
+  for (const z of [mz(330), mz(440)]) { const l = new THREE.PointLight(0xffe2c0, 1.1, 8, 1.6); l.position.set(mx(934), H - .2, z); l.userData.i = 1.1; scene.add(l); pointLights.push(l); }
+}
+
+/* ---------- the frosted band on the cafe-to-gym glass, and the symbol at the door ---------- */
+async function buildFilm() {
+  const sym = await svgImage('symbol', '#ffffff', 300);
+  const tex = cv(1024, 256, (g, w, h) => {
+    g.fillStyle = 'rgba(245,242,236,.55)'; g.fillRect(0, 0, w, h);
+    g.fillStyle = 'rgba(255,255,255,.55)'; g.fillRect(0, 0, w, 6); g.fillRect(0, h - 6, w, 6);
+    const sw = Math.min(400, 170 * sym.width / sym.height), sh = sw * sym.height / sym.width;
+    g.globalCompositeOperation = 'destination-out'; g.drawImage(sym, 56, (h - sh) / 2, sw, sh); g.drawImage(sym, 56 + w / 2, (h - sh) / 2, sw, sh);
+    g.globalCompositeOperation = 'source-over';
+  });
+  for (const [y0, y1] of [[164, 262], [292, 300]]) {
+    const L = mz(y1) - mz(y0); if (L < .3) continue;
+    const t = tex.clone(); t.needsUpdate = true; t.wrapS = THREE.RepeatWrapping; t.repeat.set(-Math.max(1, Math.round(L / 1.6)), 1);
+    const band = new THREE.Mesh(new THREE.PlaneGeometry(L, .42), new THREE.MeshBasicMaterial({ map: t, transparent: true, side: THREE.DoubleSide, depthWrite: false }));
+    band.position.set(mx(838) - .025, 1.38, (mz(y0) + mz(y1)) / 2); band.rotation.y = -Math.PI / 2; scene.add(band);
+  }
+  // the symbol by the door goes on a bronze plaque beside the opening, not on the glass
+  const pl = PT(838, 262); box(.04, .16, .16, M.bronze, pl[0] - .13, 1.55, pl[1] - .1);
+  const sm = await svgImage('symbol', '#1e1c1a', 300); const smT = cv(sm.width, sm.height, g => g.drawImage(sm, 0, 0));
+  const sw = Math.min(.12, .09 * sm.width / sm.height); const sp = new THREE.Mesh(new THREE.PlaneGeometry(sw, sw * sm.height / sm.width), new THREE.MeshStandardMaterial({ map: smT, transparent: true, roughness: .4, metalness: .3 }));
+  sp.position.set(pl[0] - .13 - .021, 1.55, pl[1] - .1); sp.rotation.y = -Math.PI / 2; scene.add(sp);
+}
+
+/* ---------- signs: halo-lit linen in the gym, unlit bronze in the cafe ---------- */
+async function haloSign(variant, w, x, y, z, ry, colour, hMax, unlit) {
+  const img = await svgImage(variant, '#ffffff', 1400, true);
+  if (hMax && w * img.height / img.width > hMax) w = hMax * img.width / img.height;  // fit inside a w x hMax box, centred on x, y
+  const ar = img.height / img.width, hgt = w * ar, pad = 140;
+  if (!unlit) {
+    const glowTex = cv(img.width + pad * 2, img.height + pad * 2, (g) => {
+      g.filter = 'blur(34px)'; g.globalAlpha = .9; g.drawImage(img, pad, pad); g.filter = 'blur(14px)'; g.globalAlpha = .5; g.drawImage(img, pad, pad);
+      g.globalCompositeOperation = 'source-in'; g.fillStyle = '#ffc68a'; g.fillRect(0, 0, img.width + pad * 2, img.height + pad * 2); });
+    const gw = w * (img.width + pad * 2) / img.width, gh = hgt * (img.height + pad * 2) / img.height;
+    const glowMesh = new THREE.Mesh(new THREE.PlaneGeometry(gw, gh), new THREE.MeshBasicMaterial({ map: glowTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: .3, toneMapped: false }));
+    const off0 = new THREE.Vector3(0, 0, .015).applyAxisAngle(new THREE.Vector3(0, 1, 0), ry);
+    glowMesh.position.set(x + off0.x, y, z + off0.z); glowMesh.rotation.y = ry; scene.add(glowMesh);
+  }
+  const faceTex = cv(img.width, img.height, g => g.drawImage(img, 0, 0));
+  const sp = 40;
+  const shTex = cv(img.width + sp * 2, img.height + sp * 2, (g) => { g.filter = 'blur(9px)'; g.drawImage(img, sp + 4, sp + 8); g.globalCompositeOperation = 'source-in'; g.fillStyle = '#000'; g.fillRect(0, 0, img.width + sp * 2, img.height + sp * 2); });
+  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(w * (img.width + sp * 2) / img.width, hgt * (img.height + sp * 2) / img.height), new THREE.MeshBasicMaterial({ map: shTex, transparent: true, opacity: unlit ? .35 : .7, depthWrite: false }));
+  const offS = new THREE.Vector3(0, 0, .03).applyAxisAngle(new THREE.Vector3(0, 1, 0), ry);
+  shadow.position.set(x + offS.x, y, z + offS.z); shadow.rotation.y = ry; scene.add(shadow);
+  const mat = unlit
+    ? new THREE.MeshStandardMaterial({ map: faceTex, color: colour, transparent: true, alphaTest: .4, roughness: .45, metalness: .35, emissive: 0x000000, emissiveIntensity: 0 })
+    : new THREE.MeshStandardMaterial({ map: faceTex, color: colour, transparent: true, alphaTest: .4, roughness: .6, emissive: 0xfff1dc, emissiveIntensity: .75, emissiveMap: faceTex });
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(w, hgt), mat);
+  const off = new THREE.Vector3(0, 0, .05).applyAxisAngle(new THREE.Vector3(0, 1, 0), ry);
+  face.position.set(x + off.x, y + off.y, z + off.z); face.rotation.y = ry; scene.add(face);
+}
+
+/* ---------- slogan walls: three or four words, stacked, a full stop, a bronze rule ---------- */
+function slogan(lines, capH, x, y, z, ry, colour) {
+  // three or four words, stacked, left-aligned as a block; the block is centred on x
+  const fs = 118, lh = 120, pad = 8;
+  const meas = document.createElement('canvas').getContext('2d'); meas.font = '700 ' + fs + 'px "Barlow Condensed", "Arial Narrow", sans-serif';
+  const tw = Math.ceil(Math.max(...lines.map(t => meas.measureText(t).width))) + pad * 2, th = lh * lines.length + 90;
+  const tex = cv(tw, th, (g) => {
+    g.fillStyle = colour; g.font = '700 ' + fs + 'px "Barlow Condensed", "Arial Narrow", sans-serif'; g.textBaseline = 'top';
+    lines.forEach((t, i) => g.fillText(t, pad, i * lh));
+    g.fillStyle = '#a2723f'; g.fillRect(pad + 4, lh * lines.length + 40, 110, 14);
+  });
+  const k = capH / lh, w = tw * k, h = th * k;
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshStandardMaterial({ map: tex, transparent: true, roughness: .8 }));
+  m.position.set(x, y - h / 2, z); m.rotation.y = ry; scene.add(m);
+}
+/* ---------- lights ---------- */
+const hemi = new THREE.HemisphereLight(0xfff1dc, 0x2a2018, .5); scene.add(hemi);
+const amb = new THREE.AmbientLight(0xffe2c0, .1); scene.add(amb);
+const pts = [];
+for (let x = 2.5; x < 19; x += 4.2) for (let z of [2.6, 7.4]) pts.push([x, 3.3, z, 10, 9]);
+for (let x = mx(560); x < mx(830); x += 3.4) { pts.push([x, 3.2, mz(230), 8, 7]); pts.push([x, 3.1, mz(350), 6, 6]); }
+for (const x of [865, 890, 915]) pts.push([mx(x), 2.2, mz(241), 2.2, 3.5]);
+pts.push([mx(160), 3.2, mz(175), 6, 5], [mx(960), 3.0, mz(225), 5, 7], [mx(930), 2.8, mz(350), 7, 6], [mx(865), 2.8, mz(345), 5, 5], [mx(938), 3.2, mz(240), 2, 5]);
+for (const [x, y, z, i, d] of pts) { const l = new THREE.PointLight(0xffc996, i, d * 1.6, 1.6); l.position.set(x, y, z); l.userData.i = i; scene.add(l); pointLights.push(l); }
+const sun = new THREE.DirectionalLight(0xfff4e2, .6); sun.position.set(60, 10, 10); scene.add(sun);
+/* ---------- time of day: evening (HUB's renders) or morning, with daylight through the curved glass ---------- */
+let TIME = q0.get('time') === 'day' ? 'day' : 'evening';
+const dayMat = day.material;
+function applyTime() {
+  const d = TIME === 'day';
+  dayMat.color.set(d ? 0xcfc6b4 : 0x3c4048); dayMat.color.multiplyScalar(d ? 1.35 : 1);
+  scene.background.set(d ? 0x2a2622 : 0x15130f); scene.fog.color.copy(scene.background);
+  hemi.intensity = d ? .9 : .5; hemi.color.set(d ? 0xfff8ee : 0xfff1dc); amb.intensity = d ? .3 : .1;
+  sun.intensity = d ? 1.6 : .6; sun.position.set(d ? 40 : 60, d ? 18 : 10, d ? 14 : 10);
+  for (const l of pointLights) l.intensity = l.userData.i * (d ? .45 : 1);
+  renderer.toneMappingExposure = d ? 1.0 : 1.05; bloom.strength = d ? .22 : .42;
+  const sel = document.getElementById('tsel'); if (sel) sel.value = TIME;
+}
+function setTime(t) { if (t === TIME) return; TIME = t; setParam('time', t); applyTime(); }
+
+/* ---------- post: bloom on the warm light ---------- */
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), .42, .6, .86);
+composer.addPass(bloom);
+composer.addPass(new OutputPass());
+applyTime();
+function resize() {
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setSize(w, h, false); composer.setSize(w, h); bloom.resolution.set(w / 2, h / 2);
+  camera.aspect = w / h; camera.fov = w < h ? 72 : 60; camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize); resize();
+
+/* ---------- places ---------- */
+const P = [
+  { name:'Foyer', pos:[mx(948), 1.6, mz(400)], look:[mx(922), 1.9, mz(292)], k:'Café glass front · lit header · reeded panel', h:'From the building foyer', p:'HUB\'s page 8: standing in the building\'s foyer on the way to the lifts. The café is a glass box, doors closed, the name lit on the black header, reeded glass to the left hiding the gym, timber beside you, the building\'s stone wall on the right.' },
+  { name:'Entry', pos:[mx(926), 1.65, mz(352)], look:[mx(912), 2.1, mz(162)], k:'On the inlay · through the glass', h:'The first look', p:'On the dark stone inlay at the café doors: the counter ahead through the glass, the curved booths to the right, the gym soft behind the reeded panel on the left.' },
+  { name:'Café', pos:[mx(938), 1.7, mz(268)], look:[mx(938), 2.45, mz(162)], k:'Blackened bronze letters, unlit · pinned off the concrete', h:'The café counter', p:'The name in blackened bronze on the concrete wall, with "Fuel good days" beneath. HUB\'s pendants light the café, so the sign doesn\'t need to glow: it catches the light instead.' },
+  { name:'A table', pos:[mx(951), 1.0, mz(240)], look:[mx(958), .8, mz(227)], k:'Coasters, cups and a menu card', h:'On the table', p:'The brand at hand size: the symbol on a walnut coaster and on the cup sleeve, the name on the cup, and a menu card in the club\'s type. This is where most people meet the logo.' },
+  { name:'Booths', pos:[mx(925), 1.5, mz(226)], look:[mx(1040), 1.3, mz(226)], k:'Clear glass to the street', h:'The curve', p:'Tan leather booths follow the curved glass onto St Georges Terrace. Clear glass here: the café wants to be seen from the street.' },
+  { name:'Frosted glass', pos:[mx(918), 1.6, mz(212)], look:[mx(838), 1.5, mz(222)], k:'Frosted film, printed both sides · 400 mm band at 1200–1600 mm', h:'The glass wall in full', p:'The whole partition between café and gym, straight on: a frosted band at seated height with the strokes cut clear, and a small bronze plaque with the symbol beside the door. You see the gym moving behind it without sitting in it.' },
+  { name:'Café to gym', pos:[mx(905), 1.6, mz(278)], look:[mx(700), 1.4, mz(232)], k:'Frosted film, printed both sides · band at 1200–1600 mm', h:'Through the glass', p:'The strokes are cut clear from a frosted band between café and gym: you see the training without sitting in it. A bronze plaque with the symbol sits beside the door.' },
+  { name:'Strength', pos:[mx(345), 1.7, mz(150)], look:[mx(520), 1.0, mz(92)], k:'Panatta · Nautilus · Citadel Strength · one frame colour', h:'The strength floor', p:'Sergio is choosing every machine himself: Panatta from Italy, Nautilus from the US, Citadel plate-loaded pieces built in Queensland. The eight Citadel machines are drawn to type at typical commercial size (Citadel publish no dimensions; supplier 3D files will replace them). One spec throughout, black frames and saddle pads, so three makers read as one gym.' },
+  { name:'End wall', pos:[mx(255), 1.7, mz(175)], look:[mx(131), 2.45, mz(175)], k:'Linen acrylic · 30 mm stand-off · 3000 K halo', h:'The gym end wall', p:'The stacked lockup halo-lit on the charcoal end wall of G.01, above the kettlebell shelving and across the turf hairpin. HUB to confirm the wall.' },
+  { name:'Turf loop', pos:[mx(605), 1.75, mz(290)], look:[mx(330), .5, mz(150)], k:'Olive turf · HUB revision 2', h:'The loop', p:'One continuous turf path round G.01: along the top, down the east side, back along the bottom and up through the hairpin. Sleds, carries, lunges.' },
+  { name:'Treadmills', pos:[mx(300), 1.65, mz(300)], look:[mx(420), 1.0, mz(215)], k:'Timber platform · four treadmills', h:'Cardio in the middle', p:'The treadmills sit on a timber platform in the middle of the loop, planting at one end, the dumbbells beyond.' },
+  { name:'Glass room', pos:[mx(690), 1.7, mz(256)], look:[mx(752), 1.0, mz(180)], k:'Glazed room · use to confirm with HUB', h:'The glass room', p:'A small glazed room off G.02 with plate-loaded machines. Heavy lifting, PT or small groups: HUB and Sergio to confirm.' },
+  { name:'Track room', pos:[mx(772), 1.75, mz(336)], look:[mx(822), 0, mz(322)], k:'Linen paint · 600 mm · distance bars every metre', h:'The track room', p:'A straight run of turf in its own glazed room, the symbol painted at the start. Every push begins on it.' }
+];
+/* ---------- guided tour ---------- */
+let tour = null;
+const TOUR = ['Foyer', 'Entry', 'Café', 'A table', 'Booths', 'Frosted glass', 'Café to gym', 'Strength', 'End wall', 'Turf loop', 'Treadmills', 'Glass room', 'Track room'];
+function tourStep() {
+  if (!tour) return;
+  const idx = P.findIndex(p => p.name === TOUR[tour.i % TOUR.length]); if (idx >= 0) go(idx);
+  tour.i++; tour.t = setTimeout(tourStep, 7500);
+}
+function startTour() { stopTour(); tour = { i: 0, t: null }; document.getElementById('tour').classList.add('on'); document.getElementById('tour').textContent = '■ Stop'; tourStep(); }
+function stopTour() { if (!tour) return; clearTimeout(tour.t); tour = null; const b = document.getElementById('tour'); b.classList.remove('on'); b.textContent = '▶ Tour'; }
+document.getElementById('tour').addEventListener('click', () => tour ? stopTour() : startTour());
+const spots = document.getElementById('spots');
+P.forEach((p, i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = p.name; b.addEventListener('click', () => { stopTour(); go(i); }); spots.appendChild(b); });
+const card = document.getElementById('card');
+function showCard(p) { document.getElementById('cardk').textContent = p.k; document.getElementById('cardh').textContent = p.h; document.getElementById('cardp').textContent = p.p; card.style.opacity = 1; }
+
+/* ---------- camera: look by drag, walk by keys or pad, fly between places ---------- */
+let yaw = 0, pitch = 0; const pos = new THREE.Vector3();
+function lookAt(from, to) { const d = new THREE.Vector3().subVectors(to, from); yaw = Math.atan2(-d.x, -d.z); pitch = Math.atan2(d.y, Math.hypot(d.x, d.z)); }
+let fly = null, cur = 0;
+function go(i, instant) {
+  cur = i; const p = P[i]; const to = new THREE.Vector3(...p.pos), look = new THREE.Vector3(...p.look);
+  const sy = yaw, sp = pitch; lookAt(to, look); const ty = yaw, tp = pitch; yaw = sy; pitch = sp;
+  let dy = ty - sy; while (dy > Math.PI) dy -= 2 * Math.PI; while (dy < -Math.PI) dy += 2 * Math.PI;
+  if (instant) { pos.copy(to); yaw = ty; pitch = tp; fly = null; }
+  else fly = { t: 0, from: pos.clone(), to, sy, sp, dy, tp };
+  Array.prototype.forEach.call(spots.children, (b, j) => b.classList.toggle('on', j === i));
+  showCard(p);
+}
+const keys = {};
+window.addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; if (!e.metaKey && !e.ctrlKey) stopTour(); });
+window.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+let drag = null;
+canvas.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId); fly = null; stopTour(); });
+canvas.addEventListener('pointermove', e => { if (!drag) return; yaw += (e.clientX - drag.x) * .0042; pitch += (e.clientY - drag.y) * .0034; pitch = Math.max(-1.1, Math.min(1.1, pitch)); drag = { x: e.clientX, y: e.clientY }; });
+canvas.addEventListener('pointerup', () => { drag = null; });
+let padDir = 0;
+for (const [id, d] of [['fwd', 1], ['back', -1]]) { const b = document.getElementById(id); b.addEventListener('pointerdown', e => { e.preventDefault(); padDir = d; fly = null; }); for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) b.addEventListener(ev, () => { padDir = 0; }); }
+
+const rooms = [[140, 54, 618, 300], [600, 166, 834, 294], [536, 300, 826, 398], [841, 166, 976, 290], [841, 290, 972, 401]].map(r => [mx(r[0]), mz(r[1]), mx(r[2]), mz(r[3])]);
+function blocked(x, z) {
+  let ok = rooms.some(r => x >= r[0] && x <= r[2] && z >= r[1] && z <= r[3]);
+  const dc = Math.hypot(x - gC.x, z - gC.y);
+  if (!ok && x > gC.x && dc < gR - .35) ok = true;
+  if (!ok) return true;
+  for (const s of solids) { const d = Math.hypot(x - s.c[0], z - s.c[1]); if (s.ring) { if (x > s.c[0] - .3 && d > s.ring[0] && d < s.ring[1]) return true; } else if (d < s.r) return true; }
+  return false;
+}
+const clock = new THREE.Clock();
+function step() {
+  const dt = Math.min(clock.getDelta(), .05);
+  if (fly) {
+    fly.t = Math.min(1, fly.t + dt / (tour ? 3.2 : 1.8)); const e = fly.t < .5 ? 4 * fly.t ** 3 : 1 - Math.pow(-2 * fly.t + 2, 3) / 2;
+    pos.lerpVectors(fly.from, fly.to, e); yaw = fly.sy + fly.dy * e; pitch = fly.sp + (fly.tp - fly.sp) * e;
+    if (fly.t >= 1) fly = null;
+  } else {
+    let f = (keys['w'] || keys['arrowup'] ? 1 : 0) - (keys['s'] || keys['arrowdown'] ? 1 : 0) + padDir;
+    let s = (keys['d'] ? 1 : 0) - (keys['a'] ? 1 : 0);
+    if (keys['arrowleft']) yaw += dt * 1.6; if (keys['arrowright']) yaw -= dt * 1.6;
+    if (f || s) {
+      const sp = 2.4 * dt, fx = -Math.sin(yaw), fz = -Math.cos(yaw);
+      const nx = pos.x + (fx * f - fz * s) * sp, nz = pos.z + (fz * f + fx * s) * sp;
+      if (!blocked(nx, pos.z)) pos.x = nx; if (!blocked(pos.x, nz)) pos.z = nz;
+      pos.y += (1.65 - pos.y) * Math.min(1, dt * 3);
+    }
+  }
+  camera.position.copy(pos);
+  camera.rotation.set(0, 0, 0); camera.rotateY(yaw); camera.rotateX(pitch);
+  composer.render();
+  requestAnimationFrame(step);
+}
+
+/* ---------- cafe props: cups, coasters, a menu card. the brand at hand size, rebuilt with the logo ---------- */
+function texOf(img, w, h, draw) { const t = cv(w, h, g => draw(g, img)); return t; }
+async function buildProps() {
+  const symI = await svgImage('symbol', '#f3efe7', 400), symD = await svgImage('symbol', '#1e1c1a', 400);
+  const nameD = await svgImage(LOGO === 'B5' ? 'name' : 'primary', '#1e1c1a', 800), nameL = await svgImage(LOGO === 'B5' ? 'lockup' : 'primary', '#f3efe7', 800);
+  const fit = (g, img, cx, cy, w, hmax) => { let h = w * img.height / img.width; if (h > hmax) { h = hmax; w = h * img.width / img.height; } g.drawImage(img, cx - w / 2, cy - h / 2, w, h); };
+  // hot cup: linen cup, walnut sleeve with the symbol, charcoal lid
+  const cupTex = cv(512, 256, g => { g.fillStyle = '#f4f1ea'; g.fillRect(0, 0, 512, 256); g.fillStyle = '#5f4535'; g.fillRect(0, 86, 512, 120); for (const cx of [64, 192, 320, 448]) { fit(g, symI, cx, 146, 92, 52); fit(g, nameD, cx, 50, 116, 28); } });
+  const cupMat = new THREE.MeshStandardMaterial({ map: cupTex, roughness: .7 });
+  function cup(px, py, rot) { const p = PT(px, py); const g = new THREE.Group(); g.position.set(p[0], .76, p[1]); g.rotation.y = rot || 0; scene.add(g);
+    const c = new THREE.Mesh(new THREE.CylinderGeometry(.046, .037, .13, 24, 1, true), cupMat); c.position.y = .065; g.add(c);
+    const lid = new THREE.Mesh(new THREE.CylinderGeometry(.049, .047, .012, 24), M.black); lid.position.y = .136; g.add(lid);
+    const base = new THREE.Mesh(new THREE.CircleGeometry(.034, 24), M.linen); base.rotation.x = -Math.PI / 2; base.position.y = .0005; g.add(base); }
+  // coaster: 100 mm walnut disc, symbol in linen
+  const coTex = cv(256, 256, g => { g.fillStyle = '#5f4535'; g.beginPath(); g.arc(128, 128, 126, 0, 7); g.fill(); fit(g, symI, 128, 128, 120, 64); });
+  const coMat = new THREE.MeshStandardMaterial({ map: coTex, transparent: true, roughness: .85 });
+  function coaster(px, py, rot) { const p = PT(px, py); const m = new THREE.Mesh(new THREE.CylinderGeometry(.055, .055, .004, 32), coMat); m.position.set(p[0], .762, p[1]); m.rotation.y = rot || 0; scene.add(m); }
+  // menu card: charcoal, the lockup, then the lines in the brand's type
+  const menuTex = cv(300, 420, g => { g.fillStyle = '#1e1c1a'; g.fillRect(0, 0, 300, 420); fit(g, nameL, 150, 48, 220, 50);
+    g.fillStyle = '#f3efe7'; g.font = '700 30px "Barlow Condensed", "Arial Narrow", sans-serif'; g.fillText('COFFEE', 28, 120); g.font = '500 15px "DM Mono", monospace'; ['BATCH BREW', 'FLAT WHITE', 'COLD BREW'].forEach((t, i) => g.fillText(t, 28, 150 + i * 26));
+    g.font = '700 30px "Barlow Condensed", "Arial Narrow", sans-serif'; g.fillText('SHAKES', 28, 262); g.font = '500 15px "DM Mono", monospace'; ['THE GREEN ONE', 'CHOCOLATE', 'BANANA AND OAT'].forEach((t, i) => g.fillText(t, 28, 292 + i * 26));
+    g.fillStyle = '#a2723f'; g.fillRect(28, 388, 60, 4); });
+  const menuMat = new THREE.MeshStandardMaterial({ map: menuTex, roughness: .8, side: THREE.DoubleSide });
+  function menu(px, py, rot) { const p = PT(px, py); const m = new THREE.Mesh(new THREE.PlaneGeometry(.11, .154), menuMat); m.position.set(p[0], .837, p[1]); m.rotation.set(-.18, rot || 0, 0); scene.add(m);
+    const foot = new THREE.Mesh(new THREE.BoxGeometry(.1, .006, .03), M.frame); foot.position.set(p[0], .763, p[1] + .01); foot.rotation.y = rot || 0; scene.add(foot); }
+  // on the tables
+  coaster(958, 227, .3); cup(958, 227, Math.PI * 1.05); coaster(951, 221, .9); menu(966, 229, -.45);
+  coaster(868, 323, 0); cup(868, 323, .4); coaster(861, 330, .6); menu(870, 320, .5);
+  coaster(864, 366, .2); cup(864, 366, 2); menu(869, 372, -.3);
+  // takeaway cups on the counter, a stack by the machine
+  for (let i = 0; i < 3; i++) cup(905 + i * 4.5, 243, i * .7);
+  cup(870, 244, .5);
+}
+
+/* ---------- the brand pieces: built into one group so the mark can be swapped ---------- */
+const BG = new THREE.Group(); scene.add(BG);
+let building = null;
+async function buildBrand() {
+  for (const o of [...BG.children]) { BG.remove(o); o.geometry && o.geometry.dispose(); if (o.material) { o.material.map && o.material.map.dispose(); o.material.dispose(); } }
+  const n0 = scene.children.length;
+  await buildTrack(); await buildFilm(); await buildProps();
+  await haloSign(LOGO === 'B5' ? 'lockup' : 'primary', 2.6, mx(938), 2.8, mz(162) + .1, 0, CAFE_LIT ? 0xf3efe7 : 0x151311, 1.0, !CAFE_LIT);
+  await haloSign('stacked', LOGO === 'B5' ? 2.2 : 3.2, mx(131) + .11, 2.6, mz(175), Math.PI / 2, 0xf3efe7, 1.45);
+  await haloSign('primary', 2.1, FXC, (H + 2.75) / 2, ZF + .14, 0, 0xf3efe7, .7);   // the black header over the café doors, read from the foyer
+  for (const o of scene.children.slice(n0)) BG.add(o);
+  document.getElementById('mk').innerHTML = LOGO === 'B5' ? markSvg('primary', '#f3efe7').replace('<svg ', '<svg style="width:100%;height:100%" ') : markSvg('symbol', '#f3efe7').replace('<svg ', '<svg style="width:100%;height:100%" ');
+  document.getElementById('mk').querySelector('svg').setAttribute('preserveAspectRatio', 'xMinYMid meet');
+  document.getElementById('logosel').value = LOGO; document.getElementById('wsel').value = WEIGHT; document.getElementById('csel').value = CAFE_LIT ? 'lit' : 'unlit';
+  const cafe = P.find(p => p.name === 'Café'); if (cafe) { cafe.k = CAFE_LIT ? 'Linen letters, halo-lit 3000 K · on the concrete' : 'Blackened bronze letters, unlit · pinned off the concrete'; cafe.p = CAFE_LIT ? 'The name in linen letters, lit from behind so the glow falls onto the concrete: the same treatment as the gym wall, brought into the café.' : 'The name in blackened bronze on the concrete wall, with "Fuel good days" beneath. HUB\'s pendants light the café, so the sign doesn\'t need to glow: it catches the light instead.'; if (P[cur] === cafe) showCard(cafe); }
+}
+function rebuild() { if (building) return; building = buildBrand().then(() => { building = null; }); }
+function setParam(k, v) { try { const u = new URL(location.href); u.searchParams.set(k, v); history.replaceState(null, '', u); } catch (e) {} }
+function setLogo(k) { if (k === LOGO) return; LOGO = k; setParam('logo', k); rebuild(); }
+function setWeight(w) { if (w === WEIGHT) return; WEIGHT = w; setParam('w', w); rebuild(); }
+function setCafe(v) { const lit = v === 'lit'; if (lit === CAFE_LIT) return; CAFE_LIT = lit; setParam('cafe', v); rebuild(); }
+{ const sel = document.getElementById('logosel');
+  for (const [label, keys] of LOGO_GROUPS) { const og = document.createElement('optgroup'); og.label = label; for (const k of keys) { const o = document.createElement('option'); o.value = k; o.textContent = k + ' · ' + LOGO_NAMES[k]; og.appendChild(o); } sel.appendChild(og); }
+  sel.value = LOGO; sel.addEventListener('change', () => setLogo(sel.value));
+  const step = (n) => { const i = (LOGOS.indexOf(LOGO) + n + LOGOS.length) % LOGOS.length; sel.value = LOGOS[i]; setLogo(LOGOS[i]); };
+  document.getElementById('lprev').addEventListener('click', () => step(-1));
+  document.getElementById('lnext').addEventListener('click', () => step(1));
+  const ws = document.getElementById('wsel'); for (const [v, n] of WEIGHTS) { const o = document.createElement('option'); o.value = v; o.textContent = n; ws.appendChild(o); } ws.value = WEIGHT; ws.addEventListener('change', () => setWeight(ws.value));
+  const cs = document.getElementById('csel'); cs.addEventListener('change', () => setCafe(cs.value));
+  const ts = document.getElementById('tsel'); ts.value = TIME; ts.addEventListener('change', () => setTime(ts.value)); }
+
+/* ---------- build, then start ---------- */
+(async () => {
+  try { await document.fonts.load('700 118px "Barlow Condensed"'); await document.fonts.load('500 24px "DM Mono"'); } catch (e) {}
+  slogan(['FUEL', 'GOOD', 'DAYS.'], .13, mx(938), 2.12, mz(162) + .13, 0, '#1e1c1a');
+  slogan(['STRONGER', 'EVERY', 'DAY.'], .2, mx(585), 2.6, mz(48) + .12, 0, '#f3efe7');
+  await buildBrand();
+  go(0, true);
+  const l = document.getElementById('load'); l.style.opacity = 0; setTimeout(() => l.remove(), 700);
+  window.__ready = true;
+  requestAnimationFrame(step);
+})();
+window.__logo = (k) => { setLogo(k); return building; }; window.__weight = (w) => { setWeight(w); return building; }; window.__cafe = (v) => { setCafe(v); return building; }; window.__time = (t) => setTime(t);
+window.__go = (i) => go(i, true);
+window.__cam = (px, py, h, lx, ly, lh) => { const to = new THREE.Vector3(mx(px), h, mz(py)); lookAt(to, new THREE.Vector3(mx(lx), lh, mz(ly))); pos.copy(to); fly = null; };
+</script>
+</html>

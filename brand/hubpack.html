@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 228 82'><rect x='-8' y='-8' width='228' height='82' fill='%235f4535'/><g fill='%23f3efe7'><path d='M16 0L96 0L80 26L0 26ZM56 40L212 40L196 66L40 66Z'/></g></svg>">
+<meta name="theme-color" content="#1e1c1a">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="HUB Interiors concept pack with the Second Wind identity in place.">
+<link rel="canonical" href="https://secondwindgym.com.au/brand/hubpack.html">
+<meta property="og:title" content="HUB Revision 2, with the Second Wind mark">
+<meta property="og:type" content="website">
+<meta property="og:description" content="HUB Interiors concept pack with the Second Wind identity in place.">
+<meta charset="utf-8">
+<title>HUB Pack, Our Mark</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: HUB's own ten pages, in HUB's own order. Pages where the old lettering was replaced get a before/after slider; the rest are shown as they came. */
+:root {
+  --bg:#efebe2; --card:#f7f4ed; --ink:#1e1c1a; --muted:#5d5a52; --line:#d8d1c4; --walnut:#5f4535; --linen:#f3efe7; --bronze:#a2723f;
+  --f-label:'DM Mono',ui-monospace,Menlo,monospace; --f-body:'Barlow Semi Condensed','Arial Narrow',Arial,sans-serif; --f-cond:'Barlow Condensed','Arial Narrow',sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#141311; --card:#1d1b19; --ink:#ece7dc; --muted:#a49d90; --line:#36322d; color-scheme:dark; } }
+:root[data-theme="dark"] { --bg:#141311; --card:#1d1b19; --ink:#ece7dc; --muted:#a49d90; --line:#36322d; color-scheme:dark; }
+body { background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:18px; line-height:1.5; }
+.wrap { max-width:1240px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px)); padding-block:56px 96px; display:flex; flex-direction:column; gap:72px; }
+.label { margin:0; font:500 12px var(--f-label); letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+h1 { margin:0; font:700 clamp(44px,6.5vw,84px)/.92 var(--f-cond); text-transform:uppercase; text-wrap:balance; }
+h2 { margin:0; font:700 clamp(26px,3vw,36px)/1 var(--f-cond); text-transform:uppercase; }
+p { margin:0; max-width:62ch; }
+.head { display:flex; flex-direction:column; gap:20px; }
+.head .brand { width:min(260px,60%); }
+.head .brand svg { width:100%; height:auto; display:block; }
+.lead { font-size:21px; line-height:1.45; max-width:56ch; }
+.note { display:flex; gap:14px; align-items:flex-start; font-size:16px; color:var(--muted); max-width:70ch; border-left:3px solid var(--bronze); padding-left:16px; }
+
+.page { display:flex; flex-direction:column; gap:16px; }
+.ph { display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.ph .n { font:500 12px var(--f-label); letter-spacing:.16em; color:var(--muted); }
+.ph .what { font-size:16px; color:var(--muted); max-width:60ch; }
+
+/* before / after */
+.cmp { position:relative; aspect-ratio:1800/1273; background:#1e1c1a; overflow:hidden; border:1px solid var(--line); touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+.cmp img { position:absolute; inset:0; width:100%; height:100%; display:block; pointer-events:none; }
+.cmp .before { clip-path:inset(0 calc(100% - var(--x,50%)) 0 0); }
+.cmp .bar { position:absolute; top:0; bottom:0; left:var(--x,50%); width:2px; background:#fff; transform:translateX(-1px); box-shadow:0 0 0 1px rgba(0,0,0,.25); pointer-events:none; }
+.cmp .knob { position:absolute; top:50%; left:var(--x,50%); transform:translate(-50%,-50%); width:44px; height:44px; border-radius:50%; background:#fff; color:#1e1c1a; display:flex; align-items:center; justify-content:center; font:700 14px var(--f-cond); letter-spacing:.02em; box-shadow:0 2px 10px rgba(0,0,0,.35); pointer-events:none; }
+.cmp .tag { position:absolute; top:12px; font:500 11px var(--f-label); letter-spacing:.14em; text-transform:uppercase; color:#fff; background:rgba(30,28,26,.72); padding:6px 10px; pointer-events:none; }
+.cmp .tag.l { left:12px; } .cmp .tag.r { right:12px; }
+.cmp input { position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize; -webkit-appearance:none; appearance:none; }
+.cmp input:focus-visible ~ .knob { outline:3px solid var(--bronze); outline-offset:2px; }
+.still { aspect-ratio:1800/1273; border:1px solid var(--line); background:#1e1c1a; }
+.still img { width:100%; height:100%; display:block; object-fit:cover; }
+
+.changes { background:var(--card); border:1px solid var(--line); padding:clamp(20px,3vw,36px); display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px 32px; }
+.changes div { display:flex; flex-direction:column; gap:6px; }
+.changes b { font:700 22px/1 var(--f-cond); text-transform:uppercase; }
+.changes span { color:var(--muted); font-size:16px; }
+.foot { display:flex; flex-wrap:wrap; gap:16px 28px; align-items:center; border-top:1px solid var(--line); padding-top:24px; }
+.btn { font:500 13px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:var(--linen); background:#1e1c1a; text-decoration:none; padding:0 22px; min-height:48px; display:inline-flex; align-items:center; }
+.btn:hover { background:var(--walnut); }
+.btn.alt { background:transparent; color:var(--ink); border:1px solid var(--ink); }
+a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div class="brand" data-v="primary" data-c="currentColor"></div>
+    <p class="label">HUB Interiors · Revision 2 · with the Second Wind identity</p>
+    <h1>Their pages,<br>our mark</h1>
+    <p class="lead">This is HUB's concept pack exactly as Sergio has it, with one change: the placeholder lettering the previous designer left in the renders is replaced with the Second Wind mark. Nothing about the interior has moved.</p>
+    <p class="note">Drag the handle on any page to compare. Left of the line is HUB's original, right of the line is with our mark. Pages 1, 6, 7 and 8 had no branding in them and are shown untouched.</p>
+  </header>
+
+  <section class="changes" aria-label="What changed">
+    <div><b>Café wall</b><span>Light weight, blackened bronze letters, "Fuel good days" beneath.</span></div>
+    <div><b>Shopfront</b><span>Bold weight, lit, on the dark fascia.</span></div>
+    <div><b>Cups and shakes</b><span>Light weight, printed in charcoal.</span></div>
+    <div><b>Plan stamp</b><span>Stacked mark in place of the italic.</span></div>
+    <div><b>Gym walls</b><span>Bold weight, halo-lit: end wall, heavy room, cardio wall. Nike branding removed.</span></div>
+    <div><b>Glass room icon</b><span>The neon arrow becomes the two strokes.</span></div>
+  </section>
+
+  <div id="pages"></div>
+
+  <section class="foot">
+    <a class="btn" href="walkthrough.html">Walk through it in 3D</a>
+    <a class="btn alt" href="options.html">The four weights</a>
+    <a class="btn alt" href="review.html">Logo review</a>
+  </section>
+</div>
+
+<script src="brand.js"></script>
+<script>
+(function () {
+  document.querySelector('.brand').innerHTML = SW.svg('primary', 'currentColor', { attrs: ' aria-hidden="true"' });
+  var pages = [
+    [1, 'Cover', null],
+    [2, 'Café + gym connection', 'Café wall, shopfront, cup, shakes and the footer wordmark.'],
+    [3, 'Café looking into the gym', 'The neon arrow on the far wall becomes our symbol.'],
+    [4, 'Proposed concept plan', 'The italic stamp on the plan becomes the stacked mark.'],
+    [5, 'Café moodboard', 'Footer wordmark.'],
+    [6, 'Café render', null],
+    [7, 'Café from the street', null],
+    [8, 'Café entry', null],
+    [9, 'Gym moodboard', 'Heavy lifting room sign, cardio wall sign and icon, footer wordmark.'],
+    [10, 'Gym render', 'End wall sign in the bold weight. Nike branding on the rack and bench removed.']
+  ];
+  var root = document.getElementById('pages'), html = '';
+  pages.forEach(function (pg) {
+    var n = ('0' + pg[0]).slice(-2);
+    html += '<section class="page" aria-labelledby="p' + n + '"><div class="ph"><div><p class="n">Page ' + pg[0] + ' of 10</p><h2 id="p' + n + '">' + pg[1] + '</h2></div>' + (pg[2] ? '<p class="what">' + pg[2] + '</p>' : '<p class="what">No branding on this page. Shown as HUB sent it.</p>') + '</div>';
+    if (pg[2]) {
+      html += '<div class="cmp" style="--x:50%"><img class="after" src="hub/after-' + n + '.jpg" alt="Page ' + pg[0] + ' with the Second Wind mark" loading="lazy"><img class="before" src="hub/before-' + n + '.jpg" alt="" loading="lazy"><span class="tag l">HUB original</span><span class="tag r">With our mark</span><input type="range" min="0" max="100" value="50" aria-label="Compare before and after on page ' + pg[0] + '"><span class="bar"></span><span class="knob" aria-hidden="true">&#8596;</span></div>';
+    } else {
+      html += '<div class="still"><img src="hub/after-' + n + '.jpg" alt="Page ' + pg[0] + ', ' + pg[1] + '" loading="lazy"></div>';
+    }
+    html += '</section>';
+  });
+  root.innerHTML = html;
+  root.style.display = 'flex'; root.style.flexDirection = 'column'; root.style.gap = '72px';
+  Array.prototype.forEach.call(root.querySelectorAll('.cmp'), function (c) {
+    var r = c.querySelector('input');
+    function set(v) { c.style.setProperty('--x', v + '%'); }
+    r.addEventListener('input', function () { set(r.value); });
+  });
+})();
+</script>
+
+</body>
+</html>
