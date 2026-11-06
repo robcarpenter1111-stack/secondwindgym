@@ -119,7 +119,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 <div class="wrap">
   <div class="top">
     <a href="index.html" style="background:var(--ink);color:var(--bg)">&#8592; Review</a><a href="#c1">Idea</a><a href="#c2">Icon</a><a href="#c3">Letters</a><a href="#c4">Lockups</a><a href="#c5">Colour</a><a href="#c6">Type</a><a href="#c7">In the space</a><a href="#cafe">Café</a><a href="#c8">Social</a><a href="#c9">Apparel</a><a href="#c10">Digital</a><a href="#c11">Print</a>
-    <span id="switch" style="margin-left:auto;display:flex;gap:6px;align-items:center"><span style="font:500 10px var(--f-label);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Top three</span><a href="identity.html">Two strokes</a><a href="?logo=W1" data-l="W1">The wing</a><a href="?logo=B4" data-l="B4">The crest</a></span>
+    <span id="switch" style="margin-left:auto;display:flex;gap:6px;align-items:center"><span style="font:500 10px var(--f-label);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Top four</span><a href="identity.html">Two strokes</a><a href="?logo=W1" data-l="W1">The wing</a><a href="?logo=B4" data-l="B4">The crest</a><a href="?logo=F7" data-l="F7">The serif</a><a class="ext" style="margin-left:8px" href="guidelines.html">Guidelines</a></span>
   </div>
 
   <!-- cover -->
@@ -172,7 +172,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
     <div class="txt"><h2><small>03</small>The letters</h2>
       <p class="lead" data-t="lettersLead"></p>
       <p data-t="letters1"></p>
-      <p>The same letters come in four weights, light to bold, drawn from the same bars. The logo never changes, only how heavy it is: light where people are close and calm, in the café, on cups, menus and print; bold where it has to carry across a room or a street, on the gym walls, the café front, merch and social. <span class="draft">Sergio to confirm the split, or one weight everywhere</span></p>
+      <p>The same letters come in four weights, light to bold<span data-t="bars"></span>. The logo never changes, only how heavy it is: light where people are close and calm, in the café, on cups, menus and print; bold where it has to carry across a room or a street, on the gym walls, the café front, merch and social. <span class="draft">Sergio to confirm the split, or one weight everywhere</span></p>
       <p class="k" data-t="lettersK"></p></div>
     <div class="frames">
       <div class="f"><div class="sl" data-sw="primary" data-c="ink" style="left:8%;top:22%;width:84%;height:56%"></div><span class="cap">The full mark · light</span></div>
@@ -491,7 +491,7 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
       lettersK: 'Italic · SECOND light, WIND bold · script club line, print only',
       lockupNote: 'The wing version has no stacked form: it is one line, always. Where a square is needed, the icon stands alone.',
       minSizes: 'FULL MARK · 60 MM PRINT · 220 PX · 90 MM THREAD<br>ICON · 18 MM · 16 PX · 24 MM THREAD', embroider: 'The D and its feathers embroider as one shape in two colours at most; the fine script line is left off anything stitched.',
-      cover: 'The wing' },
+      bars: ', drawn from the same bars', cover: 'The wing' },
     B4: { title: 'The crest', idea: 'A shield with the initials, a cut through the letters, the year beneath and the club name under the shield. Membership and belonging, drawn the traditional way.',
       iconLead: 'The shield is the icon. SW inside it, a single cut through both letters, EST. 2026 under them. It says members\' club before it says gym.',
       icon1: 'It is the strongest of the fourteen on a dark gym wall and on a fascia: a solid shape with a hard outline reads from the far end of the floor and from across the foyer. Embroidered on a cap it looks like it has been there for years.',
@@ -503,7 +503,19 @@ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
       lettersK: 'Upright condensed capitals · the shield carries the weight',
       lockupNote: 'The crest is naturally square, so it works where the others need a stacked form; the full lockup is the tall version.',
       minSizes: 'FULL LOCKUP · 30 MM PRINT · 120 PX · 50 MM THREAD<br>SHIELD · 14 MM · 24 PX · 30 MM THREAD', embroider: 'The shield embroiders as a filled shape with the letters reversed out, which is why the cut through the letters is kept wide.',
-      cover: 'The crest' }
+      bars: ', drawn from the same bars', cover: 'The crest' },
+    F7: { title: 'The serif', idea: 'The name set in a fine serif, tracked wide, with the club line small beneath it. No symbol, no device: the letters themselves are the logo, the way a fashion house or a good hotel does it.',
+      iconLead: 'The SW monogram. The two initials set in the same serif, close enough to touch, between two hairlines. It is the piece that goes where the full name will not fit.',
+      icon1: 'This is the most expensive-looking of the fourteen, and the quietest. In the café it is at home at once: it looks like the cup, the menu and the shopfront of somewhere that charges properly for coffee. On a lit sign the serifs catch the halo and read as jewellery rather than signage, which suits the foyer and the street.',
+      icon2: 'What it gives up is sport. Nothing in it moves or works; it says taste before it says training. On the gym floor it has to be used bold and large, and it never goes on the turf or the track, where a serif at floor scale looks wrong. The monogram embroiders well; the full name does not go below 40 mm on thread.',
+      iconK: 'Icon · SW monogram between two rules · minimum 18 mm print, 24 px, 30 mm thread',
+      reads: 'Hotel.<br>Atelier.<br>Members.', notThis: 'Fashion label. Winery. A law firm.',
+      lettersLead: 'SECOND WIND in a light serif with wide tracking; ATHLETIC CLUB smaller and wider still beneath. Weight is the type weight, regular to bold, and the leaning version is the true italic.',
+      letters1: 'The letters do all the work, so spacing is the rule that matters: the tracking never tightens, the two lines stay centred on each other, and nothing else sits inside the clear space. Light in the café and in print; bold on the gym walls and the café front, where the thin strokes would otherwise disappear against the dark. This is the one candidate drawn in a typeface rather than from our bars, so it is also the easiest to set badly: the typeface and its tracking are fixed, not a style to approximate.',
+      lettersK: 'Light serif capitals · tracked wide · bold on dark walls · italic is the lean',
+      lockupNote: 'The serif has a natural stacked form, two centred lines, and that is the only lockup; it is never set on one line with the club name beside it.',
+      minSizes: 'FULL MARK · 40 MM PRINT · 180 PX · 60 MM THREAD<br>MONOGRAM · 18 MM · 24 PX · 30 MM THREAD', embroider: 'The monogram embroiders in a single colour with the hairlines left off; the full name is printed or cut, never stitched small, because thin serifs break up in thread.',
+      bars: ', the four weights of the typeface', cover: 'The serif' }
   };
   var q = new URLSearchParams(location.search), ID = (q.get('logo') || 'W1').toUpperCase(); if (!L[ID]) ID = 'W1';
   var T = L[ID];

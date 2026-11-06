@@ -116,7 +116,7 @@
     /* fashion serif: weight is the font weight */
     F7: function (p, k) {
       var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : '';
-      return { vb: '-40 0 680 170', inner: '<text x="300" y="86" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="92" letter-spacing="10" fill="currentColor">SECOND WIND</text><text x="300" y="134" text-anchor="middle" ' + SERF + ' font-size="26" letter-spacing="14" fill="currentColor">ATHLETIC CLUB</text>' };
+      return { vb: '-140 0 880 170', inner: '<text x="300" y="86" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="92" letter-spacing="10" fill="currentColor">SECOND WIND</text><text x="300" y="134" text-anchor="middle" ' + SERF + ' font-size="26" letter-spacing="14" fill="currentColor">ATHLETIC CLUB</text>' };
     }
   };
   var NAMES = { B5: 'Two strokes', W1: 'The wing', B1: 'Heritage arch', B4: 'Crest', F2: 'Interlocking SW', K1: 'Light and heavy', B6: 'Varsity 2', F6: 'Three stripes', B2: 'Condensed stack', B3: 'Lowercase', B7: 'Luxury tracking', G1: 'Extended', G2: 'Chamfered', F7: 'Fashion serif' };
@@ -128,6 +128,7 @@
     F2: function (p, k) { return D.F2(p, k); },
     K1: function (p, k) { var r = D.K1(p, k); return { vb: r.vb.split(' ').slice(0, 2).join(' ') + ' ' + (parseFloat(r.vb.split(' ')[2])) + ' 132', inner: r.inner.replace(/<text[\s\S]*<\/text>/, '') }; },
     B6: function (p, k) { var r = D.B6(p, k); return { vb: '-6 -6 240 202', inner: r.inner }; },
+    F7: function (p, k) { var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : ''; return { vb: '0 0 200 200', inner: '<text x="100" y="138" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="128" letter-spacing="-10" fill="currentColor">SW</text><path d="M58 160h84" stroke="currentColor" stroke-width="2"/><path d="M58 38h84" stroke="currentColor" stroke-width="2"/>' }; },
     F6: function (p, k) { var r = D.F6(p, k); return { vb: '-6 -6 192 112', inner: r.inner.replace(/<g transform="translate\(210 0\)">[\s\S]*$/, '') + (k === 'lean' ? '</g>' : '') }; }
   };
   window.SWF = {
