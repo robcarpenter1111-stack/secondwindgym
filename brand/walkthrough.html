@@ -70,9 +70,9 @@ html, body { margin:0; height:100%; background:#141210; color:var(--linen); font
 <div class="ui pad"><button id="fwd" aria-label="Walk forward">▲</button><button id="back" aria-label="Walk back">▼</button></div>
 <div class="ui spots" id="spots"></div>
 
-<script src="brand.js?v=d57b95d5"></script>
-<script src="fonts.js?v=d57b95d5"></script>
-<script src="family.js?v=d57b95d5"></script>
+<script src="brand.js?v=d95ca54f"></script>
+<script src="fonts.js?v=d95ca54f"></script>
+<script src="family.js?v=d95ca54f"></script>
 <script type="importmap">
 { "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }
 </script>
@@ -141,7 +141,8 @@ ribTex.wrapS = ribTex.wrapT = THREE.RepeatWrapping;
 
 /* which mark is in the room: B5 is the chosen identity; B1, B4, B6 are alternatives for comparison */
 const LOGO_GROUPS = [
-  ['Two strokes · chosen', ['B5']],
+  ['Round four · from Sergio\'s feedback', ['R1', 'R3', 'R2', 'R4', 'R5', 'R7', 'R6']],
+  ['Two strokes · original', ['B5']],
   ['Round three · new icons', ['X1', 'X2', 'X3', 'X4', 'X5', 'X6']],
   ['Round two · from the favourites', ['N1', 'N2', 'N3', 'N4', 'N5', 'N6']],
   ['The wing', ['W1']],
@@ -175,7 +176,7 @@ function signText(s) {
     if (tl && x && parseFloat(tl[1]) / fs > 14) { const L = parseFloat(tl[1]), nl = fs * 12, cx = parseFloat(x[1]) + L / 2; b = b.replace(/textLength="[\d.]+"/, 'textLength="' + nl.toFixed(1) + '"').replace(/\sx="[\d.-]+"/, ' x="' + (cx - nl / 2).toFixed(1) + '"'); }
     return '<text' + b + ' stroke="currentColor" stroke-width="0.6" paint-order="stroke">';
   });
-  if (LOGO === 'B7' || LOGO === 'G1' || LOGO === 'F7' || LOGO === 'N1' || LOGO === 'N2' || LOGO === 'N3' || LOGO === 'N5') s = s.replace(/<g fill="([^"]+)">/, '<g fill="$1" stroke="$1" stroke-width="2.2" stroke-linejoin="miter">');
+  if (LOGO === 'B7' || LOGO === 'G1' || LOGO === 'F7' || LOGO === 'N1' || LOGO === 'N2' || LOGO === 'N3' || LOGO === 'N5' || LOGO === 'R5' || LOGO === 'R6' || LOGO === 'R7') s = s.replace(/<g fill="([^"]+)">/, '<g fill="$1" stroke="$1" stroke-width="2.2" stroke-linejoin="miter">');
   return s.replace(/currentColor/g, '#ffffff');
 }
 function svgImage(variant, colour, w, sign) {
