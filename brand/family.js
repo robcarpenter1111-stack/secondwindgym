@@ -45,6 +45,15 @@
     else return SW.glyph(ch, tv, th, w);
     return { d: d, adv: w };
   }
+  function cutGlyph2(ch, tv, th, w) {   // as cutGlyph, and the I's top cut at the strokes' angle
+    if (ch === 'I') { var dy = tv / CUT; return { d: P([[0, dy], [tv, 0], [tv, H], [0, H]]), adv: tv }; }
+    return cutGlyph(ch, tv, th, w);
+  }
+  function cword2(str, p) {
+    var x = 0, out = '', o, i, ch;
+    for (i = 0; i < str.length; i++) { ch = str.charAt(i); if (ch === ' ') { x += p[3] * 3; continue; } o = cutGlyph2(ch, p[0], p[1], p[2]); out += '<path transform="translate(' + x + ' 0)" d="' + o.d + '"/>'; x += o.adv + p[3]; }
+    return { s: out, w: x - p[3] };
+  }
   function cword(str, p) {
     var x = 0, out = '', o, i, ch;
     for (i = 0; i < str.length; i++) { ch = str.charAt(i); if (ch === ' ') { x += p[3] * 3; continue; } o = cutGlyph(ch, p[0], p[1], p[2]); out += '<path transform="translate(' + x + ' 0)" d="' + o.d + '"/>'; x += o.adv + p[3]; }
@@ -213,6 +222,8 @@
         '<text x="' + wx + '" y="134" ' + SERF + ' font-size="26" textLength="' + tw + '" lengthAdjust="spacing" fill="currentColor">ATHLETIC CLUB</text>' };
     },
     R7: function (p, k) { return cafeR4('SECOND WIND', p, k); },
+    /* a little extended: Sergio's voice note, 8 Nov. the two strokes' spacing, letters about a fifth wider, cuts on S E C (an I cut was tried: at this angle a narrow stem becomes a spike) */
+    R8: function (p, k) { return lockR4(cword('SECOND WIND', [p[0], p[1], Math.round(p[2] * 1.22), p[3]]), k, 40, 22); },
     /* --- round three: new icons, same build. an icon on the left, the bar letters, the club line --- */
     X1: function (p, k) { return named(icons.wind(p, k), 112, p, k); },
     X2: function (p, k) { return named(icons.ring(p, k), 100, p, k); },
@@ -245,7 +256,7 @@
       return { vb: '-140 0 880 170', inner: '<text x="300" y="86" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="92" letter-spacing="10" fill="currentColor">SECOND WIND</text><text x="300" y="134" text-anchor="middle" ' + SERF + ' font-size="26" letter-spacing="14" fill="currentColor">ATHLETIC CLUB</text>' };
     }
   };
-  var NAMES = { B5: 'Two strokes', W1: 'The wing', B1: 'Heritage arch', B4: 'Crest', F2: 'Interlocking SW', K1: 'Light and heavy', B6: 'Varsity 2', F6: 'Three stripes', B2: 'Condensed stack', B3: 'Lowercase', B7: 'Luxury tracking', G1: 'Extended', G2: 'Chamfered', F7: 'Fashion serif', N1: 'Serif strokes', N2: 'Serif stacked', N3: 'Framed strokes', N4: 'Wide strokes', N5: 'Monogram strokes', N6: 'Italic club line', X1: 'The wind', X2: 'The breath', X3: 'The loop', X4: 'The second half', X5: 'Fast forward', X6: 'The turn', R1: 'Extended strokes', R2: 'Leaning strokes', R3: 'Two-line extended', R4: 'Wide strokes, cut', R5: 'First Wind Café', R6: 'Serif strokes, full width', R7: 'Second Wind Café' };
+  var NAMES = { B5: 'Two strokes', W1: 'The wing', B1: 'Heritage arch', B4: 'Crest', F2: 'Interlocking SW', K1: 'Light and heavy', B6: 'Varsity 2', F6: 'Three stripes', B2: 'Condensed stack', B3: 'Lowercase', B7: 'Luxury tracking', G1: 'Extended', G2: 'Chamfered', F7: 'Fashion serif', N1: 'Serif strokes', N2: 'Serif stacked', N3: 'Framed strokes', N4: 'Wide strokes', N5: 'Monogram strokes', N6: 'Italic club line', X1: 'The wind', X2: 'The breath', X3: 'The loop', X4: 'The second half', X5: 'Fast forward', X6: 'The turn', R1: 'Extended strokes', R2: 'Leaning strokes', R3: 'Two-line extended', R4: 'Wide strokes, cut', R5: 'First Wind Café', R6: 'Serif strokes, full width', R7: 'Second Wind Café', R8: 'Two strokes, a little extended' };
   var SYMBOL = { // the compact mark each one becomes at icon size
     B5: function (p, k) { return { vb: '-8 -8 ' + (SW.SYM_W + 16) + ' ' + (SW.SYM_H + 16), inner: sym() }; },
     W1: function (p, k) { var d = SW.glyph('D', p[0] + 8, p[1] + 6, p[2] + 6); var wing = D.W1(p, k).inner.match(/<path fill="currentColor" d="M30 2[^"]+"\/>/)[0]; return { vb: '0 -74 ' + (300 + (k === 'lean' ? 20 : 0)) + ' 178', inner: lean('<path fill="currentColor" d="' + d.d + '"/>' + wing, k === 'lean' ? 16 : 10) }; },
@@ -254,7 +265,7 @@
     F2: function (p, k) { return D.F2(p, k); },
     K1: function (p, k) { var r = D.K1(p, k); return { vb: r.vb.split(' ').slice(0, 2).join(' ') + ' ' + (parseFloat(r.vb.split(' ')[2])) + ' 132', inner: r.inner.replace(/<text[\s\S]*<\/text>/, '') }; },
     B6: function (p, k) { var r = D.B6(p, k); return { vb: (k === 'lean' ? '-22' : '-6') + ' -6 ' + (k === 'lean' ? 256 : 240) + ' 202', inner: r.inner }; },
-    R1: function (p, k) { return SYMBOL.B5(p, k); }, R2: function (p, k) { return SYMBOL.B5(p, k); }, R3: function (p, k) { return SYMBOL.B5(p, k); }, R4: function (p, k) { return SYMBOL.B5(p, k); }, R6: function (p, k) { return SYMBOL.B5(p, k); },
+    R1: function (p, k) { return SYMBOL.B5(p, k); }, R2: function (p, k) { return SYMBOL.B5(p, k); }, R3: function (p, k) { return SYMBOL.B5(p, k); }, R4: function (p, k) { return SYMBOL.B5(p, k); }, R8: function (p, k) { return SYMBOL.B5(p, k); }, R6: function (p, k) { return SYMBOL.B5(p, k); },
     R5: function (p, k) { var q = SW.SYM; return { vb: '-8 -8 ' + (q.a + q.lean + 16) + ' ' + (q.t + 16), inner: stroke1(1) }; }, R7: function (p, k) { var q = SW.SYM; return { vb: '-8 -8 ' + (q.a + q.lean + 16) + ' ' + (q.t + 16), inner: stroke1(1) }; },
     X1: function (p, k) { return { vb: '-6 -6 124 112', inner: icons.wind(p, k) }; }, X2: function (p, k) { return { vb: '-6 -6 112 112', inner: icons.ring(p, k) }; }, X3: function (p, k) { return { vb: '-6 -6 140 112', inner: icons.loop(p, k) }; },
     X4: function (p, k) { return { vb: '-6 -6 122 112', inner: icons.dial(p, k) }; }, X5: function (p, k) { return { vb: '-6 -6 116 112', inner: icons.chev(p, k) }; }, X6: function (p, k) { return { vb: '-6 -6 116 112', inner: icons.turn(p, k) }; },
