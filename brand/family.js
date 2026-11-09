@@ -61,11 +61,11 @@
   }
   function stroke1(sc) { var q = SW.SYM; return '<path fill="currentColor" transform="scale(' + (sc || 1) + ')" d="' + P([[q.lean, 0], [q.a + q.lean, 0], [q.a, q.t], [0, q.t]]) + '"/>'; }
   function lockR4(w, k, gap, tagSize, forceLean) {
-    var sy = (H - SW.SYM_H) / 2 + 2, wx = SW.SYM_W + gap, L = (k === 'lean' || forceLean) ? (k === 'lean' ? 14 : 10) : 0;
+    var sy = (H - SW.SYM_H) / 2 + 2, wx = SW.SYM_W + gap, L = typeof forceLean === 'number' ? forceLean : (k === 'lean' || forceLean) ? (k === 'lean' ? 14 : 10) : 0;
     var word = '<g transform="translate(' + wx + ' 0)">' + w.s + '</g>', icon = '<g transform="translate(0 ' + sy + ')">' + sym() + '</g>';
     var inner = icon + word, tl = tag('ATHLETIC CLUB', wx, 134, w.w, tagSize);
     if (L) inner = lean(inner, L);
-    return { vb: '-10 -10 ' + (wx + w.w + 30 + (L ? 24 : 0)) + ' 160', inner: inner + tl };
+    return { vb: '-10 -10 ' + (wx + w.w + 30 + (L ? Math.ceil(Math.tan(L * Math.PI / 180) * H) + 8 : 0)) + ' 160', inner: inner + tl };
   }
   function cafeR4(name, p, k) {
     var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : '';
@@ -203,7 +203,8 @@
     },
     /* --- round four: Sergio's feedback, 8 Nov. the two strokes stay; the letters go wider, lean, and carry the cut --- */
     R1: function (p, k) { return lockR4(cword('SECOND WIND', [p[0], p[1], 92, 14]), k, 44, 22); },
-    R2: function (p, k) { return lockR4(cword('SECOND WIND', [p[0] + 3, p[1] + 3, 60, 9]), k, 40, 22, true); },
+    /* 13 as Sergio liked it: the chamfered weight (+6), gap 8, leaning 12 degrees (18 at bold-leaning), now with the strokes */
+    R2: function (p, k) { return lockR4(cword('SECOND WIND', [p[0] + 6, p[1] + 6, 60, 8]), k, 40, 22, k === 'lean' ? 18 : 12); },
     R3: function (p, k) {
       var pp = [p[0] + 2, p[1] + 2, 92, 14], a = cword('SECOND', pp), b = cword('WIND', pp), sw = SW.SYM_W;
       var ix = b.w + 36, iy = 132 + (H - SW.SYM_H) / 2;
@@ -222,6 +223,18 @@
         '<text x="' + wx + '" y="134" ' + SERF + ' font-size="26" textLength="' + tw + '" lengthAdjust="spacing" fill="currentColor">ATHLETIC CLUB</text>' };
     },
     R7: function (p, k) { return cafeR4('SECOND WIND', p, k); },
+    /* 01 exactly as it is, the cut in the S, E and C only: Sergio's "variation or two" of the cut */
+    R9: function (p, k) { return lockR4(cword('SECOND WIND', p), k, 40, 22); },
+    /* the café and the gym side by side: one stroke for the café, two for the gym */
+    R10: function (p, k) {
+      var GW = { light: [14, 13, 58, 9], medium: [20, 18, 62, 8], bold: [20, 18, 62, 8], lean: [20, 18, 62, 8] }[k] || p, gk = (k === 'light' || k === 'medium') ? 'bold' : 'lean';
+      var c = cafeR4('FIRST WIND', p, k === 'bold' || k === 'lean' ? 'medium' : k), g = lockR4(cword('SECOND WIND', [GW[0], GW[1], Math.round(GW[2] * 1.22), GW[3]]), gk, 40, 22);
+      var gw = parseFloat(g.vb.split(' ')[2]), gs = 660 / gw, gy = 145 - 160 * gs / 2;
+      return { vb: '-20 -20 1420 330', inner: c.inner + '<rect x="690" y="0" width="2" height="270" fill="currentColor" opacity=".35"/>' +
+        '<g transform="translate(730 ' + gy.toFixed(1) + ') scale(' + gs.toFixed(4) + ')">' + g.inner + '</g>' +
+        '<text x="320" y="306" text-anchor="middle" ' + TAGF + ' font-size="15" letter-spacing="6" fill="currentColor" opacity=".55">THE CAFÉ · ONE STROKE</text>' +
+        '<text x="1060" y="306" text-anchor="middle" ' + TAGF + ' font-size="15" letter-spacing="6" fill="currentColor" opacity=".55">THE GYM · TWO STROKES</text>' };
+    },
     /* a little extended: Sergio's voice note, 8 Nov. the two strokes' spacing, letters about a fifth wider, cuts on S E C (an I cut was tried: at this angle a narrow stem becomes a spike) */
     R8: function (p, k) { return lockR4(cword('SECOND WIND', [p[0], p[1], Math.round(p[2] * 1.22), p[3]]), k, 40, 22); },
     /* --- round three: new icons, same build. an icon on the left, the bar letters, the club line --- */
@@ -256,7 +269,7 @@
       return { vb: '-140 0 880 170', inner: '<text x="300" y="86" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="92" letter-spacing="10" fill="currentColor">SECOND WIND</text><text x="300" y="134" text-anchor="middle" ' + SERF + ' font-size="26" letter-spacing="14" fill="currentColor">ATHLETIC CLUB</text>' };
     }
   };
-  var NAMES = { B5: 'Two strokes', W1: 'The wing', B1: 'Heritage arch', B4: 'Crest', F2: 'Interlocking SW', K1: 'Light and heavy', B6: 'Varsity 2', F6: 'Three stripes', B2: 'Condensed stack', B3: 'Lowercase', B7: 'Luxury tracking', G1: 'Extended', G2: 'Chamfered', F7: 'Fashion serif', N1: 'Serif strokes', N2: 'Serif stacked', N3: 'Framed strokes', N4: 'Wide strokes', N5: 'Monogram strokes', N6: 'Italic club line', X1: 'The wind', X2: 'The breath', X3: 'The loop', X4: 'The second half', X5: 'Fast forward', X6: 'The turn', R1: 'Extended strokes', R2: 'Leaning strokes', R3: 'Two-line extended', R4: 'Wide strokes, cut', R5: 'First Wind Café', R6: 'Serif strokes, full width', R7: 'Second Wind Café', R8: 'Two strokes, a little extended' };
+  var NAMES = { B5: 'Two strokes', W1: 'The wing', B1: 'Heritage arch', B4: 'Crest', F2: 'Interlocking SW', K1: 'Light and heavy', B6: 'Varsity 2', F6: 'Three stripes', B2: 'Condensed stack', B3: 'Lowercase', B7: 'Luxury tracking', G1: 'Extended', G2: 'Chamfered', F7: 'Fashion serif', N1: 'Serif strokes', N2: 'Serif stacked', N3: 'Framed strokes', N4: 'Wide strokes', N5: 'Monogram strokes', N6: 'Italic club line', X1: 'The wind', X2: 'The breath', X3: 'The loop', X4: 'The second half', X5: 'Fast forward', X6: 'The turn', R1: 'Extended strokes', R2: 'Leaning strokes', R3: 'Two-line extended', R4: 'Wide strokes, cut', R5: 'First Wind Café', R6: 'Serif strokes, full width', R7: 'Second Wind Café', R8: 'Two strokes, a little extended', R9: 'Two strokes, cut', R10: 'Café and gym together' };
   var SYMBOL = { // the compact mark each one becomes at icon size
     B5: function (p, k) { return { vb: '-8 -8 ' + (SW.SYM_W + 16) + ' ' + (SW.SYM_H + 16), inner: sym() }; },
     W1: function (p, k) { var d = SW.glyph('D', p[0] + 8, p[1] + 6, p[2] + 6); var wing = D.W1(p, k).inner.match(/<path fill="currentColor" d="M30 2[^"]+"\/>/)[0]; return { vb: '0 -74 ' + (300 + (k === 'lean' ? 20 : 0)) + ' 178', inner: lean('<path fill="currentColor" d="' + d.d + '"/>' + wing, k === 'lean' ? 16 : 10) }; },
@@ -265,7 +278,7 @@
     F2: function (p, k) { return D.F2(p, k); },
     K1: function (p, k) { var r = D.K1(p, k); return { vb: r.vb.split(' ').slice(0, 2).join(' ') + ' ' + (parseFloat(r.vb.split(' ')[2])) + ' 132', inner: r.inner.replace(/<text[\s\S]*<\/text>/, '') }; },
     B6: function (p, k) { var r = D.B6(p, k); return { vb: (k === 'lean' ? '-22' : '-6') + ' -6 ' + (k === 'lean' ? 256 : 240) + ' 202', inner: r.inner }; },
-    R1: function (p, k) { return SYMBOL.B5(p, k); }, R2: function (p, k) { return SYMBOL.B5(p, k); }, R3: function (p, k) { return SYMBOL.B5(p, k); }, R4: function (p, k) { return SYMBOL.B5(p, k); }, R8: function (p, k) { return SYMBOL.B5(p, k); }, R6: function (p, k) { return SYMBOL.B5(p, k); },
+    R1: function (p, k) { return SYMBOL.B5(p, k); }, R2: function (p, k) { return SYMBOL.B5(p, k); }, R3: function (p, k) { return SYMBOL.B5(p, k); }, R4: function (p, k) { return SYMBOL.B5(p, k); }, R8: function (p, k) { return SYMBOL.B5(p, k); }, R9: function (p, k) { return SYMBOL.B5(p, k); }, R10: function (p, k) { var q = SW.SYM; return { vb: '-8 -8 ' + (q.a + q.lean + 16) + ' ' + (q.t + 16), inner: stroke1(1) }; }, R6: function (p, k) { return SYMBOL.B5(p, k); },
     R5: function (p, k) { var q = SW.SYM; return { vb: '-8 -8 ' + (q.a + q.lean + 16) + ' ' + (q.t + 16), inner: stroke1(1) }; }, R7: function (p, k) { var q = SW.SYM; return { vb: '-8 -8 ' + (q.a + q.lean + 16) + ' ' + (q.t + 16), inner: stroke1(1) }; },
     X1: function (p, k) { return { vb: '-6 -6 124 112', inner: icons.wind(p, k) }; }, X2: function (p, k) { return { vb: '-6 -6 112 112', inner: icons.ring(p, k) }; }, X3: function (p, k) { return { vb: '-6 -6 140 112', inner: icons.loop(p, k) }; },
     X4: function (p, k) { return { vb: '-6 -6 122 112', inner: icons.dial(p, k) }; }, X5: function (p, k) { return { vb: '-6 -6 116 112', inner: icons.chev(p, k) }; }, X6: function (p, k) { return { vb: '-6 -6 116 112', inner: icons.turn(p, k) }; },
