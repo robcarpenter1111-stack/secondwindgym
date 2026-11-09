@@ -218,9 +218,9 @@
     R6: function (p, k) {
       var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : '';
       var sy = (H - SW.SYM_H) / 2 + 2, wx = SW.SYM_W + 48, tw = 700;
-      return { vb: '-10 -14 ' + (wx + tw + 30) + ' 172', inner: '<g transform="translate(0 ' + sy + ')">' + sym() + '</g>' +
+      return { vb: '-10 -14 ' + (wx + tw + 30) + ' 182', inner: '<g transform="translate(0 ' + sy + ')">' + sym() + '</g>' +
         '<text x="' + wx + '" y="86" ' + SERF.replace('400', fw) + it + ' font-size="92" textLength="' + tw + '" lengthAdjust="spacing" fill="currentColor">SECOND WIND</text>' +
-        '<text x="' + wx + '" y="134" ' + SERF + ' font-size="26" textLength="' + tw + '" lengthAdjust="spacing" fill="currentColor">ATHLETIC CLUB</text>' };
+        '<text x="' + wx + '" y="144" ' + SERF + ' font-size="46" letter-spacing="7" textLength="' + tw + '" lengthAdjust="spacing" fill="currentColor">ATHLETIC CLUB</text>' };
     },
     R7: function (p, k) { return cafeR4('SECOND WIND', p, k); },
     /* 16 exactly, with one stroke: the café version Sergio described */
