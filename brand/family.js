@@ -63,9 +63,11 @@
   function lockR4(w, k, gap, tagSize, forceLean) {
     var sy = (H - SW.SYM_H) / 2 + 2, wx = SW.SYM_W + gap, L = typeof forceLean === 'number' ? forceLean : (k === 'lean' || forceLean) ? (k === 'lean' ? 14 : 10) : 0;
     var word = '<g transform="translate(' + wx + ' 0)">' + w.s + '</g>', icon = '<g transform="translate(0 ' + sy + ')">' + sym() + '</g>';
-    var inner = icon + word, tl = tag('ATHLETIC CLUB', wx, 134, w.w, tagSize);
+    var LS = 8, tl = '<text x="' + (wx + w.w + LS) + '" y="138" font-size="26" letter-spacing="' + LS + '" text-anchor="end" ' + TAGF + ' fill="currentColor">ATHLETIC CLUB</text>';
+    var inner = icon + word + tl;
     if (L) inner = lean(inner, L);
-    return { vb: '-10 -10 ' + (wx + w.w + 30 + (L ? Math.ceil(Math.tan(L * Math.PI / 180) * H) + 8 : 0)) + ' 160', inner: inner + tl };
+    tl = '';
+    return { vb: (L ? '-18' : '-10') + ' -10 ' + (wx + w.w + 30 + (L ? Math.ceil(Math.tan(L * Math.PI / 180) * H) + 16 : 0)) + ' 160', inner: inner + tl };
   }
   function cafeR4(name, p, k) {
     var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : '';
@@ -208,10 +210,11 @@
     R3: function (p, k) {
       var pp = [p[0] + 2, p[1] + 2, 92, 14], a = cword('SECOND', pp), b = cword('WIND', pp), sw = SW.SYM_W;
       var ix = b.w + 36, iy = 132 + (H - SW.SYM_H) / 2;
-      var inner = a.s + '<g transform="translate(0 132)">' + b.s + '</g><g transform="translate(' + ix + ' ' + iy + ')">' + sym() + '</g>';
-      var W = Math.max(a.w, ix + sw);
+      var W = Math.max(a.w, ix + sw), LS = 9;
+      var inner = a.s + '<g transform="translate(0 132)">' + b.s + '</g><g transform="translate(' + ix + ' ' + iy + ')">' + sym() + '</g>' +
+        '<text x="' + (W + LS) + '" y="272" font-size="30" letter-spacing="' + LS + '" text-anchor="end" ' + TAGF + ' fill="currentColor">ATHLETIC CLUB</text>';
       inner = lean(inner, k === 'lean' ? 14 : 10);
-      return { vb: '-44 -14 ' + (W + 90) + ' 300', inner: inner + tag('ATHLETIC CLUB', -38, 268, W, 22) };
+      return { vb: '-56 -14 ' + (W + 120) + ' 304', inner: inner };
     },
     R4: function (p, k) { return lockR4(cword('SECOND WIND', [p[0], p[1], p[2], 22]), k, 48, 22); },
     R5: function (p, k) { return cafeR4('FIRST WIND', p, k); },
