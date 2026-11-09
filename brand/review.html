@@ -81,6 +81,11 @@ p { margin:0; max-width:62ch; }
 .rec th { font:500 11px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:#e7d8c4; }
 .rec .tw { overflow-x:auto; }
 /* Sergio's take: a verdict and a line per logo, remembered in this browser, sent as one email */
+.fbk { display:grid; grid-template-columns:1fr 1fr; gap:18px; background:var(--card); border:1px solid var(--line); border-left:3px solid var(--bronze); padding:18px 22px; }
+.fbk .label { color:var(--bronze); margin:0 0 6px; }
+.fbk p { margin:0; font-size:16px; line-height:1.5; }
+.fbk p + p { margin:0; }
+@media (max-width:720px) { .fbk { grid-template-columns:1fr; } }
 .fb { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 22px; display:flex; flex-direction:column; gap:12px; }
 .fb .fbh { display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; justify-content:space-between; }
 .fb .opts { display:flex; gap:8px; flex-wrap:wrap; }
@@ -105,12 +110,11 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
 <body>
 <div class="wrap">
   <header class="head">
-    <a href="index.html" style="font:500 11px 'DM Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:inherit;text-decoration:none;border:1px solid currentColor;padding:8px 12px;display:inline-flex;align-items:center;gap:8px;opacity:.8">&#8592; Brand review</a>
-    <p class="label">Second Wind Athletic Club · logo review · for Sergio</p>
+    <p class="label">Second Wind Athletic Club · logo review · from Robbie, for Sergio</p>
     <h1>The shortlist</h1>
-    <p class="lead">Seventeen logos left after Sergio's feedback of 8 November: the ten new ones built from his notes and voice notes, and the seven he liked or marked maybe. Each one is put through the same test: the full mark, four weights, the icon it becomes when it's small, and how it behaved on the real walls, glass and cups of HUB's design. The same format for each, so the only thing that changes is the logo.</p>
-    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Sergio: under each logo, tap Like, Maybe or Not for me and add a line if you have one. The page remembers as you go. When you're done, press Send feedback at the bottom and it opens an email to Robbie with everything filled in. Your earlier answers are kept.</p>
-    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">New first: 27 to 36, from your notes. Then the ones you liked: 01, 12, 13, 14, 15, 16 and 18. The nineteen marked not for me are set aside at the bottom of the page.</p>
+    <p class="lead">Sergio, this is the shortlist after your feedback on 8 November: the eleven new ones built from your notes and voice notes, and the seven you liked or marked maybe. Under each logo you'll find your feedback and what I did with it. Each one is put through the same test: the full mark, four weights, the icon it becomes when it's small, and how it behaved on the real walls, glass and cups of HUB's design. The same format for each, so the only thing that changes is the logo.</p>
+    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Under each logo, tap Like, Maybe or Not for me and add a line if you have one. The page remembers as you go. When you're done, press Send feedback at the bottom and it opens an email to me with everything filled in. Your earlier answers are kept.</p>
+    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">New first: 27 to 37, from your notes. Then the ones you liked: 01, 12, 13, 14, 15, 16 and 18. The nineteen marked not for me are set aside at the bottom of the page.</p>
     <p class="label" style="letter-spacing:.1em">How to read a spread: the hero is the logo at its best. The four weights are the same letters, thicker. The three squares are the icon at profile-picture size on linen, charcoal and walnut.</p>
   </header>
 
@@ -138,50 +142,128 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   </section>
 </div>
 
-<script src="brand.js?v=a5894bc1"></script>
-<script src="fonts.js?v=a5894bc1"></script>
-<script src="family.js?v=a5894bc1"></script>
+<script src="brand.js?v=ffdc3912"></script>
+<script src="fonts.js?v=ffdc3912"></script>
+<script src="family.js?v=ffdc3912"></script>
 <script>
 (function () {
   var W = [['light', 'Light'], ['medium', 'Medium'], ['bold', 'Bold'], ['lean', 'Bold, leaning']];
+  var FB = {
+  "B5": [
+  "Like it. Word spacing is good but can we try a variation of this extended? I like it bold leaning. Could the 30 degree cut also be in some of the word letters too, so the icon is also subtly in the word? Voice note: certainly the favourite; the lean still shares movement; a little more extended, not the wide gaps.",
+  "Three variations for you. <b>34</b> is this exactly, a little more extended: letters a fifth wider, the spacing you said is good left alone. <b>27</b> is the fully extended version so you can see how far is too far. <b>35</b> is this unchanged with only the cut added. All three bold leaning. The cut sits on the open ends of the S, E and C, at the strokes' angle. I tried the I and the N too: the N already has a diagonal, and the I turned into a spike and ran into the W, so I left those two alone."
+  ],
+  "G1": [
+  "Like it. Could you include a variation in bold, leaning with two lines?",
+  "That's <b>27</b>: these letters, bold leaning, with the two strokes in front and the cut in the letters. I also stacked it as <b>28</b>, SECOND over WIND, because it makes a strong shape for the end wall and the back of a shirt; that one's my extra, not your ask."
+  ],
+  "G2": [
+  "Like it. Medium leaning is nice. Could you include a variation with an icon?",
+  "<b>29</b> is this at the same weight and lean, with the two strokes in front and the cut in the letters. Nothing else changed."
+  ],
+  "F7": [
+  "Like it. I'm thinking could be used for cafe?",
+  "Agreed, and I think that's the right split: the serif is the café's voice, the bar letters are the gym's. <b>31</b>, <b>32</b> and <b>37</b> are the café marks built on it, and the full serif presentation is in the hub."
+  ],
+  "N1": [
+  "Maybe. Could a variation show wording under Second Wind to be same width? See how that looks?",
+  "<b>33</b>: the club line now runs exactly the width of the name."
+  ],
+  "N2": [
+  "Like it. I like it for cafe. Maybe could we show a variation showing cafe icon only that has one line and then Gym have two? Cafe name to be confirmed, maybe First Wind Cafe for now. Having it centred feels more balanced to me.",
+  "Yes, and I think the one-stroke, two-strokes idea is the best thought in the whole round: first wind in the café, second wind in the gym. <b>37</b> is this exactly with one stroke and FIRST WIND. <b>31</b> is the fuller café mark with CAFÉ and a line back to the club. <b>36</b> shows the café and the gym side by side so you can judge them as a pair. <b>32</b> is the same with the club's own name in case First Wind doesn't go ahead. Before First Wind Café goes on a cup we should check nobody nearby already trades under it."
+  ],
+  "N4": [
+  "Like this one.",
+  "<b>30</b> is this with the cut added, so it sits in the same family as 34. Between the two, 34 widens the letters and 30 widens the space; your voice note sounded like you prefer the letters wider, but see them next to each other."
+  ],
+  "R8": [
+  "From your notes on 01: a little more extended, bold leaning, the cut in the letters.",
+  "This is the one I'd put my money on. The favourite, letters a fifth wider, your spacing, the cut on the S, E and C, bold leaning. Look at the gym wall and the fascia renders below."
+  ],
+  "R9": [
+  "From your notes on 01: the cut in the letters, on its own.",
+  "01 untouched except the cut, so you can see what the cut alone does before the width changes anything."
+  ],
+  "R1": [
+  "From your note on 12: bold, leaning, with the two strokes.",
+  "12's extended letters with the strokes in front and the cut carried through. The full statement; compare with 34, which does the same a little more gently."
+  ],
+  "R2": [
+  "From your note on 13: medium leaning, with an icon.",
+  "13's weight and lean exactly, the two strokes in front, the cut in the letters."
+  ],
+  "R4": [
+  "From your like on 18.",
+  "18 with the cut, so it's in the family. Letters normal width, space opened up."
+  ],
+  "R11": [
+  "From your note on 16: one stroke for the café, First Wind Café, centred.",
+  "16 exactly as you liked it, one stroke instead of two, FIRST WIND, the small line naming the café and the club."
+  ],
+  "R5": [
+  "From your note on 16: the café mark.",
+  "The fuller café version: one stroke, the name, CAFÉ, a rule, and a line back to the club. Centred as you asked."
+  ],
+  "R10": [
+  "From your note on 16: café with one line, gym with two.",
+  "The pair together: the café mark on the left, the gym mark on the right, so the one-stroke, two-strokes idea can be judged as a system."
+  ],
+  "R7": [
+  "From your note on 16, with the club's own name.",
+  "The same café mark with SECOND WIND, the fallback if First Wind Café doesn't go ahead."
+  ],
+  "R6": [
+  "From your maybe on 15: the club line the same width as the name.",
+  "Done as asked. Probably the bridge between café and club rather than a lead mark."
+  ],
+  "R3": [
+  "Our extra, not one of your asks.",
+  "I first read \"with two lines\" as a two-line stack. You call the strokes lines, so your ask is 27; this stayed because it's the natural wall version of 27."
+  ]
+  };
   var R = {
-    R9: { title: 'Two strokes, cut', fam: 'Round four: from Sergio\'s feedback, 8 Nov', idea: 'The two strokes exactly as 01, same width and spacing, with only the change Sergio asked about: the strokes\' 30° cut on the free ends of the S, the E and the C, so the icon is quietly inside the word.',
-      works: ['Shows the cut on its own, with nothing else changed', 'Keeps the spacing Sergio said is good', 'Bold leaning, the way he prefers it'],
+    R11: { title: 'First Wind Café, as 16', fam: 'Round four: from your feedback, 8 Nov', idea: '16 exactly as you liked it for the café, with the one change you described: one stroke instead of two. FIRST WIND in the serif, centred, with the small line beneath naming the café and the club.',
+      works: ['The closest thing to what you asked for: 16, one stroke, centred', 'Same proportions as 16, so it goes straight onto the café wall you were picturing'],
+      struggles: ['The small line has to carry CAFÉ and the club name together; 31 gives them more room', 'Name to be confirmed'],
+      verdict: 'good', vt: '16 with one stroke', vp: 'Compare with 31: the literal version and the fuller one.' },
+    R9: { title: 'Two strokes, cut', fam: 'Round four: from your feedback, 8 Nov', idea: 'The two strokes exactly as 01, same width and spacing, with only the change you asked about: the strokes\' 30° cut on the free ends of the S, the E and the C, so the icon is quietly inside the word.',
+      works: ['Shows the cut on its own, with nothing else changed', 'Keeps the spacing you said is good', 'Bold leaning, the way you prefer it'],
       struggles: ['A detail: from across the room it reads as 01; up close, on a cup or a shirt, the cut shows'],
       verdict: 'good', vt: 'The cut on its own', vp: 'Compare with 34: the same cut, with and without the extra width.' },
-    R10: { title: 'Café and gym together', fam: 'Round four: from Sergio\'s feedback, 8 Nov', idea: 'The two marks side by side, as Sergio asked: First Wind Café in the serif, centred, with one stroke; Second Wind Athletic Club with two strokes, a little extended and bold leaning. The café is the first wind, the gym the second. The renders show the café mark on the café wall and the gym mark in the gym and on the fascia.',
+    R10: { title: 'Café and gym together', fam: 'Round four: from your feedback, 8 Nov', idea: 'The two marks side by side, as you asked: First Wind Café in the serif, centred, with one stroke; Second Wind Athletic Club with two strokes, a little extended and bold leaning. The café is the first wind, the gym the second. The renders show the café mark on the café wall and the gym mark in the gym and on the fascia.',
       works: ['One idea across both: count the strokes', 'Each space gets its own voice: serif and calm for the café, bar letters and movement for the gym', 'The café can be named and promoted on its own without a second logo system'],
       struggles: ['Two marks to keep consistent; the guidelines will need a page on when each is used', 'The café name is still to be confirmed and checked'],
       verdict: 'good', vt: 'The system', vp: 'This is how 31 and 34 would work together.' },
-    R8: { title: 'Two strokes, a little extended', fam: 'Round four: from Sergio\'s voice notes, 8 Nov', idea: 'The two strokes with the letters a fifth wider and the spacing unchanged: "a little more extended" to make more of a statement, without the stretch of 27. The 30° cut of the strokes runs through the S, E and C.',
-      works: ['Keeps the proportions that made the two strokes the favourite', 'More presence on a wall than 01, less length than 27', 'Bold leaning, as Sergio prefers: the lean carries the movement'],
+    R8: { title: 'Two strokes, a little extended', fam: 'Round four: from your voice notes, 8 Nov', idea: 'The two strokes with the letters a fifth wider and the spacing unchanged: your "a little more extended", without the stretch of 27. The 30° cut of the strokes runs through the S, E and C.',
+      works: ['Keeps the proportions that made the two strokes the favourite', 'More presence on a wall than 01, less length than 27', 'Bold leaning, as you prefer: the lean carries the movement'],
       struggles: ['A small step: next to 01 the difference is felt more than seen', 'An I cut was tried and dropped: at this angle a narrow stem turns into a spike'],
       verdict: 'good', vt: 'From the voice notes', vp: 'Probably the one: the favourite, a little more extended, the icon in the letters.' },
-    R1: { title: 'Extended strokes', fam: 'Round four: from Sergio\'s feedback, 8 Nov', idea: 'The two strokes, with the letters drawn wider ("can we try this extended?") and the strokes\' cut carried into the letters: the free ends of the S, the E and the C are cut at the same angle as the symbol, so the icon is quietly inside the word.',
+    R1: { title: 'Extended strokes', fam: 'Round four: from your feedback, 8 Nov', idea: 'Your 12, Extended, "bold, leaning with two lines": the extended letters with the two strokes, and the strokes\' cut carried into the letters: the free ends of the S, the E and the C are cut at the same angle as the symbol, so the icon is quietly inside the word.',
       works: ['Everything that already worked about the two strokes', 'Wider letters read as more confident and more premium on a wall', 'The cut ties the name to the symbol: one family of shapes'],
       struggles: ['Long: about a fifth wider than before, so the stacked form is needed sooner', 'The cut is subtle at light weight; it shows best from medium up'],
-      verdict: 'good', vt: 'Fully extended', vp: 'The full statement. Sergio asked for "a little" more extended, so compare it with 27\'s gentler sibling at the top.' },
-    R2: { title: 'Leaning strokes', fam: 'Round four: from Sergio\'s feedback, 8 Nov', idea: 'Sergio\'s 13 exactly as he liked it, medium leaning, with the two strokes as its icon ("needs icon"). Same weight, spacing and lean as 13, with the cut ends added.',
+      verdict: 'good', vt: 'Fully extended', vp: 'The full statement. You asked for "a little" more extended, so compare it with 34 at the top.' },
+    R2: { title: 'Leaning strokes', fam: 'Round four: from your feedback, 8 Nov', idea: 'Your 13 exactly as you liked it, medium leaning, with the two strokes as its icon ("needs icon"). Same weight, spacing and lean as 13, with the cut ends added.',
       works: ['Compact: fits where the extended version is too long', 'Always moving: the whole mark leans with the symbol', 'Medium leaning is the softer gym-and-café weight'],
       struggles: ['Always leaning means no upright version for the café; it relies on weight for calm', 'Closer to sportswear than the extended version'],
       verdict: 'good', vt: 'The compact one', vp: 'If the extended version is too long anywhere, this is the same idea at normal width.' },
-    R3: { title: 'Two-line extended', fam: 'Round four: from Sergio\'s feedback, 8 Nov', idea: 'Extended, bold, leaning, on two lines ("bold, leaning with two lines?"): SECOND over WIND, with the two strokes finishing the second line so both lines end together. The club line runs the full width beneath.',
+    R3: { title: 'Two-line extended', fam: 'Round four: my extra, not one of your asks', idea: 'Extended, bold, leaning, stacked on two lines: SECOND over WIND, with the two strokes finishing the second line so both lines end together. I first read "with two lines" as this; you call the strokes lines, so your ask is 27. Kept because it is the natural wall and shirt-back version of 27.',
       works: ['A block shape for walls, the gym end wall, merch backs, posters', 'The strokes earn their place: they square off the shorter word', 'Strongest of the round at a distance'],
       struggles: ['Too tall for the fascia band and the cup sleeve', 'If "two lines" meant the name plus the club line, the one-line extended version (27) already does that'],
-      verdict: 'good', vt: 'The wall version', vp: 'Pairs with 27: one line for the fascia and web, two lines for walls and shirts.' },
-    R4: { title: 'Wide strokes, cut', fam: 'Round four: from Sergio\'s feedback, 8 Nov', idea: 'The wide strokes Sergio liked (18), now with the cut terminals. The letters stay their normal width; the space between them opens up instead.',
+      verdict: 'ok', vt: 'Our extra', vp: 'Pairs with 27: one line for the fascia and web, stacked for walls and shirts.' },
+    R4: { title: 'Wide strokes, cut', fam: 'Round four: from your feedback, 8 Nov', idea: 'Your 18, now with the cut terminals. The letters stay their normal width; the space between them opens up instead.',
       works: ['Calmer and more expensive than the extended version', 'Works light in the café and bold in the gym', 'The cut is easy to see in the open spacing'],
       struggles: ['Long, like the extended version', 'Wide spacing loses some punch when leaning'],
-      verdict: 'good', vt: 'Sergio liked 18', vp: 'His 18 with the cut added. (The "gaps too wide" in his voice note is most likely 11, luxury tracking, which he also ruled out.)' },
-    R5: { title: 'First Wind Café', fam: 'Round four: the café, from Sergio\'s feedback', idea: 'The café\'s mark: one stroke where the gym has two. First wind in the café, second wind in the gym. The name in the serif, centred, with CAFÉ beneath and a small line to tie it back to the club. The name is Sergio\'s suggestion, to be confirmed.',
-      works: ['A system, not a second logo: one stroke for the café, two for the gym', 'The serif makes the café feel like its own place, as Sergio wanted', 'Centred and balanced on the counter wall above Fuel good days'],
+      verdict: 'good', vt: 'Your 18, with the cut', vp: 'Your 18 with the cut added. (The "gaps too wide" in your voice note I took to be 11, luxury tracking.)' },
+    R5: { title: 'First Wind Café', fam: 'Round four: the café, from your feedback', idea: 'The café\'s mark: one stroke where the gym has two. First wind in the café, second wind in the gym. The name in the serif, centred, with CAFÉ beneath and a small line to tie it back to the club. The name is your suggestion, to be confirmed.',
+      works: ['A system, not a second logo: one stroke for the café, two for the gym', 'The serif makes the café feel like its own place, as you wanted', 'Centred and balanced on the counter wall above Fuel good days'],
       struggles: ['A second name to protect and explain; check it is free to use before it goes on a cup', 'Thin serif lines need the light weight indoors only, never lit outside'],
-      verdict: 'good', vt: 'The café system', vp: 'If Sergio confirms the name, this is the café. The one stroke does the explaining.' },
-    R6: { title: 'Serif strokes, full width', fam: 'Round four: from Sergio\'s feedback, 8 Nov', idea: 'Serif strokes (15) with the change Sergio asked for: the club line now runs exactly the width of SECOND WIND.',
+      verdict: 'good', vt: 'The café system', vp: 'If you confirm the name, this is the café. The one stroke does the explaining.' },
+    R6: { title: 'Serif strokes, full width', fam: 'Round four: from your feedback, 8 Nov', idea: 'Serif strokes (15) with the change you asked for: the club line now runs exactly the width of SECOND WIND.',
       works: ['Neater: one clean block of type beside the strokes', 'Keeps the two strokes with the serif for anywhere both need to meet'],
       struggles: ['Wide club-line spacing at small sizes', 'Two type voices in one line, as before'],
       verdict: 'ok', vt: 'Fixed as asked', vp: 'Probably the bridge between the café and the club rather than a lead mark.' },
-    R7: { title: 'Second Wind Café', fam: 'Round four: the café, from Sergio\'s feedback', idea: 'The same café mark with the club\'s own name, in case First Wind is not confirmed. One stroke, serif, centred.',
+    R7: { title: 'Second Wind Café', fam: 'Round four: the café, from your feedback', idea: 'The same café mark with the club\'s own name, in case First Wind is not confirmed. One stroke, serif, centred.',
       works: ['No second name to register or explain', 'Still separates the café from the gym through type and the single stroke'],
       struggles: ['Loses the first wind and second wind story'],
       verdict: 'ok', vt: 'The safe café', vp: 'The fallback if First Wind Café is not taken forward.' },
@@ -212,7 +294,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
     N1: { title: 'Serif strokes', fam: 'Round two: the two strokes dressed by the serif', idea: 'Our symbol, the name in the fine serif beside it. The strokes carry the story and the sport; the serif carries the café, the price point and the street. Two favourites, one mark.',
       works: ['Keeps the icon that works on glass, cups and the start line', 'The serif name makes the café front and the menu look like a good hotel', 'Light in the café, bold on the gym wall, as before'],
       struggles: ['Two voices in one line: the geometric strokes next to a classical serif can read as two brands if the spacing is off', 'Thin serifs still need bold on dark walls'],
-      verdict: 'ok', vt: 'The obvious cross', vp: 'If Sergio wants the serif but does not want to lose the symbol, this is it.' },
+      verdict: 'ok', vt: 'The obvious cross', vp: 'If you want the serif but don\'t want to lose the symbol, this is it.' },
     N2: { title: 'Serif stacked', fam: 'Round two: the counter-wall version of the serif strokes', idea: 'The strokes centred above a two-line serif stack. Built for the café wall above Fuel good days, the cup, the menu board and anything square.',
       works: ['The best café-wall shape of the twenty', 'Reads as a label on a bottle or a cup', 'Square enough for social and app tiles with the name in'],
       struggles: ['Too tall for the fascia and the gym end wall; those take the horizontal serif strokes instead', 'The two-line serif goes small quickly; the strokes alone take over under 40 mm'],
@@ -236,8 +318,8 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
     B5: { title: 'Two strokes', fam: 'Nike, On, Asics: an idea, not a picture', idea: 'Two strokes, the first short, then a gap, then a longer one. The first effort, the pause, and the second wind. The name drawn in straight bars on one grid, light and upright, with the club line underneath.',
       works: ['Reads at every size, from a 3 m lit wall to a 40 mm emboss', 'The symbol tells the story on its own, so it can go on glass, cups and the start line without the name', 'Light suits the café, bold suits the gym, same logo'],
       struggles: ['Quiet by design: the light weight can feel delicate on a dark gym wall, which is why the bold weight exists', 'Needs the story told once; after that it sticks'],
-      verdict: 'good', vt: 'My favourite', vp: 'The only logo that passed every test, in the café and the gym.' },
-    W1: { title: 'The wing', fam: "Sergio's original idea, rebuilt: Under Armour, Puma, a touch of Ferrari", idea: 'SECOND in wide letters, WIND heavier, with a three-feather wing flying off the D. Italic, forward, athletic. The version Sergio liked, redrawn on our letter grid so it can be made at any size.',
+      verdict: 'good', vt: 'My favourite', vp: 'The only logo that passed every test, in the café and the gym. Now your favourite too; the variations you asked for are 34, 35 and 27.' },
+    W1: { title: 'The wing', fam: "Sergio's original idea, rebuilt: Under Armour, Puma, a touch of Ferrari", idea: 'SECOND in wide letters, WIND heavier, with a three-feather wing flying off the D. Italic, forward, athletic. The version you liked at the start, redrawn on our letter grid so it can be made at any size.',
       works: ['Energy: the most athletic of the fourteen', 'A real icon: the D with its wing holds up on glass and at icon size', 'Strong on the gym wall in bold'],
       struggles: ['The fine feathers soften at 40 mm and under halo light', 'The script "Athletic Club" line cannot be made as a lit sign; it stays on print', 'Gym first: it is less at home on a coffee cup'],
       verdict: 'ok', vt: 'Strong alternative', vp: 'If you want more energy than the two strokes, this is the one.' },
@@ -271,7 +353,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
       verdict: 'bad', vt: 'Poster, not logo', vp: 'A good typographic treatment to use inside the brand, not as the brand.' },
     B3: { title: 'Lowercase', fam: 'lululemon, Peloton, wellness brands', idea: 'One soft lowercase word, "secondwind", with the club line beneath. Friendly, approachable, more wellness than gym.',
       works: ['Warm, suits the café', 'Reads quickly on a screen'],
-      struggles: ['Soft where the gym wants strong', 'No symbol at all', 'The look HUB and Sergio moved away from: "never wellness"'],
+      struggles: ['Soft where the gym wants strong', 'No symbol at all', 'The look HUB and you moved away from: "never wellness"'],
       verdict: 'bad', vt: 'Wrong tone', vp: 'Right for a yoga studio. Not for this room.' },
     B7: { title: 'Luxury tracking', fam: 'Alo, Bodyism, high-end hotels', idea: 'Light capitals, very wide spacing, a thin frame. Expensive, calm, premium. Built for a business card.',
       works: ['Beautiful on print, menus and cards', 'Premium feel without trying'],
@@ -288,15 +370,19 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
     F7: { title: 'Fashion serif', fam: 'Celine, Saint Laurent, fashion houses', idea: 'A classical serif, spaced wide, with the club line beneath. The fashion-house look.',
       works: ['The most expensive-looking of the fourteen: at home on a cup, a menu, a business card and the café front', 'The SW monogram gives it an icon for glass, caps and the app', 'Reads as a members\' club from the street'],
       struggles: ['Thin serifs vanish on a lit wall and on textured concrete, so it has to go bold and large in the gym', 'Says taste before training; nothing in it moves', 'Never on the turf or the track'],
-      verdict: 'ok', vt: 'Robbie\'s second favourite', vp: 'The café will love it; the gym has to be told to use it bold. Full presentation in the top four.' }
+      verdict: 'ok', vt: 'My second favourite', vp: 'The café will love it; the gym has to be told to use it bold. Full presentation in the hub.' }
   };
-  var first = ['B5', 'W1', 'B1', 'B4', 'F2', 'K1', 'B6', 'F6', 'B2', 'B3', 'B7', 'G1', 'G2', 'F7'], round2 = ['N1', 'N2', 'N3', 'N4', 'N5', 'N6'], round3 = ['X1', 'X2', 'X3', 'X4', 'X5', 'X6'], round4 = ['R8', 'R9', 'R1', 'R3', 'R2', 'R4', 'R10', 'R5', 'R7', 'R6'];
+  function fbBlock(id) {
+    var f = FB[id] || ['Not for me.', 'Set aside. It stays on the page only for the record.'];
+    return '<div class="fbk"><div><p class="label">Your feedback</p><p>' + f[0] + '</p></div><div><p class="label">What I did</p><p>' + f[1] + '</p></div></div>';
+  }
+  var first = ['B5', 'W1', 'B1', 'B4', 'F2', 'K1', 'B6', 'F6', 'B2', 'B3', 'B7', 'G1', 'G2', 'F7'], round2 = ['N1', 'N2', 'N3', 'N4', 'N5', 'N6'], round3 = ['X1', 'X2', 'X3', 'X4', 'X5', 'X6'], round4 = ['R8', 'R9', 'R1', 'R2', 'R4', 'R11', 'R5', 'R10', 'R7', 'R6', 'R3'];
   // the shortlist, 8 Nov: everything Sergio marked "not for me" is set aside; ?all shows the full set again
   var RULED = ['X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'N3', 'N5', 'N6', 'W1', 'B1', 'B4', 'F2', 'K1', 'B6', 'F6', 'B2', 'B3', 'B7'];
   var SHOW_ALL = /[?&]all\b/.test(location.search);
   var liked = ['B5', 'G1', 'G2', 'F7', 'N1', 'N2', 'N4'];
   var order = SHOW_ALL ? round4.concat(round3, round2, first) : round4.concat(liked), NUM = {};
-  document.getElementById('allswitch').innerHTML = SHOW_ALL ? '<a href="?" style="color:var(--bronze)">Back to the shortlist</a>' : '<a href="?all" style="color:var(--ink);opacity:.6">Show the nineteen set aside (marked not for me)</a>'; first.forEach(function (id, i) { NUM[id] = i + 1; }); round2.forEach(function (id, i) { NUM[id] = 15 + i; }); round3.forEach(function (id, i) { NUM[id] = 21 + i; }); var N4 = { R1: 27, R3: 28, R2: 29, R4: 30, R5: 31, R7: 32, R6: 33, R8: 34, R9: 35, R10: 36 }; round4.forEach(function (id) { NUM[id] = N4[id]; });
+  document.getElementById('allswitch').innerHTML = SHOW_ALL ? '<a href="?" style="color:var(--bronze)">Back to the shortlist</a>' : '<a href="?all" style="color:var(--ink);opacity:.6">Show the nineteen set aside (marked not for me)</a>'; first.forEach(function (id, i) { NUM[id] = i + 1; }); round2.forEach(function (id, i) { NUM[id] = 15 + i; }); round3.forEach(function (id, i) { NUM[id] = 21 + i; }); var N4 = { R1: 27, R3: 28, R2: 29, R4: 30, R5: 31, R7: 32, R6: 33, R8: 34, R9: 35, R10: 36, R11: 37 }; round4.forEach(function (id) { NUM[id] = N4[id]; });
   var toc = '', sp = '';
   order.forEach(function (id, n) {
     var r = R[id], num = (NUM[id] < 10 ? '0' : '') + NUM[id];
@@ -311,12 +397,12 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
       '<div class="hero"><div class="mk">' + SWF.svg(id, 'light', '#f3efe7') + '</div></div>' +
       '<div class="grid"><div class="box"><h3>Four weights</h3><div class="weights">' + ws + '</div></div><div class="box"><h3>At icon size</h3><div class="icons">' + ic + '</div><p style="font-size:14px;color:var(--muted)">Profile picture, app icon, cup sleeve, glass, start line.</p></div></div>' +
       '<div class="box" style="gap:16px"><h3>In HUB\'s renders</h3><div class="hub">' +
-        '<figure><img src="photo/fam/' + id + '-cafe.jpg?v=a5894bc1" alt="' + r.title + ' on the café counter wall, blackened bronze letters above Fuel good days" loading="lazy"><figcaption>Café wall · light · unlit bronze</figcaption></figure>' +
-        '<figure><img src="photo/fam/' + id + '-gym.jpg?v=a5894bc1" alt="' + r.title + ' lit on the gym end wall" loading="lazy"><figcaption>Gym end wall · bold · halo-lit</figcaption></figure>' +
-        '<figure><img src="photo/fam/' + id + '-shop.jpg?v=a5894bc1" alt="' + r.title + ' lit on the shopfront fascia" loading="lazy"><figcaption>Shopfront · bold · lit</figcaption></figure></div></div>' +
+        '<figure><img src="photo/fam/' + id + '-cafe.jpg?v=ffdc3912" alt="' + r.title + ' on the café counter wall, blackened bronze letters above Fuel good days" loading="lazy"><figcaption>Café wall · light · unlit bronze</figcaption></figure>' +
+        '<figure><img src="photo/fam/' + id + '-gym.jpg?v=ffdc3912" alt="' + r.title + ' lit on the gym end wall" loading="lazy"><figcaption>Gym end wall · bold · halo-lit</figcaption></figure>' +
+        '<figure><img src="photo/fam/' + id + '-shop.jpg?v=ffdc3912" alt="' + r.title + ' lit on the shopfront fascia" loading="lazy"><figcaption>Shopfront · bold · lit</figcaption></figure></div></div>' +
       '<div class="copy"><div class="c"><h3>The idea</h3><p>' + r.idea + '</p></div><div class="c"><h3>Where it works</h3><ul>' + li(r.works) + '</ul></div><div class="c"><h3>Where it may struggle</h3><ul>' + li(r.struggles) + '</ul></div></div>' +
-      '<div class="verdict"><b>' + r.vt + '</b><span class="pill ' + r.verdict + '">' + (r.verdict === 'good' ? 'Passes every test' : r.verdict === 'ok' ? 'Passes some' : 'Fails the small-size test') + '</span><p>' + r.vp + '</p></div>' +
-      '<div class="fb" data-id="' + id + '" data-title="' + num + ' · ' + r.title + '"><div class="fbh"><h3>Sergio\'s take</h3><div class="opts"><button type="button" data-v="like">Like it</button><button type="button" data-v="maybe">Maybe</button><button type="button" data-v="no">Not for me</button></div></div><textarea placeholder="Anything you like or don\'t about this one, in a line or two" aria-label="Comment on ' + r.title + '"></textarea></div>' +
+      fbBlock(id) + '<div class="verdict"><b>' + r.vt + '</b><span class="pill ' + r.verdict + '">' + (r.verdict === 'good' ? 'Passes every test' : r.verdict === 'ok' ? 'Passes some' : 'Fails the small-size test') + '</span><p>' + r.vp + '</p></div>' +
+      '<div class="fb" data-id="' + id + '" data-title="' + num + ' · ' + r.title + '"><div class="fbh"><h3>Your take</h3><div class="opts"><button type="button" data-v="like">Like it</button><button type="button" data-v="maybe">Maybe</button><button type="button" data-v="no">Not for me</button></div></div><textarea placeholder="Anything you like or don\'t about this one, in a line or two" aria-label="Comment on ' + r.title + '"></textarea></div>' +
       '</section>';
   });
   document.getElementById('toc').innerHTML = toc;

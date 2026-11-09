@@ -223,6 +223,14 @@
         '<text x="' + wx + '" y="134" ' + SERF + ' font-size="26" textLength="' + tw + '" lengthAdjust="spacing" fill="currentColor">ATHLETIC CLUB</text>' };
     },
     R7: function (p, k) { return cafeR4('SECOND WIND', p, k); },
+    /* 16 exactly, with one stroke: the café version Sergio described */
+    R11: function (p, k) {
+      var fw = k === 'light' ? 400 : k === 'medium' ? 500 : 700, it = k === 'lean' ? ' font-style="italic"' : '';
+      var tw = 700, sc = 1.15, s1 = (SW.SYM.a + SW.SYM.lean) * sc, sx = (tw - s1) / 2, ty = SW.SYM_H * sc + 118;
+      return { vb: '-10 -10 ' + (tw + 20) + ' ' + (ty + 70), inner: '<g transform="translate(' + sx + ' ' + ((SW.SYM_H - SW.SYM.t) * sc / 2) + ')">' + stroke1(sc) + '</g>' +
+        '<text x="' + (tw / 2) + '" y="' + ty + '" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="92" textLength="' + tw + '" lengthAdjust="spacing" fill="currentColor">FIRST WIND</text>' +
+        '<text x="' + (tw / 2) + '" y="' + (ty + 46) + '" text-anchor="middle" ' + SERF + ' font-size="24" letter-spacing="13" fill="currentColor">CAFÉ · SECOND WIND</text>' };
+    },
     /* 01 exactly as it is, the cut in the S, E and C only: Sergio's "variation or two" of the cut */
     R9: function (p, k) { return lockR4(cword('SECOND WIND', p), k, 40, 22); },
     /* the café and the gym side by side: one stroke for the café, two for the gym */
@@ -269,7 +277,7 @@
       return { vb: '-140 0 880 170', inner: '<text x="300" y="86" text-anchor="middle" ' + SERF.replace('400', fw) + it + ' font-size="92" letter-spacing="10" fill="currentColor">SECOND WIND</text><text x="300" y="134" text-anchor="middle" ' + SERF + ' font-size="26" letter-spacing="14" fill="currentColor">ATHLETIC CLUB</text>' };
     }
   };
-  var NAMES = { B5: 'Two strokes', W1: 'The wing', B1: 'Heritage arch', B4: 'Crest', F2: 'Interlocking SW', K1: 'Light and heavy', B6: 'Varsity 2', F6: 'Three stripes', B2: 'Condensed stack', B3: 'Lowercase', B7: 'Luxury tracking', G1: 'Extended', G2: 'Chamfered', F7: 'Fashion serif', N1: 'Serif strokes', N2: 'Serif stacked', N3: 'Framed strokes', N4: 'Wide strokes', N5: 'Monogram strokes', N6: 'Italic club line', X1: 'The wind', X2: 'The breath', X3: 'The loop', X4: 'The second half', X5: 'Fast forward', X6: 'The turn', R1: 'Extended strokes', R2: 'Leaning strokes', R3: 'Two-line extended', R4: 'Wide strokes, cut', R5: 'First Wind Café', R6: 'Serif strokes, full width', R7: 'Second Wind Café', R8: 'Two strokes, a little extended', R9: 'Two strokes, cut', R10: 'Café and gym together' };
+  var NAMES = { B5: 'Two strokes', W1: 'The wing', B1: 'Heritage arch', B4: 'Crest', F2: 'Interlocking SW', K1: 'Light and heavy', B6: 'Varsity 2', F6: 'Three stripes', B2: 'Condensed stack', B3: 'Lowercase', B7: 'Luxury tracking', G1: 'Extended', G2: 'Chamfered', F7: 'Fashion serif', N1: 'Serif strokes', N2: 'Serif stacked', N3: 'Framed strokes', N4: 'Wide strokes', N5: 'Monogram strokes', N6: 'Italic club line', X1: 'The wind', X2: 'The breath', X3: 'The loop', X4: 'The second half', X5: 'Fast forward', X6: 'The turn', R1: 'Extended strokes', R2: 'Leaning strokes', R3: 'Two-line extended', R4: 'Wide strokes, cut', R5: 'First Wind Café', R6: 'Serif strokes, full width', R7: 'Second Wind Café', R8: 'Two strokes, a little extended', R9: 'Two strokes, cut', R10: 'Café and gym together', R11: 'First Wind Café, as 16' };
   var SYMBOL = { // the compact mark each one becomes at icon size
     B5: function (p, k) { return { vb: '-8 -8 ' + (SW.SYM_W + 16) + ' ' + (SW.SYM_H + 16), inner: sym() }; },
     W1: function (p, k) { var d = SW.glyph('D', p[0] + 8, p[1] + 6, p[2] + 6); var wing = D.W1(p, k).inner.match(/<path fill="currentColor" d="M30 2[^"]+"\/>/)[0]; return { vb: '0 -74 ' + (300 + (k === 'lean' ? 20 : 0)) + ' 178', inner: lean('<path fill="currentColor" d="' + d.d + '"/>' + wing, k === 'lean' ? 16 : 10) }; },
@@ -278,7 +286,7 @@
     F2: function (p, k) { return D.F2(p, k); },
     K1: function (p, k) { var r = D.K1(p, k); return { vb: r.vb.split(' ').slice(0, 2).join(' ') + ' ' + (parseFloat(r.vb.split(' ')[2])) + ' 132', inner: r.inner.replace(/<text[\s\S]*<\/text>/, '') }; },
     B6: function (p, k) { var r = D.B6(p, k); return { vb: (k === 'lean' ? '-22' : '-6') + ' -6 ' + (k === 'lean' ? 256 : 240) + ' 202', inner: r.inner }; },
-    R1: function (p, k) { return SYMBOL.B5(p, k); }, R2: function (p, k) { return SYMBOL.B5(p, k); }, R3: function (p, k) { return SYMBOL.B5(p, k); }, R4: function (p, k) { return SYMBOL.B5(p, k); }, R8: function (p, k) { return SYMBOL.B5(p, k); }, R9: function (p, k) { return SYMBOL.B5(p, k); }, R10: function (p, k) { var q = SW.SYM; return { vb: '-8 -8 ' + (q.a + q.lean + 16) + ' ' + (q.t + 16), inner: stroke1(1) }; }, R6: function (p, k) { return SYMBOL.B5(p, k); },
+    R1: function (p, k) { return SYMBOL.B5(p, k); }, R2: function (p, k) { return SYMBOL.B5(p, k); }, R3: function (p, k) { return SYMBOL.B5(p, k); }, R4: function (p, k) { return SYMBOL.B5(p, k); }, R8: function (p, k) { return SYMBOL.B5(p, k); }, R9: function (p, k) { return SYMBOL.B5(p, k); }, R10: function (p, k) { var q = SW.SYM; return { vb: '-8 -8 ' + (q.a + q.lean + 16) + ' ' + (q.t + 16), inner: stroke1(1) }; }, R11: function (p, k) { var q = SW.SYM; return { vb: '-8 -8 ' + (q.a + q.lean + 16) + ' ' + (q.t + 16), inner: stroke1(1) }; }, R6: function (p, k) { return SYMBOL.B5(p, k); },
     R5: function (p, k) { var q = SW.SYM; return { vb: '-8 -8 ' + (q.a + q.lean + 16) + ' ' + (q.t + 16), inner: stroke1(1) }; }, R7: function (p, k) { var q = SW.SYM; return { vb: '-8 -8 ' + (q.a + q.lean + 16) + ' ' + (q.t + 16), inner: stroke1(1) }; },
     X1: function (p, k) { return { vb: '-6 -6 124 112', inner: icons.wind(p, k) }; }, X2: function (p, k) { return { vb: '-6 -6 112 112', inner: icons.ring(p, k) }; }, X3: function (p, k) { return { vb: '-6 -6 140 112', inner: icons.loop(p, k) }; },
     X4: function (p, k) { return { vb: '-6 -6 122 112', inner: icons.dial(p, k) }; }, X5: function (p, k) { return { vb: '-6 -6 116 112', inner: icons.chev(p, k) }; }, X6: function (p, k) { return { vb: '-6 -6 116 112', inner: icons.turn(p, k) }; },
