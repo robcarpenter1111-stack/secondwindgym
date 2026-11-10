@@ -124,7 +124,29 @@ body.compact .sp { gap:16px; padding-top:22px; }
 .toast { position:fixed; left:50%; bottom:calc(max(14px, env(safe-area-inset-bottom)) + 92px); transform:translateX(-50%); z-index:9; background:var(--ink); color:var(--bg); padding:10px 12px 10px 16px; display:flex; gap:14px; align-items:center; font-size:15px; box-shadow:0 10px 30px rgba(0,0,0,.25); max-width:calc(100% - 32px); }
 .toast[hidden] { display:none; }
 .toast button { font:600 12px var(--f-label); letter-spacing:.1em; text-transform:uppercase; background:transparent; color:var(--bg); border:1px solid currentColor; border-radius:8px; min-height:34px; padding:0 12px; cursor:pointer; }
-@media (max-width:640px) { .filterbar .sep { display:none; } .quick button { min-height:34px; padding:0 9px; } }
+@media (max-width:640px) { .filterbar .sep { display:none; } .quick button { min-height:34px; padding:0 9px; } .sp .top > div:last-child { align-items:flex-start !important; } .quick { justify-content:flex-start; } .sp .top .label { text-align:left !important; } }
+/* voice notes: record per logo, play back, re-record; dictate into the comment box; sent with the feedback */
+.vn { display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; }
+.vn button, .quick .mic { font:500 12px var(--f-label); letter-spacing:.08em; text-transform:uppercase; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:8px; min-height:40px; padding:0 13px; cursor:pointer; display:inline-flex; align-items:center; gap:7px; }
+.vn button.rec, .quick .mic { border-color:var(--bronze); color:var(--bronze); }
+.vn button.rec:hover, .quick .mic:hover { background:var(--bronze); color:#fff; }
+.quick .mic { min-height:36px; padding:0 11px; font-size:11px; }
+.quick .mic.has, .vn button.rec.has { background:var(--bronze); color:#fff; }
+.vn button { flex-direction:row; white-space:nowrap; }
+.vn .dot, .quick .dot { flex:none; display:inline-block; vertical-align:middle; }
+.vn audio { height:40px; max-width:100%; }
+.vn .meta { font:500 11px var(--f-label); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+.vn .dict.on { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.dot { width:9px; height:9px; border-radius:50%; background:currentColor; display:inline-block; }
+.recpill { position:fixed; left:50%; bottom:calc(max(14px, env(safe-area-inset-bottom)) + 92px); transform:translateX(-50%); z-index:10; background:#8a2e24; color:#fff; padding:10px 12px 10px 16px; display:flex; gap:12px; align-items:center; font-size:15px; box-shadow:0 10px 30px rgba(0,0,0,.3); max-width:calc(100% - 32px); border-radius:2px; }
+.recpill[hidden] { display:none; }
+.recpill .dot { animation:pulse 1.1s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity:.25; } }
+.recpill b { font-variant-numeric:tabular-nums; min-width:38px; }
+.recpill span.w { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:42vw; }
+.recpill button { font:600 12px var(--f-label); letter-spacing:.1em; text-transform:uppercase; background:#fff; color:#8a2e24; border:0; border-radius:8px; min-height:36px; padding:0 14px; cursor:pointer; }
+.recpill button.x { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.6); }
+@media (prefers-reduced-motion:reduce) { .recpill .dot { animation:none; } }
 .fbk { display:grid; grid-template-columns:1fr 1fr; gap:18px; background:var(--card); border:1px solid var(--line); border-left:3px solid var(--bronze); padding:18px 22px; }
 .fbk .label { color:var(--bronze); margin:0 0 6px; }
 .fbk p { margin:0; font-size:16px; line-height:1.5; }
@@ -157,7 +179,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
     <p class="label">Second Wind Athletic Club · logo review · from Robbie, for Sergio</p>
     <h1>What you<br>asked to see</h1>
     <p class="lead">Sergio, here is everything you asked to see in your feedback on 8 November. Each logo you liked comes first, with your note under it, followed straight away by the variations you asked for. In those variations I've changed only what you asked for, nothing else, so you can judge each change on its own. My own recommendation, including a couple of refinements I'd make, is on a <a href="recommend.html" style="color:var(--bronze)">separate page</a>. Each one is put through the same test: the full mark, four weights, the icon it becomes when it's small, and how it behaved on the real walls, glass and cups of HUB's design. The same format for each, so the only thing that changes is the logo.</p>
-    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Tap Like, Maybe or Not for me at the top of each logo. Not for me folds it away, and the bar lets you show only the ones you like side by side. The page remembers as you go. When you're done, press Send feedback at the bottom and it opens an email to me with everything filled in. Your earlier answers are kept.</p>
+    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Tap Like, Maybe or Not for me at the top of each logo. Not for me folds it away, and the bar lets you show only the ones you like side by side. If it's easier to say it than type it, tap 🎙 Voice note on any logo and talk; your notes come to me with the rest when you press Send. The page remembers as you go. When you're done, press Send feedback at the bottom and it opens an email to me with everything filled in. Your earlier answers are kept.</p>
     <p class="label" style="letter-spacing:.1em;color:var(--bronze)">In the order of your notes: 15, 16, 18, 01, 12, 13 and 14, each followed by its variations. The nineteen you marked not for me are set aside at the bottom of the page.</p>
     <p class="label" style="letter-spacing:.1em">How to read a spread: the hero is the logo at its best. The four weights are the same letters, thicker. The three squares are the icon at profile-picture size on linen, charcoal and walnut.</p>
   </header>
@@ -178,6 +200,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
 
   <div id="spreads"></div>
   <p class="empty" id="empty" hidden></p>
+  <div class="recpill" id="recpill" role="status" aria-live="polite" hidden><i class="dot" aria-hidden="true"></i><b id="rectime">0:00</b><span class="w" id="recwhat"></span><button type="button" id="recstop">Stop</button><button type="button" class="x" id="reccancel">Cancel</button></div>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toastmsg"></span><button type="button" id="undo">Undo</button></div>
   <p class="label" id="allswitch" style="text-align:center;margin:8px 0 40px"></p>
 
@@ -452,7 +475,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
       : '<div class="ic none">No icon<br>Name only</div><div class="ic none">No icon<br>Name only</div><div class="ic none">No icon<br>Name only</div>';
     var li = function (a) { return a.map(function (t) { return '<li>' + t + '</li>'; }).join(''); };
     sp += '<section class="sp" id="l-' + id + '" aria-labelledby="h-' + id + '">' +
-      '<div class="top"><div><p class="id">' + num + ' · ' + id + '</p><h2 id="h-' + id + '">' + r.title + '</h2></div><div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end"><div class="quick" data-id="' + id + '"><button type="button" data-v="like">Like it</button><button type="button" data-v="maybe">Maybe</button><button type="button" data-v="no">Not for me</button></div><p class="label" style="letter-spacing:.1em;text-align:right">In the family of: ' + r.fam + '</p></div></div>' +
+      '<div class="top"><div><p class="id">' + num + ' · ' + id + '</p><h2 id="h-' + id + '">' + r.title + '</h2></div><div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end"><div class="quick" data-id="' + id + '"><button type="button" data-v="like">Like it</button><button type="button" data-v="maybe">Maybe</button><button type="button" data-v="no">Not for me</button><button type="button" class="mic" data-mic="' + id + '" aria-label="Record a voice note about ' + r.title + '">🎙 Voice note</button></div><p class="label" style="letter-spacing:.1em;text-align:right">In the family of: ' + r.fam + '</p></div></div>' +
       '<div class="hero"><div class="mk">' + SWF.svg(id, 'light', '#f3efe7') + '</div></div>' +
       '<div class="grid"><div class="box"><h3>Four weights</h3><div class="weights">' + ws + '</div></div><div class="box"><h3>At icon size</h3><div class="icons">' + ic + '</div><p style="font-size:14px;color:var(--muted)">Profile picture, app icon, cup sleeve, glass, start line.</p></div></div>' +
       '<div class="box" style="gap:16px"><h3>In HUB\'s renders</h3><div class="hub">' +
@@ -461,7 +484,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
         '<figure><img src="photo/fam/' + id + '-shop.jpg?v=91da2086" alt="' + r.title + ' lit on the shopfront fascia" loading="lazy"><figcaption>Shopfront · bold · lit</figcaption></figure></div></div>' +
       '<div class="copy"><div class="c"><h3>The idea</h3><p>' + r.idea + '</p></div><div class="c"><h3>Where it works</h3><ul>' + li(r.works) + '</ul></div><div class="c"><h3>Where it may struggle</h3><ul>' + li(r.struggles) + '</ul></div></div>' +
       fbBlock(id) + '<div class="verdict"><b>' + r.vt + '</b><span class="pill ' + r.verdict + '">' + (r.verdict === 'good' ? 'Passes every test' : r.verdict === 'ok' ? 'Passes some' : 'Fails the small-size test') + '</span><p>' + r.vp + '</p></div>' +
-      '<div class="fb" data-id="' + id + '" data-title="' + num + ' · ' + r.title + '"><div class="fbh"><h3>Your take</h3><div class="opts"><button type="button" data-v="like">Like it</button><button type="button" data-v="maybe">Maybe</button><button type="button" data-v="no">Not for me</button></div></div><textarea placeholder="Anything you like or don\'t about this one, in a line or two" aria-label="Comment on ' + r.title + '"></textarea></div>' +
+      '<div class="fb" data-id="' + id + '" data-title="' + num + ' · ' + r.title + '"><div class="fbh"><h3>Your take</h3><div class="opts"><button type="button" data-v="like">Like it</button><button type="button" data-v="maybe">Maybe</button><button type="button" data-v="no">Not for me</button></div></div><textarea placeholder="Anything you like or don\'t about this one, in a line or two" aria-label="Comment on ' + r.title + '"></textarea><div class="vn" data-vn="' + id + '"><button type="button" class="rec" data-mic="' + id + '"><i class="dot" aria-hidden="true"></i> Record a voice note</button><button type="button" class="dict" data-dict="' + id + '" hidden>Dictate</button><span class="meta"></span></div></div>' +
       '</section>';
   });
   document.getElementById('toc').innerHTML = toc;
@@ -470,7 +493,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   var KEY = 'sw-logo-feedback', TO = 'robcarpenter1111@gmail.com';
   var state = {}; try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} count(); }
-  function count() { var n = order.filter(function (id) { return state[id] && state[id].v; }).length; document.getElementById('fbcount').textContent = n + ' of ' + order.length + ' rated'; }
+  function count() { var n = order.filter(function (id) { return state[id] && state[id].v; }).length, k = (typeof VN !== 'undefined') ? order.filter(function (id) { return VN[id]; }).length : 0; document.getElementById('fbcount').textContent = n + ' of ' + order.length + ' rated' + (k ? ' · ' + k + ' voice note' + (k > 1 ? 's' : '') : ''); }
   function paint(id) {   // both button sets for a logo show its verdict
     var v = (state[id] || {}).v;
     Array.prototype.forEach.call(document.querySelectorAll('.quick[data-id="' + id + '"] button, .fb[data-id="' + id + '"] .opts button'), function (x) { x.classList.toggle('on', x.getAttribute('data-v') === v); });
@@ -503,7 +526,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   }
   var toastT, last = null;
   function toast(msg, undo) {
-    var t = document.getElementById('toast'); document.getElementById('toastmsg').textContent = msg; t.hidden = false; last = undo;
+    var t = document.getElementById('toast'); document.getElementById('toastmsg').textContent = msg; t.hidden = false; last = undo; document.getElementById('undo').hidden = !undo;
     clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; last = null; }, 5000);
   }
   document.getElementById('undo').addEventListener('click', function () { if (last) last(); document.getElementById('toast').hidden = true; });
@@ -529,14 +552,95 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   function summary() {
     var names = { like: 'Like it', maybe: 'Maybe', no: 'Not for me' };
     return order.map(function (id) { var st = state[id] || {}, t = document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title');
-      return t + ' — ' + (names[st.v] || 'no verdict') + (st.c ? ' — ' + st.c.replace(/\s+/g, ' ').trim() : ''); }).join('\n');
+      return t + ' — ' + (names[st.v] || 'no verdict') + (st.c ? ' — ' + st.c.replace(/\s+/g, ' ').trim() : '') + (VN[id] ? ' — voice note: ' + vnName(id) : ''); }).join('\n');
   }
   document.getElementById('fbsend').addEventListener('click', function () {
-    var body = 'Logo feedback from the review page\n\n' + summary() + '\n\nOverall: ';
-    location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Second Wind logos: my feedback') + '&body=' + encodeURIComponent(body);
+    var when = new Date().toLocaleString('en-AU', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+    var body = 'Second Wind logo feedback · round 4 (shortlist of ' + order.length + ')\nSent ' + when + '\n\n' + summary() + '\n\nOverall: ';
+    var mail = function () { location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Second Wind logos: my feedback') + '&body=' + encodeURIComponent(body); };
+    var files = order.filter(function (id) { return VN[id]; }).map(function (id) { return new File([VN[id].blob], vnName(id), { type: VN[id].type }); });
+    if (!files.length) return mail();
+    if (navigator.canShare && navigator.canShare({ files: files })) {
+      navigator.share({ files: files, title: 'Second Wind logos: my feedback', text: body }).catch(function (e) { if (e && e.name !== 'AbortError') { downloadAll(files); mail(); } });
+    } else { downloadAll(files); toast('Your ' + files.length + ' voice note' + (files.length > 1 ? 's have' : ' has') + ' downloaded. Attach ' + (files.length > 1 ? 'them' : 'it') + ' to the email.', null); setTimeout(mail, 600); }
   });
+  function downloadAll(files) { files.forEach(function (f, i) { setTimeout(function () { var a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; document.body.appendChild(a); a.click(); a.remove(); }, i * 250); }); }
   document.getElementById('fbcopy').addEventListener('click', function () {
     var t = summary(), b = this; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy my feedback'; }, 1600); }, function () { window.prompt('Copy your feedback:', t); });
+  });
+
+  /* ---------- voice notes ---------- */
+  var VN = {}, DB = null;
+  window.__vn = VN; window.__summary = function () { return summary(); };   // read-only hooks for testing
+  function slug(t) { return t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+  function vnName(id) { var t = document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title'), ext = /mp4|aac|m4a/.test(VN[id].type) ? 'm4a' : /ogg/.test(VN[id].type) ? 'ogg' : 'webm'; return slug(t.replace(' · ', ' ')) + '.' + ext; }
+  function idb(cb) {
+    if (DB) return cb(DB);
+    try { var rq = indexedDB.open('sw-voice-notes', 1); rq.onupgradeneeded = function () { rq.result.createObjectStore('notes'); }; rq.onsuccess = function () { DB = rq.result; cb(DB); }; rq.onerror = function () { cb(null); }; } catch (e) { cb(null); }
+  }
+  function dbPut(id, v) { idb(function (db) { if (!db) return; try { var tx = db.transaction('notes', 'readwrite'); v ? tx.objectStore('notes').put(v, id) : tx.objectStore('notes').delete(id); } catch (e) {} }); }
+  function fmt(sec) { sec = Math.round(sec); return Math.floor(sec / 60) + ':' + ('0' + sec % 60).slice(-2); }
+  function showVN(id) {
+    var box = document.querySelector('.vn[data-vn="' + id + '"]'); if (!box) return;
+    var n = VN[id], a = box.querySelector('audio'), meta = box.querySelector('.meta'), del = box.querySelector('.del'), recB = box.querySelector('.rec');
+    if (a) { URL.revokeObjectURL(a.src); a.remove(); } if (del) del.remove();
+    if (n) {
+      a = document.createElement('audio'); a.controls = true; a.preload = 'metadata'; a.src = URL.createObjectURL(n.blob); box.insertBefore(a, recB);
+      del = document.createElement('button'); del.type = 'button'; del.className = 'del'; del.textContent = 'Delete'; del.setAttribute('data-del', id); box.insertBefore(del, meta);
+      recB.innerHTML = '<i class="dot" aria-hidden="true"></i> Re-record'; meta.textContent = 'Voice note · ' + fmt(n.dur || 0);
+    } else { recB.innerHTML = '<i class="dot" aria-hidden="true"></i> Record a voice note'; meta.textContent = ''; }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-mic="' + id + '"]'), function (b) { b.classList.toggle('has', !!n); if (b.classList.contains('mic')) b.textContent = n ? '🎙 Voice note ✓' : '🎙 Voice note'; });
+    count();
+  }
+  idb(function (db) {
+    if (!db) return;
+    try { var st = db.transaction('notes').objectStore('notes'), cur = st.openCursor(); cur.onsuccess = function () { var c = cur.result; if (c) { if (order.indexOf(c.key) >= 0) { VN[c.key] = c.value; showVN(c.key); } c.continue(); } }; } catch (e) {}
+  });
+  var R8C = null;   // the one recording in progress
+  var pill = document.getElementById('recpill');
+  function stopTracks() { if (R8C && R8C.stream) R8C.stream.getTracks().forEach(function (t) { t.stop(); }); }
+  function startRec(id) {
+    if (R8C) { if (R8C.id === id) return finishRec(true); finishRec(true); }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined') { toast('Voice notes need the website version of this page on a phone or computer with a microphone. You can type in the box instead.', null); return; }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      var types = ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm', 'audio/ogg;codecs=opus'], mime = '';
+      for (var i = 0; i < types.length; i++) if (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(types[i])) { mime = types[i]; break; }
+      var mr = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined), chunks = [], t0 = Date.now();
+      R8C = { id: id, mr: mr, stream: stream, keep: true, t0: t0 };
+      mr.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+      mr.onstop = function () {
+        var me = R8C; stopTracks(); R8C = null; clearInterval(me.tick); pill.hidden = true;
+        if (!me.keep || !chunks.length) return;
+        var type = (mr.mimeType || mime || 'audio/webm').split(';')[0];
+        VN[id] = { blob: new Blob(chunks, { type: type }), type: type, dur: (Date.now() - t0) / 1000, at: Date.now() };
+        dbPut(id, VN[id]); showVN(id);
+        toast('Voice note saved for ' + document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title') + '.', null);
+      };
+      mr.start(1000);
+      document.getElementById('recwhat').textContent = 'Recording · ' + document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title');
+      document.getElementById('rectime').textContent = '0:00'; pill.hidden = false;
+      R8C.tick = setInterval(function () { var s2 = (Date.now() - t0) / 1000; document.getElementById('rectime').textContent = fmt(s2); if (s2 >= 300) finishRec(true); }, 250);
+    }).catch(function () { toast('The microphone is blocked. Allow it for this site in your browser settings, or type in the box instead.', null); });
+  }
+  function finishRec(keep) { if (!R8C) return; R8C.keep = keep; try { R8C.mr.state !== 'inactive' ? R8C.mr.stop() : R8C.mr.onstop(); } catch (e) { stopTracks(); R8C = null; pill.hidden = true; } }
+  document.getElementById('recstop').addEventListener('click', function () { finishRec(true); });
+  document.getElementById('reccancel').addEventListener('click', function () { finishRec(false); });
+  // dictation: speech typed into the comment box, where the browser supports it
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition, DICT = null;
+  if (SR) Array.prototype.forEach.call(document.querySelectorAll('.dict'), function (b) { b.hidden = false; });
+  function dictate(id, btn) {
+    if (DICT) { var was = DICT.id; DICT.r.stop(); if (was === id) return; }
+    var r = new SR(), ta = document.querySelector('.fb[data-id="' + id + '"] textarea');
+    r.lang = 'en-AU'; r.continuous = true; r.interimResults = false;
+    r.onresult = function (e) { for (var i = e.resultIndex; i < e.results.length; i++) if (e.results[i].isFinal) { var t = e.results[i][0].transcript.trim(); if (t) { ta.value = (ta.value ? ta.value.replace(/\s+$/, '') + ' ' : '') + t.charAt(0).toUpperCase() + t.slice(1) + '.'; ta.dispatchEvent(new Event('input')); } } };
+    r.onend = function () { btn.classList.remove('on'); btn.textContent = 'Dictate'; DICT = null; };
+    r.onerror = function (e) { if (e.error === 'not-allowed') toast('The microphone is blocked for dictation. You can type in the box instead.', null); };
+    try { r.start(); DICT = { id: id, r: r }; btn.classList.add('on'); btn.textContent = 'Listening · tap to stop'; } catch (e) {}
+  }
+  document.getElementById('spreads').addEventListener('click', function (e) {
+    var m = e.target.closest('[data-mic]'); if (m) { startRec(m.getAttribute('data-mic')); return; }
+    var d = e.target.closest('[data-del]'); if (d) { var id = d.getAttribute('data-del'), keep = VN[id]; delete VN[id]; dbPut(id, null); showVN(id); toast('Voice note deleted.', function () { VN[id] = keep; dbPut(id, keep); showVN(id); }); return; }
+    var dc = e.target.closest('[data-dict]'); if (dc) dictate(dc.getAttribute('data-dict'), dc);
   });
   count(); apply();
   Array.prototype.forEach.call(document.querySelectorAll('[data-rec]'), function (el) { el.innerHTML = SWF.svg(el.getAttribute('data-rec'), el.getAttribute('data-w'), '#f3efe7').replace('<svg ', '<svg style="width:100%;height:100%;display:block" '); });
