@@ -101,6 +101,30 @@ p { margin:0; max-width:62ch; }
 .ba figcaption { font:500 11px var(--f-label); letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:6px; }
 .ask { border-left:3px solid var(--bronze); padding:4px 0 4px 18px; font-size:17px; line-height:1.55; margin:0; }
 @media (max-width:860px) { .rec3, .why, .ba { grid-template-columns:1fr; } }
+/* sorting: Not for me folds a logo away; a sticky bar filters by verdict; compact shows only what's needed to compare */
+.filterbar { position:sticky; top:0; z-index:7; background:var(--bg); padding:12px 0; margin:0 0 6px; display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; border-bottom:1px solid var(--line); }
+.filterbar .lab { font:500 11px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-right:2px; }
+.filterbar button { font:500 12px var(--f-label); letter-spacing:.08em; text-transform:uppercase; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:8px; min-height:38px; padding:0 12px; cursor:pointer; display:inline-flex; gap:7px; align-items:center; }
+.filterbar button .n { font-variant-numeric:tabular-nums; opacity:.6; }
+.filterbar button.on { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.filterbar button.on .n { opacity:.8; }
+.filterbar .sep { flex:1; }
+.filterbar .compact[aria-pressed="true"] { background:var(--bronze); border-color:var(--bronze); color:#fff; }
+.sp.gone, .toc a.gone { display:none !important; }
+.sp.folding { transition:opacity .32s ease, transform .32s ease; opacity:0; transform:translateY(-10px); }
+.quick { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+.quick button { font:500 11px var(--f-label); letter-spacing:.08em; text-transform:uppercase; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:8px; min-height:36px; padding:0 11px; cursor:pointer; }
+.quick button.on { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.quick button.on[data-v="like"], .fb .opts button.on[data-v="like"] { background:var(--good); border-color:var(--good); color:#fff; }
+.quick button.on[data-v="no"] { background:var(--bad); border-color:var(--bad); color:#fff; }
+body.compact .sp .grid, body.compact .sp .copy, body.compact .sp .fbk, body.compact .sp .verdict, body.compact .sp .top .label { display:none; }
+body.compact #spreads { gap:40px !important; }
+body.compact .sp { gap:16px; padding-top:22px; }
+.empty { text-align:center; padding:40px 16px; color:var(--muted); border:1px dashed var(--line); }
+.toast { position:fixed; left:50%; bottom:calc(max(14px, env(safe-area-inset-bottom)) + 92px); transform:translateX(-50%); z-index:9; background:var(--ink); color:var(--bg); padding:10px 12px 10px 16px; display:flex; gap:14px; align-items:center; font-size:15px; box-shadow:0 10px 30px rgba(0,0,0,.25); max-width:calc(100% - 32px); }
+.toast[hidden] { display:none; }
+.toast button { font:600 12px var(--f-label); letter-spacing:.1em; text-transform:uppercase; background:transparent; color:var(--bg); border:1px solid currentColor; border-radius:8px; min-height:34px; padding:0 12px; cursor:pointer; }
+@media (max-width:640px) { .filterbar .sep { display:none; } .quick button { min-height:34px; padding:0 9px; } }
 .fbk { display:grid; grid-template-columns:1fr 1fr; gap:18px; background:var(--card); border:1px solid var(--line); border-left:3px solid var(--bronze); padding:18px 22px; }
 .fbk .label { color:var(--bronze); margin:0 0 6px; }
 .fbk p { margin:0; font-size:16px; line-height:1.5; }
@@ -133,15 +157,28 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
     <p class="label">Second Wind Athletic Club · logo review · from Robbie, for Sergio</p>
     <h1>What you<br>asked to see</h1>
     <p class="lead">Sergio, here is everything you asked to see in your feedback on 8 November. Each logo you liked comes first, with your note under it, followed straight away by the variations you asked for. In those variations I've changed only what you asked for, nothing else, so you can judge each change on its own. My own recommendation, including a couple of refinements I'd make, is on a <a href="recommend.html" style="color:var(--bronze)">separate page</a>. Each one is put through the same test: the full mark, four weights, the icon it becomes when it's small, and how it behaved on the real walls, glass and cups of HUB's design. The same format for each, so the only thing that changes is the logo.</p>
-    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Under each logo, tap Like, Maybe or Not for me and add a line if you have one. The page remembers as you go. When you're done, press Send feedback at the bottom and it opens an email to me with everything filled in. Your earlier answers are kept.</p>
+    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Tap Like, Maybe or Not for me at the top of each logo. Not for me folds it away, and the bar lets you show only the ones you like side by side. The page remembers as you go. When you're done, press Send feedback at the bottom and it opens an email to me with everything filled in. Your earlier answers are kept.</p>
     <p class="label" style="letter-spacing:.1em;color:var(--bronze)">In the order of your notes: 15, 16, 18, 01, 12, 13 and 14, each followed by its variations. The nineteen you marked not for me are set aside at the bottom of the page.</p>
     <p class="label" style="letter-spacing:.1em">How to read a spread: the hero is the logo at its best. The four weights are the same letters, thicker. The three squares are the icon at profile-picture size on linen, charcoal and walnut.</p>
   </header>
 
 
+  <div id="fbanchor"></div>
+  <div class="filterbar" id="filterbar" role="toolbar" aria-label="Sort the logos">
+    <span class="lab">Show</span>
+    <button type="button" data-f="all">All <span class="n"></span></button>
+    <button type="button" data-f="todo">To rate <span class="n"></span></button>
+    <button type="button" data-f="like">Liked <span class="n"></span></button>
+    <button type="button" data-f="maybe">Maybe <span class="n"></span></button>
+    <button type="button" data-f="no">Hidden <span class="n"></span></button>
+    <span class="sep"></span>
+    <button type="button" class="compact" id="compact" aria-pressed="false">Compact view</button>
+  </div>
   <nav class="toc" id="toc" aria-label="Logos"></nav>
 
   <div id="spreads"></div>
+  <p class="empty" id="empty" hidden></p>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toastmsg"></span><button type="button" id="undo">Undo</button></div>
   <p class="label" id="allswitch" style="text-align:center;margin:8px 0 40px"></p>
 
   <div class="sendbar" id="sendbar"><p id="fbcount">0 rated</p><div class="acts"><button type="button" class="copy" id="fbcopy">Copy my feedback</button><button type="button" class="send" id="fbsend">Send feedback to Robbie</button></div></div>
@@ -415,7 +452,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
       : '<div class="ic none">No icon<br>Name only</div><div class="ic none">No icon<br>Name only</div><div class="ic none">No icon<br>Name only</div>';
     var li = function (a) { return a.map(function (t) { return '<li>' + t + '</li>'; }).join(''); };
     sp += '<section class="sp" id="l-' + id + '" aria-labelledby="h-' + id + '">' +
-      '<div class="top"><div><p class="id">' + num + ' · ' + id + '</p><h2 id="h-' + id + '">' + r.title + '</h2></div><p class="label" style="letter-spacing:.1em">In the family of: ' + r.fam + '</p></div>' +
+      '<div class="top"><div><p class="id">' + num + ' · ' + id + '</p><h2 id="h-' + id + '">' + r.title + '</h2></div><div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end"><div class="quick" data-id="' + id + '"><button type="button" data-v="like">Like it</button><button type="button" data-v="maybe">Maybe</button><button type="button" data-v="no">Not for me</button></div><p class="label" style="letter-spacing:.1em;text-align:right">In the family of: ' + r.fam + '</p></div></div>' +
       '<div class="hero"><div class="mk">' + SWF.svg(id, 'light', '#f3efe7') + '</div></div>' +
       '<div class="grid"><div class="box"><h3>Four weights</h3><div class="weights">' + ws + '</div></div><div class="box"><h3>At icon size</h3><div class="icons">' + ic + '</div><p style="font-size:14px;color:var(--muted)">Profile picture, app icon, cup sleeve, glass, start line.</p></div></div>' +
       '<div class="box" style="gap:16px"><h3>In HUB\'s renders</h3><div class="hub">' +
@@ -434,15 +471,61 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   var state = {}; try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} count(); }
   function count() { var n = order.filter(function (id) { return state[id] && state[id].v; }).length; document.getElementById('fbcount').textContent = n + ' of ' + order.length + ' rated'; }
+  function paint(id) {   // both button sets for a logo show its verdict
+    var v = (state[id] || {}).v;
+    Array.prototype.forEach.call(document.querySelectorAll('.quick[data-id="' + id + '"] button, .fb[data-id="' + id + '"] .opts button'), function (x) { x.classList.toggle('on', x.getAttribute('data-v') === v); });
+  }
   Array.prototype.forEach.call(document.querySelectorAll('.fb'), function (box) {
     var id = box.getAttribute('data-id'), st = state[id] || (state[id] = {});
     var ta = box.querySelector('textarea'); if (st.c) ta.value = st.c;
-    Array.prototype.forEach.call(box.querySelectorAll('.opts button'), function (b) {
-      if (st.v === b.getAttribute('data-v')) b.classList.add('on');
-      b.addEventListener('click', function () { st.v = b.getAttribute('data-v'); Array.prototype.forEach.call(box.querySelectorAll('.opts button'), function (x) { x.classList.toggle('on', x === b); }); save(); });
-    });
     ta.addEventListener('input', function () { st.c = ta.value; save(); });
+    paint(id);
   });
+  // sorting
+  var VKEY = 'sw-logo-view', view = 'all', compact = false;
+  try { var vv = JSON.parse(localStorage.getItem(VKEY) || '{}'); view = vv.view || 'all'; compact = !!vv.compact; } catch (e) {}
+  if (SHOW_ALL) view = 'all';
+  function keepView() { try { localStorage.setItem(VKEY, JSON.stringify({ view: view, compact: compact })); } catch (e) {} }
+  function shows(id) { var v = (state[id] || {}).v; return view === 'all' ? v !== 'no' : view === 'todo' ? !v : view === v; }
+  var EMPTY = { all: 'Everything is hidden. Tap Hidden to bring logos back.', todo: 'All rated. Tap Liked to see your favourites together.', like: 'Nothing liked yet.', maybe: 'Nothing marked maybe.', no: 'Nothing hidden.' };
+  function apply() {
+    var shown = 0;
+    order.forEach(function (id) {
+      var on = shows(id); if (on) shown++;
+      var sec = document.getElementById('l-' + id); sec.classList.remove('folding'); sec.classList.toggle('gone', !on);
+      var a = document.querySelector('.toc a[href="#l-' + id + '"]'); if (a) a.classList.toggle('gone', !on);
+    });
+    var c = { all: 0, todo: 0, like: 0, maybe: 0, no: 0 };
+    order.forEach(function (id) { var v = (state[id] || {}).v; if (v !== 'no') c.all++; if (!v) c.todo++; else c[v]++; });
+    Array.prototype.forEach.call(document.querySelectorAll('#filterbar [data-f]'), function (b) { var f = b.getAttribute('data-f'); b.classList.toggle('on', f === view); b.setAttribute('aria-pressed', f === view); b.querySelector('.n').textContent = c[f]; });
+    var em = document.getElementById('empty'); em.hidden = shown > 0; em.textContent = EMPTY[view];
+    document.body.classList.toggle('compact', compact); document.getElementById('compact').setAttribute('aria-pressed', compact);
+  }
+  var toastT, last = null;
+  function toast(msg, undo) {
+    var t = document.getElementById('toast'); document.getElementById('toastmsg').textContent = msg; t.hidden = false; last = undo;
+    clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; last = null; }, 5000);
+  }
+  document.getElementById('undo').addEventListener('click', function () { if (last) last(); document.getElementById('toast').hidden = true; });
+  document.getElementById('spreads').addEventListener('click', function (e) {
+    var b = e.target.closest('.quick button, .fb .opts button'); if (!b) return;
+    var box = b.closest('[data-id]'), id = box.getAttribute('data-id'), st = state[id] || (state[id] = {}), prev = st.v, v = b.getAttribute('data-v');
+    st.v = v; paint(id); save();
+    var title = document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title');
+    if (!shows(id)) {   // it leaves the current view: fold it away after a beat so the tick is seen
+      var sec = document.getElementById('l-' + id);
+      setTimeout(function () { sec.classList.add('folding'); setTimeout(apply, 320); }, 260);
+      var restore = function () { st.v = prev; paint(id); save(); apply(); var s2 = document.getElementById('l-' + id); if (s2 && !s2.classList.contains('gone')) s2.scrollIntoView({ block: 'start' }); };
+      toast(v === 'no' ? 'Hidden: ' + title : 'Moved: ' + title, restore);
+    } else apply();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('#filterbar [data-f]'), function (b) {
+    b.addEventListener('click', function () { view = b.getAttribute('data-f'); keepView(); apply(); toTop(); });
+  });
+  document.getElementById('compact').addEventListener('click', function () { compact = !compact; keepView(); apply(); toTop(); });
+  function toTop() { var y = document.getElementById('fbanchor').getBoundingClientRect().top + window.scrollY; if (window.scrollY > y) window.scrollTo({ top: y }); }
+  // the round-one summary belongs to the archive, not to what Sergio asked to see
+  var oldRec = document.querySelector('section.rec'); if (oldRec && !SHOW_ALL) { oldRec.hidden = true; oldRec.style.display = 'none'; }
   function summary() {
     var names = { like: 'Like it', maybe: 'Maybe', no: 'Not for me' };
     return order.map(function (id) { var st = state[id] || {}, t = document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title');
@@ -455,7 +538,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   document.getElementById('fbcopy').addEventListener('click', function () {
     var t = summary(), b = this; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy my feedback'; }, 1600); }, function () { window.prompt('Copy your feedback:', t); });
   });
-  count();
+  count(); apply();
   Array.prototype.forEach.call(document.querySelectorAll('[data-rec]'), function (el) { el.innerHTML = SWF.svg(el.getAttribute('data-rec'), el.getAttribute('data-w'), '#f3efe7').replace('<svg ', '<svg style="width:100%;height:100%;display:block" '); });
   document.getElementById('spreads').style.display = 'flex'; document.getElementById('spreads').style.flexDirection = 'column'; document.getElementById('spreads').style.gap = '72px';
 })();
