@@ -168,6 +168,17 @@ body.compact .sp { gap:16px; padding-top:22px; }
 .sendbar .send { background:var(--linen); color:var(--ink); border:1px solid var(--linen); }
 .sendbar .saved { color:#a9c79a; letter-spacing:.08em; }
 .sendbar .saved.wait { color:#e3c48f; }
+.idea { border-top:1px solid rgba(30,28,26,.15); margin:64px 0 0; padding:40px 0 8px; }
+.idea h2 { margin:.2em 0 .4em; }
+.idea > p:not(.label) { max-width:62ch; }
+.ideapair { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:22px 0 18px; }
+.ideapair figure { margin:0; }
+.ideapair img { width:100%; height:auto; display:block; border-radius:10px; }
+.ideapair figcaption { font:500 11px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:rgba(30,28,26,.65); margin-top:8px; }
+.ideavote { display:flex; gap:10px; flex-wrap:wrap; }
+.ideavote button { font:500 12px var(--f-label); letter-spacing:.1em; text-transform:uppercase; min-height:44px; padding:0 18px; border-radius:8px; border:1px solid rgba(30,28,26,.3); background:transparent; color:var(--ink); cursor:pointer; }
+.ideavote button.on { background:var(--ink); color:var(--linen); border-color:var(--ink); }
+@media (max-width:640px) { .ideapair { grid-template-columns:1fr; } }
 .signoff { background:#fff; border:1px solid rgba(30,28,26,.12); border-radius:14px; padding:28px clamp(18px,4vw,40px); margin:56px 0 48px; }
 .signoff h2 { margin:.2em 0 .4em; }
 .sogrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px 18px; margin:18px 0 14px; }
@@ -190,7 +201,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   <header class="head">
     <p class="label">Second Wind Athletic Club · logo review · from Robbie, for Sergio</p>
     <h1>What you<br>asked to see</h1>
-    <p class="lead">Sergio, here is everything you asked to see in your feedback on 8 November. Each logo you liked comes first, with your note under it, followed straight away by the variations you asked for. In those variations I've changed only what you asked for, nothing else, so you can judge each change on its own. Our recommendation, with a couple of small refinements we'd suggest, is on a <a href="recommend.html" style="color:var(--bronze)">separate page</a>. Each one is put through the same test: the full mark, four weights, the icon it becomes when it's small, and how it behaved on the real walls, glass and cups of HUB's design. The same format for each, so the only thing that changes is the logo.</p>
+    <p class="lead">Sergio, here is everything you asked to see in your feedback on 8 November. Each logo you liked comes first, with your note under it, followed straight away by the variations you asked for. In those variations I've changed only what you asked for, nothing else, so you can judge each change on its own. Each one is put through the same test: the full mark, four weights, the icon it becomes when it's small, and how it behaved on the real walls, glass and cups of HUB's design. The same format for each, so the only thing that changes is the logo.</p>
     <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Tap Like, Maybe or Not for me at the top of each logo. Not for me folds it away, and the bar lets you show only the ones you like side by side. If it's easier to say it than type it, tap 🎙 Voice note on any logo and talk. Everything you tap, type or record comes straight to me as you go, so there's nothing to send. When you've made up your mind, sign off your final choice at the bottom.</p>
     <p class="label" style="letter-spacing:.1em;color:var(--bronze)">In the order of your notes: 15, 16, 18, 01, 12, 13 and 14, each followed by its variations. The nineteen you marked not for me are set aside at the bottom of the page.</p>
     <p class="label" style="letter-spacing:.1em">How to read a spread: the hero is the logo at its best. The four weights are the same letters, thicker. The three squares are the icon at profile-picture size on linen, charcoal and walnut.</p>
@@ -215,6 +226,19 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   <div class="recpill" id="recpill" role="status" aria-live="polite" hidden><i class="dot" aria-hidden="true"></i><b id="rectime">0:00</b><span class="w" id="recwhat"></span><button type="button" id="recstop">Stop</button><button type="button" class="x" id="reccancel">Cancel</button></div>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toastmsg"></span><button type="button" id="undo">Undo</button></div>
   <p class="label" id="allswitch" style="text-align:center;margin:8px 0 40px"></p>
+
+  <section class="idea" id="idea" aria-labelledby="h-idea">
+    <p class="label">Optional · one extra idea from us</p>
+    <h2 id="h-idea">The club line, tidied up</h2>
+    <p>Not something you asked for, just a small thing we noticed while drawing your variations, so take it or leave it. On 01 and the versions based on it, ATHLETIC CLUB is stretched across the full width of SECOND WIND. That spreads the letters so far apart they get hard to read, and too thin to light up on a sign. One option is to lean it with the letters and finish it under WIND, so the strokes open the logo and the club line closes it. If you like it, we can apply it to whichever logo you choose.</p>
+    <div class="ideapair">
+      <figure><img src="photo/clubline-before.jpg?v=c7961404" alt="ATHLETIC CLUB stretched across the full width of the name" loading="lazy"><figcaption>As it is now</figcaption></figure>
+      <figure><img src="photo/clubline-after.jpg?v=c7961404" alt="ATHLETIC CLUB leaning with the letters and finishing under WIND" loading="lazy"><figcaption>Tidied up</figcaption></figure>
+    </div>
+    <div class="ideavote" role="group" aria-label="Your take on this idea">
+      <button type="button" data-iv="like">Yes, use it</button><button type="button" data-iv="no">Keep it as it is</button>
+    </div>
+  </section>
 
   <section class="signoff" id="signoff" aria-labelledby="h-so">
     <p class="label">When you're ready</p>
@@ -580,7 +604,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   function summary() {
     var names = { like: 'Like it', maybe: 'Maybe', no: 'Not for me' };
     return order.map(function (id) { var st = state[id] || {}, t = document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title');
-      return t + ' — ' + (names[st.v] || 'no verdict') + (st.c ? ' — ' + st.c.replace(/\s+/g, ' ').trim() : '') + (VN[id] ? ' — voice note: ' + vnName(id) : ''); }).join('\n') + (function () { try { var p = JSON.parse(localStorage.getItem('sw-signoff') || 'null'); return p ? '\n\nSIGNED OFF by ' + p.who + ', ' + p.when + ': club ' + p.club + '; café ' + p.cafe + (p.name ? '; café name ' + p.name : '') : ''; } catch (e) { return ''; } })();
+      return t + ' — ' + (names[st.v] || 'no verdict') + (st.c ? ' — ' + st.c.replace(/\s+/g, ' ').trim() : '') + (VN[id] ? ' — voice note: ' + vnName(id) : ''); }).join('\n') + (function () { try { var p = JSON.parse(localStorage.getItem('sw-signoff') || 'null'); var iv = localStorage.getItem('sw-idea'); var ideaTxt = iv ? '\n\nExtra idea (club line tidied up): ' + (iv === 'like' ? 'yes, use it' : 'keep it as it is') : ''; return ideaTxt + (p ? '\n\nSIGNED OFF by ' + p.who + ', ' + p.when + ': club ' + p.club + '; café ' + p.cafe + (p.name ? '; café name ' + p.name : '') : ''); } catch (e) { return ''; } })();
   }
   document.getElementById('fbsend').addEventListener('click', function () {
     var when = new Date().toLocaleString('en-AU', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' });
@@ -740,6 +764,13 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
       log({ event: 'signoff', title: 'Club: ' + p.club + ' · Café: ' + p.cafe, verdict: 'Approved', comment: p.name ? 'Café name: ' + p.name : '', signedBy: p.who });
       show(p); ok.checked = false; check();
     });
+  })();
+  // the optional extra idea: his answer is logged like a vote
+  (function () {
+    var bs = document.querySelectorAll('.ideavote button'), k = 'sw-idea', cur = null; try { cur = localStorage.getItem(k); } catch (e) {}
+    function show() { Array.prototype.forEach.call(bs, function (b) { b.classList.toggle('on', b.getAttribute('data-iv') === cur); b.setAttribute('aria-pressed', b.getAttribute('data-iv') === cur); }); }
+    show();
+    Array.prototype.forEach.call(bs, function (b) { b.addEventListener('click', function () { cur = cur === b.getAttribute('data-iv') ? null : b.getAttribute('data-iv'); try { cur ? localStorage.setItem(k, cur) : localStorage.removeItem(k); } catch (e) {} show(); log({ event: 'vote', title: 'Extra idea: club line tidied up', verdict: cur === 'like' ? 'Yes, use it' : cur === 'no' ? 'Keep it as it is' : '(answer cleared)' }); }); });
   })();
   log({ event: 'opened' });
   if (ENDPOINT && !Q.length) status('Saves to Robbie as you go');
