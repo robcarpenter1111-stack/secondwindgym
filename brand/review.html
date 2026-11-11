@@ -166,6 +166,18 @@ body.compact .sp { gap:16px; padding-top:22px; }
 .sendbar .acts { display:flex; gap:8px; flex-wrap:wrap; }
 .sendbar button, .sendbar a { font:500 12px var(--f-label); letter-spacing:.12em; text-transform:uppercase; border-radius:8px; min-height:42px; padding:0 16px; display:inline-flex; align-items:center; cursor:pointer; text-decoration:none; }
 .sendbar .send { background:var(--linen); color:var(--ink); border:1px solid var(--linen); }
+.sendbar .saved { color:#a9c79a; letter-spacing:.08em; }
+.sendbar .saved.wait { color:#e3c48f; }
+.signoff { background:#fff; border:1px solid rgba(30,28,26,.12); border-radius:14px; padding:28px clamp(18px,4vw,40px); margin:56px 0 48px; }
+.signoff h2 { margin:.2em 0 .4em; }
+.sogrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px 18px; margin:18px 0 14px; }
+.sogrid label { display:flex; flex-direction:column; gap:6px; font:500 11px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:rgba(30,28,26,.7); }
+.sogrid select, .sogrid input { font:16px var(--f-body, inherit); min-height:44px; padding:0 12px; border:1px solid rgba(30,28,26,.25); border-radius:8px; background:#fbf9f5; color:var(--ink); text-transform:none; letter-spacing:0; }
+.sotick { display:flex; gap:10px; align-items:flex-start; margin:6px 0 16px; line-height:1.4; }
+.sotick input { width:20px; height:20px; flex:none; margin-top:1px; }
+.sobtn { font:500 12px var(--f-label); letter-spacing:.12em; text-transform:uppercase; min-height:46px; padding:0 22px; border-radius:8px; border:1px solid var(--ink); background:var(--ink); color:var(--linen); cursor:pointer; }
+.sobtn:disabled { opacity:.35; cursor:not-allowed; }
+.sodone { margin:16px 0 0; padding:14px 16px; border-radius:8px; background:#e7efe3; color:#24361d; font-weight:500; }
 .sendbar .copy { background:transparent; color:var(--linen); border:1px solid rgba(243,239,231,.4); }
 .btn { align-self:flex-start; font:500 13px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:var(--linen); background:#1e1c1a; text-decoration:none; padding:0 22px; min-height:48px; display:inline-flex; align-items:center; }
 .btn:hover { background:var(--bronze); }
@@ -204,7 +216,22 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   <div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toastmsg"></span><button type="button" id="undo">Undo</button></div>
   <p class="label" id="allswitch" style="text-align:center;margin:8px 0 40px"></p>
 
-  <div class="sendbar" id="sendbar"><p id="fbcount">0 rated</p><div class="acts"><button type="button" class="copy" id="fbcopy">Copy my feedback</button><button type="button" class="send" id="fbsend">Send feedback to Robbie</button></div></div>
+  <section class="signoff" id="signoff" aria-labelledby="h-so">
+    <p class="label">When you're ready</p>
+    <h2 id="h-so">Sign off your final choice</h2>
+    <p>Only when you've made up your mind. Pick the logo for the club and the one for the café, type your name and tick the box. It's saved with the date and time, so we both have a record of what we agreed before I start the full rollout. You can still change your mind later; a new sign-off simply goes in under the old one.</p>
+    <div class="sogrid">
+      <label>Club logo<select id="soclub"></select></label>
+      <label>Café logo<select id="socafe"></select></label>
+      <label>Café name<input id="soname2" type="text" placeholder="e.g. First Wind Café, or still to decide"></label>
+      <label>Your name<input id="sowho" type="text" autocomplete="name" placeholder="Sergio …"></label>
+    </div>
+    <label class="sotick"><input type="checkbox" id="sook"> I'm happy for Robbie to take these into the full rollout.</label>
+    <button type="button" class="sobtn" id="sobtn" disabled>Sign off</button>
+    <p class="sodone" id="sodone" hidden></p>
+  </section>
+
+  <div class="sendbar" id="sendbar"><p id="fbcount">0 rated</p><p class="saved" id="saved" hidden></p><div class="acts"><button type="button" class="copy" id="fbcopy">Copy my feedback</button><button type="button" class="send" id="fbsend">Send feedback to Robbie</button></div></div>
 
   <section class="rec" aria-labelledby="h-rec">
     <p class="label">My favourite</p>
@@ -531,7 +558,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   }
   document.getElementById('undo').addEventListener('click', function () { if (last) last(); document.getElementById('toast').hidden = true; });
   document.getElementById('spreads').addEventListener('click', function (e) {
-    var b = e.target.closest('.quick button, .fb .opts button'); if (!b) return;
+    var b = e.target.closest('.quick button[data-v], .fb .opts button[data-v]'); if (!b) return;
     var box = b.closest('[data-id]'), id = box.getAttribute('data-id'), st = state[id] || (state[id] = {}), prev = st.v, v = b.getAttribute('data-v');
     st.v = v; paint(id); save();
     var title = document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title');
@@ -552,7 +579,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   function summary() {
     var names = { like: 'Like it', maybe: 'Maybe', no: 'Not for me' };
     return order.map(function (id) { var st = state[id] || {}, t = document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title');
-      return t + ' — ' + (names[st.v] || 'no verdict') + (st.c ? ' — ' + st.c.replace(/\s+/g, ' ').trim() : '') + (VN[id] ? ' — voice note: ' + vnName(id) : ''); }).join('\n');
+      return t + ' — ' + (names[st.v] || 'no verdict') + (st.c ? ' — ' + st.c.replace(/\s+/g, ' ').trim() : '') + (VN[id] ? ' — voice note: ' + vnName(id) : ''); }).join('\n') + (function () { try { var p = JSON.parse(localStorage.getItem('sw-signoff') || 'null'); return p ? '\n\nSIGNED OFF by ' + p.who + ', ' + p.when + ': club ' + p.club + '; café ' + p.cafe + (p.name ? '; café name ' + p.name : '') : ''; } catch (e) { return ''; } })();
   }
   document.getElementById('fbsend').addEventListener('click', function () {
     var when = new Date().toLocaleString('en-AU', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' });
@@ -613,7 +640,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
         if (!me.keep || !chunks.length) return;
         var type = (mr.mimeType || mime || 'audio/webm').split(';')[0];
         VN[id] = { blob: new Blob(chunks, { type: type }), type: type, dur: (Date.now() - t0) / 1000, at: Date.now() };
-        dbPut(id, VN[id]); showVN(id);
+        dbPut(id, VN[id]); showVN(id); window.dispatchEvent(new CustomEvent('sw-voice', { detail: { type: 'saved', id: id } }));
         toast('Voice note saved for ' + document.querySelector('.fb[data-id="' + id + '"]').getAttribute('data-title') + '.', null);
       };
       mr.start(1000);
@@ -639,9 +666,83 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   }
   document.getElementById('spreads').addEventListener('click', function (e) {
     var m = e.target.closest('[data-mic]'); if (m) { startRec(m.getAttribute('data-mic')); return; }
-    var d = e.target.closest('[data-del]'); if (d) { var id = d.getAttribute('data-del'), keep = VN[id]; delete VN[id]; dbPut(id, null); showVN(id); toast('Voice note deleted.', function () { VN[id] = keep; dbPut(id, keep); showVN(id); }); return; }
+    var d = e.target.closest('[data-del]'); if (d) { var id = d.getAttribute('data-del'), keep = VN[id]; delete VN[id]; dbPut(id, null); showVN(id); window.dispatchEvent(new CustomEvent('sw-voice', { detail: { type: 'deleted', id: id } })); toast('Voice note deleted.', function () { VN[id] = keep; dbPut(id, keep); showVN(id); }); return; }
     var dc = e.target.closest('[data-dict]'); if (dc) dictate(dc.getAttribute('data-dict'), dc);
   });
+
+  // ---- Central log: every vote, comment, voice note and sign-off goes to Robbie's Google Sheet as it happens ----
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycby_2mo4zrEks9klkrUmIdsAJQeB5YXXImyUrqJuxVg_l5S8USTZI73hTF8MHczmJEO2Ig/exec';   // the Google Apps Script web app URL, set after deployment
+  var CLIENT = 'Second Wind Athletic Club', ROUND = 'Logo round 4', QKEY = 'sw-log-queue';
+  var SESSION = (function () { try { var x = sessionStorage.getItem('sw-session'); if (!x) { x = Math.random().toString(36).slice(2, 8); sessionStorage.setItem('sw-session', x); } return x; } catch (e) { return Math.random().toString(36).slice(2, 8); } })();
+  var Q = []; try { Q = JSON.parse(localStorage.getItem(QKEY) || '[]'); } catch (e) {}
+  function keepQ() { try { localStorage.setItem(QKEY, JSON.stringify(Q)); } catch (e) {} }
+  function titleOf(id) { var b = document.querySelector('.fb[data-id="' + id + '"]'); return b ? b.getAttribute('data-title') : id; }
+  function log(ev) {
+    if (!ENDPOINT) return;
+    ev.eid = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    ev.at = new Date().toISOString(); ev.client = CLIENT; ev.round = ROUND; ev.session = SESSION; ev.page = location.host || 'preview';
+    if (ev.id) { ev.num = NUM[ev.id] ? ('0' + NUM[ev.id]).slice(-2) : ''; ev.title = ev.title || titleOf(ev.id); }
+    Q.push(ev); keepQ(); flush();
+  }
+  var busy = false, retryT;
+  function status(txt, wait) { var el = document.getElementById('saved'); el.hidden = !txt; el.textContent = txt || ''; el.classList.toggle('wait', !!wait); }
+  function b64(blob) { return new Promise(function (ok, no) { var r = new FileReader(); r.onload = function () { ok(String(r.result).split(',')[1]); }; r.onerror = no; r.readAsDataURL(blob); }); }
+  function flush() {
+    if (busy || !Q.length || !ENDPOINT) return; busy = true; status('Saving…', true);
+    var ev = Q[0], body = JSON.parse(JSON.stringify(ev)), prep = Promise.resolve();
+    if (ev.event === 'voice') {
+      var n = VN[ev.id];
+      if (n && n.at === ev.vnAt) prep = b64(n.blob).then(function (a) { body.audio = a; body.mime = n.type; body.file = vnName(ev.id); body.dur = n.dur; });
+      else body.comment = '(this voice note was replaced or deleted before it uploaded)';
+    }
+    prep.then(function () { return fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }); })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j || !j.ok) throw new Error((j && j.error) || 'not saved'); Q.shift(); keepQ(); busy = false; if (Q.length) flush(); else status('Saved to Robbie ✓'); })
+      .catch(function () { busy = false; status(navigator.onLine === false ? 'Offline · will save when you’re back online' : 'Not saved yet · trying again', true); clearTimeout(retryT); retryT = setTimeout(flush, 15000); });
+  }
+  window.addEventListener('online', flush);
+  // votes
+  document.getElementById('spreads').addEventListener('click', function (e) {
+    var b = e.target.closest('.quick button[data-v], .fb .opts button[data-v]'); if (!b) return;
+    var id = b.closest('[data-id]').getAttribute('data-id'), names = { like: 'Like', maybe: 'Maybe', no: 'Not for me' };
+    log({ event: 'vote', id: id, verdict: names[b.getAttribute('data-v')] || b.getAttribute('data-v'), comment: (state[id] || {}).c || '' });
+  });
+  // comments: saved a few seconds after he stops typing, and when he leaves the box
+  Array.prototype.forEach.call(document.querySelectorAll('.fb'), function (box) {
+    var id = box.getAttribute('data-id'), ta = box.querySelector('textarea'), t, sent = ta.value;
+    var push = function () { clearTimeout(t); var v = ta.value.trim(); if (v === sent) return; sent = v; var names = { like: 'Like', maybe: 'Maybe', no: 'Not for me' }; log({ event: 'comment', id: id, verdict: names[(state[id] || {}).v] || '', comment: v || '(comment cleared)' }); };
+    ta.addEventListener('input', function () { clearTimeout(t); t = setTimeout(push, 4000); });
+    ta.addEventListener('blur', push);
+  });
+  // voice notes (hooked from the recorder and the delete button)
+  window.addEventListener('sw-voice', function (e) { var d = e.detail; if (d.type === 'saved') log({ event: 'voice', id: d.id, vnAt: VN[d.id].at, dur: VN[d.id].dur }); else log({ event: 'voice_deleted', id: d.id }); });
+  document.getElementById('fbsend').addEventListener('click', function () { log({ event: 'sent', comment: summary() }); });
+  // sign-off
+  (function () {
+    var club = document.getElementById('soclub'), cafe = document.getElementById('socafe'), who = document.getElementById('sowho'), ok = document.getElementById('sook'), btn = document.getElementById('sobtn'), done = document.getElementById('sodone'), cname = document.getElementById('soname2');
+    function opts() {
+      var liked = order.filter(function (id) { return (state[id] || {}).v === 'like'; }), rest = order.filter(function (id) { var v = (state[id] || {}).v; return v !== 'like' && v !== 'no'; });
+      var o = function (id) { return '<option value="' + id + '">' + titleOf(id) + '</option>'; }, h = '<option value="">Choose…</option>';
+      if (liked.length) h += '<optgroup label="Ones you liked">' + liked.map(o).join('') + '</optgroup>';
+      if (rest.length) h += '<optgroup label="Others still in">' + rest.map(o).join('') + '</optgroup>';
+      [club, cafe].forEach(function (s) { var v = s.value; s.innerHTML = h; s.value = v; });
+    }
+    function check() { btn.disabled = !(club.value && cafe.value && who.value.trim().length > 1 && ok.checked); }
+    [club, cafe, who, ok].forEach(function (el) { el.addEventListener('input', check); el.addEventListener('change', check); });
+    club.addEventListener('focus', opts); cafe.addEventListener('focus', opts); opts();
+    var past = null; try { past = JSON.parse(localStorage.getItem('sw-signoff') || 'null'); } catch (e) {}
+    function show(p) { done.hidden = false; done.textContent = 'Signed off by ' + p.who + ', ' + p.when + ': club ' + p.club + '; café ' + p.cafe + (p.name ? ' (café name: ' + p.name + ')' : '') + '. ' + (ENDPOINT ? 'Saved to Robbie.' : 'Saved in this browser. Press “Send feedback to Robbie” so he gets it.'); }
+    if (past) show(past);
+    btn.addEventListener('click', function () {
+      var p = { who: who.value.trim(), club: titleOf(club.value), cafe: titleOf(cafe.value), name: cname.value.trim(), when: new Date().toLocaleString('en-AU', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' }) };
+      try { localStorage.setItem('sw-signoff', JSON.stringify(p)); } catch (e) {}
+      log({ event: 'signoff', title: 'Club: ' + p.club + ' · Café: ' + p.cafe, verdict: 'Approved', comment: p.name ? 'Café name: ' + p.name : '', signedBy: p.who });
+      show(p); ok.checked = false; check();
+    });
+  })();
+  log({ event: 'opened' });
+  if (ENDPOINT && !Q.length) status('Saves to Robbie as you go');
+  window.__log = { q: Q, set: function (u, c) { ENDPOINT = u; if (c) CLIENT = c; flush(); } };   // test hook
   count(); apply();
   Array.prototype.forEach.call(document.querySelectorAll('[data-rec]'), function (el) { el.innerHTML = SWF.svg(el.getAttribute('data-rec'), el.getAttribute('data-w'), '#f3efe7').replace('<svg ', '<svg style="width:100%;height:100%;display:block" '); });
   document.getElementById('spreads').style.display = 'flex'; document.getElementById('spreads').style.flexDirection = 'column'; document.getElementById('spreads').style.gap = '72px';
