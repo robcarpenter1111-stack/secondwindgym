@@ -191,7 +191,7 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
     <p class="label">Second Wind Athletic Club · logo review · from Robbie, for Sergio</p>
     <h1>What you<br>asked to see</h1>
     <p class="lead">Sergio, here is everything you asked to see in your feedback on 8 November. Each logo you liked comes first, with your note under it, followed straight away by the variations you asked for. In those variations I've changed only what you asked for, nothing else, so you can judge each change on its own. My own recommendation, including a couple of refinements I'd make, is on a <a href="recommend.html" style="color:var(--bronze)">separate page</a>. Each one is put through the same test: the full mark, four weights, the icon it becomes when it's small, and how it behaved on the real walls, glass and cups of HUB's design. The same format for each, so the only thing that changes is the logo.</p>
-    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Tap Like, Maybe or Not for me at the top of each logo. Not for me folds it away, and the bar lets you show only the ones you like side by side. If it's easier to say it than type it, tap 🎙 Voice note on any logo and talk; your notes come to me with the rest when you press Send. The page remembers as you go. When you're done, press Send feedback at the bottom and it opens an email to me with everything filled in. Your earlier answers are kept.</p>
+    <p class="label" style="letter-spacing:.1em;color:var(--bronze)">Tap Like, Maybe or Not for me at the top of each logo. Not for me folds it away, and the bar lets you show only the ones you like side by side. If it's easier to say it than type it, tap 🎙 Voice note on any logo and talk. Everything you tap, type or record comes straight to me as you go, so there's nothing to send. When you've made up your mind, sign off your final choice at the bottom.</p>
     <p class="label" style="letter-spacing:.1em;color:var(--bronze)">In the order of your notes: 15, 16, 18, 01, 12, 13 and 14, each followed by its variations. The nineteen you marked not for me are set aside at the bottom of the page.</p>
     <p class="label" style="letter-spacing:.1em">How to read a spread: the hero is the logo at its best. The four weights are the same letters, thicker. The three squares are the icon at profile-picture size on linen, charcoal and walnut.</p>
   </header>
@@ -250,9 +250,10 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   </section>
 </div>
 
-<script src="brand.js?v=91da2086"></script>
-<script src="fonts.js?v=91da2086"></script>
-<script src="family.js?v=91da2086"></script>
+<script src="dryve.js?v=c7961404" data-client="Second Wind Athletic Club" data-short="Second Wind" data-round="Logo round 4"></script>
+<script src="brand.js?v=c7961404"></script>
+<script src="fonts.js?v=c7961404"></script>
+<script src="family.js?v=c7961404"></script>
 <script>
 (function () {
   var W = [['light', 'Light'], ['medium', 'Medium'], ['bold', 'Bold'], ['lean', 'Bold, leaning']];
@@ -506,9 +507,9 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
       '<div class="hero"><div class="mk">' + SWF.svg(id, 'light', '#f3efe7') + '</div></div>' +
       '<div class="grid"><div class="box"><h3>Four weights</h3><div class="weights">' + ws + '</div></div><div class="box"><h3>At icon size</h3><div class="icons">' + ic + '</div><p style="font-size:14px;color:var(--muted)">Profile picture, app icon, cup sleeve, glass, start line.</p></div></div>' +
       '<div class="box" style="gap:16px"><h3>In HUB\'s renders</h3><div class="hub">' +
-        '<figure><img src="photo/fam/' + id + '-cafe.jpg?v=91da2086" alt="' + r.title + ' on the café counter wall, blackened bronze letters above Fuel good days" loading="lazy"><figcaption>Café wall · light · unlit bronze</figcaption></figure>' +
-        '<figure><img src="photo/fam/' + id + '-gym.jpg?v=91da2086" alt="' + r.title + ' lit on the gym end wall" loading="lazy"><figcaption>Gym end wall · bold · halo-lit</figcaption></figure>' +
-        '<figure><img src="photo/fam/' + id + '-shop.jpg?v=91da2086" alt="' + r.title + ' lit on the shopfront fascia" loading="lazy"><figcaption>Shopfront · bold · lit</figcaption></figure></div></div>' +
+        '<figure><img src="photo/fam/' + id + '-cafe.jpg?v=c7961404" alt="' + r.title + ' on the café counter wall, blackened bronze letters above Fuel good days" loading="lazy"><figcaption>Café wall · light · unlit bronze</figcaption></figure>' +
+        '<figure><img src="photo/fam/' + id + '-gym.jpg?v=c7961404" alt="' + r.title + ' lit on the gym end wall" loading="lazy"><figcaption>Gym end wall · bold · halo-lit</figcaption></figure>' +
+        '<figure><img src="photo/fam/' + id + '-shop.jpg?v=c7961404" alt="' + r.title + ' lit on the shopfront fascia" loading="lazy"><figcaption>Shopfront · bold · lit</figcaption></figure></div></div>' +
       '<div class="copy"><div class="c"><h3>The idea</h3><p>' + r.idea + '</p></div><div class="c"><h3>Where it works</h3><ul>' + li(r.works) + '</ul></div><div class="c"><h3>Where it may struggle</h3><ul>' + li(r.struggles) + '</ul></div></div>' +
       fbBlock(id) + '<div class="verdict"><b>' + r.vt + '</b><span class="pill ' + r.verdict + '">' + (r.verdict === 'good' ? 'Passes every test' : r.verdict === 'ok' ? 'Passes some' : 'Fails the small-size test') + '</span><p>' + r.vp + '</p></div>' +
       '<div class="fb" data-id="' + id + '" data-title="' + num + ' · ' + r.title + '"><div class="fbh"><h3>Your take</h3><div class="opts"><button type="button" data-v="like">Like it</button><button type="button" data-v="maybe">Maybe</button><button type="button" data-v="no">Not for me</button></div></div><textarea placeholder="Anything you like or don\'t about this one, in a line or two" aria-label="Comment on ' + r.title + '"></textarea><div class="vn" data-vn="' + id + '"><button type="button" class="rec" data-mic="' + id + '"><i class="dot" aria-hidden="true"></i> Record a voice note</button><button type="button" class="dict" data-dict="' + id + '" hidden>Dictate</button><span class="meta"></span></div></div>' +
