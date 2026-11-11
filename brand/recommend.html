@@ -6,11 +6,11 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 228 82'><rect x='-8' y='-8' width='228' height='82' fill='%235f4535'/><g fill='%23f3efe7'><path d='M16 0L96 0L80 26L0 26ZM56 40L212 40L196 66L40 66Z'/></g></svg>">
 <meta name="theme-color" content="#1e1c1a">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Robbie's recommended logo system for the club and the café.">
+<meta name="description" content="Our suggested logo system for the club and the café.">
 <link rel="canonical" href="https://secondwindgym.com.au/brand/recommend.html">
-<meta property="og:title" content="Second Wind, my recommendation">
+<meta property="og:title" content="Second Wind, our recommendation">
 <meta property="og:type" content="website">
-<meta property="og:description" content="Robbie's recommended logo system for the club and the café.">
+<meta property="og:description" content="Our suggested logo system for the club and the café.">
 <meta charset="utf-8">
 <title>Second Wind Recommendation</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -101,6 +101,52 @@ p { margin:0; max-width:62ch; }
 .ba figcaption { font:500 11px var(--f-label); letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:6px; }
 .ask { border-left:3px solid var(--bronze); padding:4px 0 4px 18px; font-size:17px; line-height:1.55; margin:0; }
 @media (max-width:860px) { .rec3, .why, .ba { grid-template-columns:1fr; } }
+/* sorting: Not for me folds a logo away; a sticky bar filters by verdict; compact shows only what's needed to compare */
+.filterbar { position:sticky; top:0; z-index:7; background:var(--bg); padding:12px 0; margin:0 0 6px; display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; border-bottom:1px solid var(--line); }
+.filterbar .lab { font:500 11px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-right:2px; }
+.filterbar button { font:500 12px var(--f-label); letter-spacing:.08em; text-transform:uppercase; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:8px; min-height:38px; padding:0 12px; cursor:pointer; display:inline-flex; gap:7px; align-items:center; }
+.filterbar button .n { font-variant-numeric:tabular-nums; opacity:.6; }
+.filterbar button.on { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.filterbar button.on .n { opacity:.8; }
+.filterbar .sep { flex:1; }
+.filterbar .compact[aria-pressed="true"] { background:var(--bronze); border-color:var(--bronze); color:#fff; }
+.sp.gone, .toc a.gone { display:none !important; }
+.sp.folding { transition:opacity .32s ease, transform .32s ease; opacity:0; transform:translateY(-10px); }
+.quick { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+.quick button { font:500 11px var(--f-label); letter-spacing:.08em; text-transform:uppercase; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:8px; min-height:36px; padding:0 11px; cursor:pointer; }
+.quick button.on { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.quick button.on[data-v="like"], .fb .opts button.on[data-v="like"] { background:var(--good); border-color:var(--good); color:#fff; }
+.quick button.on[data-v="no"] { background:var(--bad); border-color:var(--bad); color:#fff; }
+body.compact .sp .grid, body.compact .sp .copy, body.compact .sp .fbk, body.compact .sp .verdict, body.compact .sp .top .label { display:none; }
+body.compact #spreads { gap:40px !important; }
+body.compact .sp { gap:16px; padding-top:22px; }
+.empty { text-align:center; padding:40px 16px; color:var(--muted); border:1px dashed var(--line); }
+.toast { position:fixed; left:50%; bottom:calc(max(14px, env(safe-area-inset-bottom)) + 92px); transform:translateX(-50%); z-index:9; background:var(--ink); color:var(--bg); padding:10px 12px 10px 16px; display:flex; gap:14px; align-items:center; font-size:15px; box-shadow:0 10px 30px rgba(0,0,0,.25); max-width:calc(100% - 32px); }
+.toast[hidden] { display:none; }
+.toast button { font:600 12px var(--f-label); letter-spacing:.1em; text-transform:uppercase; background:transparent; color:var(--bg); border:1px solid currentColor; border-radius:8px; min-height:34px; padding:0 12px; cursor:pointer; }
+@media (max-width:640px) { .filterbar .sep { display:none; } .quick button { min-height:34px; padding:0 9px; } .sp .top > div:last-child { align-items:flex-start !important; } .quick { justify-content:flex-start; } .sp .top .label { text-align:left !important; } }
+/* voice notes: record per logo, play back, re-record; dictate into the comment box; sent with the feedback */
+.vn { display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; }
+.vn button, .quick .mic { font:500 12px var(--f-label); letter-spacing:.08em; text-transform:uppercase; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:8px; min-height:40px; padding:0 13px; cursor:pointer; display:inline-flex; align-items:center; gap:7px; }
+.vn button.rec, .quick .mic { border-color:var(--bronze); color:var(--bronze); }
+.vn button.rec:hover, .quick .mic:hover { background:var(--bronze); color:#fff; }
+.quick .mic { min-height:36px; padding:0 11px; font-size:11px; }
+.quick .mic.has, .vn button.rec.has { background:var(--bronze); color:#fff; }
+.vn button { flex-direction:row; white-space:nowrap; }
+.vn .dot, .quick .dot { flex:none; display:inline-block; vertical-align:middle; }
+.vn audio { height:40px; max-width:100%; }
+.vn .meta { font:500 11px var(--f-label); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+.vn .dict.on { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.dot { width:9px; height:9px; border-radius:50%; background:currentColor; display:inline-block; }
+.recpill { position:fixed; left:50%; bottom:calc(max(14px, env(safe-area-inset-bottom)) + 92px); transform:translateX(-50%); z-index:10; background:#8a2e24; color:#fff; padding:10px 12px 10px 16px; display:flex; gap:12px; align-items:center; font-size:15px; box-shadow:0 10px 30px rgba(0,0,0,.3); max-width:calc(100% - 32px); border-radius:2px; }
+.recpill[hidden] { display:none; }
+.recpill .dot { animation:pulse 1.1s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity:.25; } }
+.recpill b { font-variant-numeric:tabular-nums; min-width:38px; }
+.recpill span.w { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:42vw; }
+.recpill button { font:600 12px var(--f-label); letter-spacing:.1em; text-transform:uppercase; background:#fff; color:#8a2e24; border:0; border-radius:8px; min-height:36px; padding:0 14px; cursor:pointer; }
+.recpill button.x { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.6); }
+@media (prefers-reduced-motion:reduce) { .recpill .dot { animation:none; } }
 .fbk { display:grid; grid-template-columns:1fr 1fr; gap:18px; background:var(--card); border:1px solid var(--line); border-left:3px solid var(--bronze); padding:18px 22px; }
 .fbk .label { color:var(--bronze); margin:0 0 6px; }
 .fbk p { margin:0; font-size:16px; line-height:1.5; }
@@ -120,6 +166,18 @@ p { margin:0; max-width:62ch; }
 .sendbar .acts { display:flex; gap:8px; flex-wrap:wrap; }
 .sendbar button, .sendbar a { font:500 12px var(--f-label); letter-spacing:.12em; text-transform:uppercase; border-radius:8px; min-height:42px; padding:0 16px; display:inline-flex; align-items:center; cursor:pointer; text-decoration:none; }
 .sendbar .send { background:var(--linen); color:var(--ink); border:1px solid var(--linen); }
+.sendbar .saved { color:#a9c79a; letter-spacing:.08em; }
+.sendbar .saved.wait { color:#e3c48f; }
+.signoff { background:#fff; border:1px solid rgba(30,28,26,.12); border-radius:14px; padding:28px clamp(18px,4vw,40px); margin:56px 0 48px; }
+.signoff h2 { margin:.2em 0 .4em; }
+.sogrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px 18px; margin:18px 0 14px; }
+.sogrid label { display:flex; flex-direction:column; gap:6px; font:500 11px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:rgba(30,28,26,.7); }
+.sogrid select, .sogrid input { font:16px var(--f-body, inherit); min-height:44px; padding:0 12px; border:1px solid rgba(30,28,26,.25); border-radius:8px; background:#fbf9f5; color:var(--ink); text-transform:none; letter-spacing:0; }
+.sotick { display:flex; gap:10px; align-items:flex-start; margin:6px 0 16px; line-height:1.4; }
+.sotick input { width:20px; height:20px; flex:none; margin-top:1px; }
+.sobtn { font:500 12px var(--f-label); letter-spacing:.12em; text-transform:uppercase; min-height:46px; padding:0 22px; border-radius:8px; border:1px solid var(--ink); background:var(--ink); color:var(--linen); cursor:pointer; }
+.sobtn:disabled { opacity:.35; cursor:not-allowed; }
+.sodone { margin:16px 0 0; padding:14px 16px; border-radius:8px; background:#e7efe3; color:#24361d; font-weight:500; }
 .sendbar .copy { background:transparent; color:var(--linen); border:1px solid rgba(243,239,231,.4); }
 .btn { align-self:flex-start; font:500 13px var(--f-label); letter-spacing:.12em; text-transform:uppercase; color:var(--linen); background:#1e1c1a; text-decoration:none; padding:0 22px; min-height:48px; display:inline-flex; align-items:center; }
 .btn:hover { background:var(--bronze); }
@@ -130,33 +188,33 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
 <body>
 <div class="wrap">
   <header class="head">
-    <p class="label">Second Wind Athletic Club · from Robbie, for Sergio</p>
-    <h1>My<br>recommendation</h1>
+    <p class="label">Second Wind Athletic Club · from Robbie and the Dryve team, for Sergio</p>
+    <h1>Our<br>recommendation</h1>
     <p class="label" style="letter-spacing:.1em"><a href="review.html" style="color:var(--bronze)">← What you asked to see</a></p>
   </header>
   <section class="myrec" aria-labelledby="h-my">
-    <h2 id="h-my" style="display:none">My recommendation</h2>
-    <p class="intro">Sergio, you've seen everything you asked for on the other page. This is what I'd do if it were my call: one system for the club and the café, built from your notes, with a few refinements of my own that I've explained below. Nothing here replaces what you asked to see; it's my advice alongside it.</p>
+    <h2 id="h-my" style="display:none">Our recommendation</h2>
+    <p class="intro">Sergio, you've seen everything you asked for on the other page. Here's one way we think it could all come together nicely: one system for the club and the café, built from your notes, with a few small refinements we've explained below. It's a suggestion to sit alongside your favourites, not instead of them. It's your brand and your call, so please let us know what you think.</p>
     <div class="rec3">
       <figure><div class="mk" data-rec="P8" data-w="lean"></div><img src="photo/fam/P8-gym.jpg?v=c7961404" alt="Second Wind, a little extended and bold leaning, halo-lit on the gym end wall in HUB's render"><figcaption><b>The club · 34, refined</b>Your 34: the two strokes, a little extended, bold leaning, the cut in the S, E and C, with the club line refined as explained below. Signage, web, social, merch.</figcaption></figure>
       <figure><div class="mk" data-rec="R11" data-w="light"></div><img src="photo/fam/R11-cafe.jpg?v=c7961404" alt="First Wind café mark on the café wall in HUB's render"><figcaption><b>The café · 37</b>Your 16, one stroke, centred. First wind in the café, second wind in the gym: count the strokes.</figcaption></figure>
-      <figure><div class="mk" data-rec="P3" data-w="lean"></div><img src="photo/fam/P3-gym.jpg?v=c7961404" alt="Second Wind on two lines, bold leaning, on the gym end wall in HUB's render"><figcaption><b>Walls and merch · my addition</b>The same mark stacked, SECOND over WIND, the strokes finishing the second line. For the end wall, the back of a shirt, a poster. One mark, two shapes.</figcaption></figure>
+      <figure><div class="mk" data-rec="P3" data-w="lean"></div><img src="photo/fam/P3-gym.jpg?v=c7961404" alt="Second Wind on two lines, bold leaning, on the gym end wall in HUB's render"><figcaption><b>Walls and merch · our addition</b>The same mark stacked, SECOND over WIND, the strokes finishing the second line. For the end wall, the back of a shirt, a poster. One mark, two shapes.</figcaption></figure>
     </div>
     <div class="why">
-      <div><p class="label">Why this works</p><p>It keeps everything you liked: the two strokes, bold and leaning for movement, a little more extended for presence, the cut tying the letters to the icon, and the serif giving the café its own calm voice.</p></div>
+      <div><p class="label">Why we think it works</p><p>It keeps everything you liked: the two strokes, bold and leaning for movement, a little more extended for presence, the cut tying the letters to the icon, and the serif giving the café its own calm voice.</p></div>
       <div><p class="label">Two rules that keep it premium</p><p>The serif is for the café's name only; menus, prices and signage text stay in the brand's sans. And the lean lives in the logo only; headings and the website stay upright. That discipline is what makes it feel expensive rather than busy.</p></div>
       <div><p class="label">The café name</p><p>First Wind Café is in as your working name. The one-stroke idea works with any name, so we can settle it together; before it goes on a cup or a sign we'll check nobody nearby already trades under it.</p></div>
     </div>
     <div class="ba">
-      <p><b>A refinement I'd make:</b> on 01 and the variations you asked for, ATHLETIC CLUB was stretched to the full width of the name, which spaced the letters so far apart they were hard to read and too thin to light. It now leans with the letters and finishes flush under WIND, so the strokes open the mark and the club line closes it. It's a small change, but it's the difference between a logo and a well-drawn logo.</p>
+      <p><b>A refinement we'd suggest:</b> on 01 and the variations you asked for, ATHLETIC CLUB was stretched to the full width of the name, which spaced the letters so far apart they were hard to read and too thin to light. It now leans with the letters and finishes flush under WIND, so the strokes open the mark and the club line closes it. It's a small change, but it's the difference between a logo and a well-drawn logo.</p>
       <figure><img src="photo/clubline-before.jpg?v=c7961404" alt="Before: ATHLETIC CLUB stretched under the whole name"><figcaption>Before</figcaption></figure>
       <figure><img src="photo/clubline-after.jpg?v=c7961404" alt="After: ATHLETIC CLUB leaning and flush under WIND"><figcaption>After</figcaption></figure>
     </div>
-    <p class="ask">If you're happy with this, just reply "go" and I'll build the final brand guidelines, the signage artwork for HUB, and roll it across the website and the walkthrough. If anything isn't right, tell me which and why, and I'll take it from there.</p>
+    <p class="ask">If you like where this is heading, just reply &ldquo;go&rdquo; or sign it off at the bottom of the other page, and we&rsquo;ll build the final brand guidelines, the signage artwork for HUB, and roll it across the website and the walkthrough. If you&rsquo;d rather go with a different favourite, or something isn&rsquo;t quite right, tell us which and why and we&rsquo;ll take it from there. Either way, we&rsquo;d love to hear what you think.</p>
   </section>
 
 </div>
-<script src="dryve.js?v=c7961404" data-client="Second Wind Athletic Club" data-short="Second Wind" data-round="My recommendation"></script>
+<script src="dryve.js?v=c7961404" data-client="Second Wind Athletic Club" data-short="Second Wind" data-round="Our recommendation"></script>
 <script src="brand.js?v=c7961404"></script>
 <script src="fonts.js?v=c7961404"></script>
 <script src="family.js?v=c7961404"></script>
@@ -166,6 +224,8 @@ a:focus-visible { outline:2px solid var(--bronze); outline-offset:3px; }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fill); fill();
 })();
 </script>
+</body>
+</html>
 
 </body>
 </html>
